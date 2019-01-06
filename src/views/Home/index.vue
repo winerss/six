@@ -6,7 +6,7 @@
         <el-col :span="8">
           <div class="wrapper">
             <div class="left">
-              <img src="../../assets/img/money.png" alt="">
+              <img src="../../assets/img/qianbao.png" alt="">
             </div>
             <div class="right">
               <h2>0.16</h2>
@@ -17,7 +17,7 @@
         <el-col :span="8">
           <div class="wrapper">
             <div class="left">
-              <img src="../../assets/img/money.png" alt="">
+              <img src="../../assets/img/star.png" alt="">
             </div>
             <div class="right">
               <h2>0.00</h2>
@@ -28,7 +28,7 @@
         <el-col :span="8">
           <div class="wrapper">
             <div class="left">
-              <img src="../../assets/img/money.png" alt="">
+              <img src="../../assets/img/glass.png" alt="">
             </div>
             <div class="right">
               <h2>2500.00</h2>
@@ -41,7 +41,7 @@
         <el-col :span="8" >
           <div class="wrapper">
             <div class="left">
-              <img src="../../assets/img/money.png" alt="">
+              <img src="../../assets/img/heart.png" alt="">
             </div>
             <div class="right">
               <h2>464458.00</h2>
@@ -52,7 +52,7 @@
         <el-col :span="8" >
           <div class="wrapper">
             <div class="left">
-              <img src="../../assets/img/money.png" alt="">
+              <img src="../../assets/img/coin.png" alt="">
             </div>
             <div class="right">
               <h2>2102470.00</h2>
@@ -80,7 +80,7 @@
             <div class="title">信息咨询</div>
             <div class="item">
               <div class="left">
-                <img src="../../assets/img/money.png" alt="">
+                <img src="../../assets/img/info.png" alt="">
               </div>
               <div class="center">
                 <p class="name">个人信息</p>
@@ -92,7 +92,7 @@
             </div>
             <div class="item">
               <div class="left">
-                <img src="../../assets/img/money.png" alt="">
+                <img src="../../assets/img/shequn.png" alt="">
               </div>
               <div class="center">
                 <p class="name">我的社群</p>
@@ -104,7 +104,7 @@
             </div>
             <div class="item">
               <div class="left">
-                <img src="../../assets/img/money.png" alt="">
+                <img src="../../assets/img/email.png" alt="">
               </div>
               <div class="center">
                 <p class="name">我的收件箱</p>
@@ -224,7 +224,7 @@ export default {
             float left
             width 20px
             height 20px
-            margin 10px
+            margin 2px 10px
         .center
           float left
         .right
