@@ -14,7 +14,7 @@ export default {
 .el-table
   width inherit
 .el-table th, .el-table tr
-  background rgba(0,0,0,.4) !important
+  background rgba(0,0,0,0.8) !important
   color #ccc
 .el-table td, .el-table th.is-leaf
   border-bottom 1px solid rgba(255, 255, 255, .25)

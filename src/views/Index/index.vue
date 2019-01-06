@@ -151,6 +151,12 @@ export default {
     }
   },
   mounted () {
+    // if (!localStorage.getItem('sid')) {
+    //   this.$message.error('请重新登录')
+    //   setTimeout(() => {
+    //     this.$router.push('/login')
+    //   }, 1000)
+    // }
   },
   methods: {
     handleOpen (key, keyPath) {
@@ -219,8 +225,6 @@ img
         padding 10px 20px
         cursor pointer
         color #ccc
-  .el-menu-item
-    color #999 !important
   .el-menu-vertical-demo:not(.el-menu--collapse)
     width 200px
   .el-submenu__title:hover, .el-menu-item:focus, .el-menu-item:hover

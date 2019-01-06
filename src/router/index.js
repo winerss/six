@@ -26,6 +26,8 @@ import revice from '@/views/news/revice'
 
 // 登陆注册
 import login from '@/views/Login/login'
+import unknow from '@/views/unknow'
+
 Vue.use(Router)
 
 export default new Router({
@@ -176,6 +178,17 @@ export default new Router({
       meta: {
         title: '登录'
       }
+    }, {
+      path: '/404',
+      name: '404',
+      component: unknow,
+      meta: {
+        title: '404'
+      }
+    },
+    {
+      path: '*',
+      redirect: '/404'
     }
   ]
 })
