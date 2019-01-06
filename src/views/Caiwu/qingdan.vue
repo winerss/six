@@ -1,6 +1,6 @@
 <template>
-  <div id="myinvite">
-    <div class="title">我的邀请</div>
+  <div id="qingdan">
+    <div class="title">贡献清单</div>
     <el-table
       ref="singleTable"
       :data="tableData"
@@ -10,24 +10,28 @@
         label="序号">
       </el-table-column>
       <el-table-column
-        property="number"
-        label="金粉编号">
+        property="invite"
+        label="邀请奖">
       </el-table-column>
       <el-table-column
-        property="name"
-        label="姓名">
+        property="reward"
+        label="社群奖">
       </el-table-column>
       <el-table-column
-        property="user"
-        label="邀请人">
+        property="hasCoin"
+        label="持币奖">
+      </el-table-column>
+      <el-table-column
+        property="total"
+        label="总计">
       </el-table-column>
       <el-table-column
         property="date"
-        label="注册日期">
+        label="结算日期">
       </el-table-column>
       <el-table-column
-        property="status"
-        label="状态">
+        property="times"
+        label="结算次数">
       </el-table-column>
     </el-table>
     <el-pagination
@@ -48,11 +52,12 @@ export default {
       currentPage: 1,
       tableData: [{
         id: 1,
-        number: '413237',
-        name: 'winerss',
-        user: '1456',
+        invite: 0.00,
+        reward: 0.00,
+        hasCoin: 12.50,
+        total: 12.50,
         date: '2016-05-02 0:00:33',
-        status: '已开通'
+        times: '163'
       }]
     }
   },
@@ -70,10 +75,10 @@ export default {
 </script>
 
 <style lang="stylus">
-#myinvite
+#qingdan
   .title
     font-size 24px
-    background rgba(0, 0, 0, .25)
+    background #666
     padding 20px
     color #ccc
   .el-table

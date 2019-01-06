@@ -33,7 +33,7 @@ export default {
     color #ccc
   .title
     font-size 24px
-    background #666
+    background rgba(0, 0, 0, .25)
     padding 20px
     color #ccc
   .content

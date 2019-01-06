@@ -4,8 +4,7 @@
     <el-table
       ref="singleTable"
       :data="tableData"
-      highlight-current-row
-      style="width: 100%">
+      highlight-current-row>
       <el-table-column
         property="id"
         label="序号">
@@ -79,7 +78,7 @@ export default {
 #caiwu
   .title
     font-size 24px
-    background #666
+    background rgba(0, 0, 0, .25)
     padding 20px
     color #ccc
   .el-table

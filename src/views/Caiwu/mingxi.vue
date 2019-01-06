@@ -1,6 +1,6 @@
 <template>
-  <div id="myinvite">
-    <div class="title">我的邀请</div>
+  <div id="mingxi">
+    <div class="title">提币明细</div>
     <el-table
       ref="singleTable"
       :data="tableData"
@@ -10,24 +10,28 @@
         label="序号">
       </el-table-column>
       <el-table-column
-        property="number"
-        label="金粉编号">
+        property="tibiNum"
+        label="提币数量">
       </el-table-column>
       <el-table-column
-        property="name"
-        label="姓名">
+        property="num"
+        label="实发数量">
       </el-table-column>
       <el-table-column
-        property="user"
-        label="邀请人">
-      </el-table-column>
-      <el-table-column
-        property="date"
-        label="注册日期">
+        property="fear"
+        label="矿工费">
       </el-table-column>
       <el-table-column
         property="status"
-        label="状态">
+        label="提币状态">
+      </el-table-column>
+      <el-table-column
+        property="date"
+        label="申请日期">
+      </el-table-column>
+      <el-table-column
+        property="conDate"
+        label="确认时间">
       </el-table-column>
     </el-table>
     <el-pagination
@@ -48,11 +52,12 @@ export default {
       currentPage: 1,
       tableData: [{
         id: 1,
-        number: '413237',
-        name: 'winerss',
-        user: '1456',
+        tibiNum: 0.00,
+        num: 0.00,
+        fear: 12.50,
+        status: '状态',
         date: '2016-05-02 0:00:33',
-        status: '已开通'
+        conDate: '2016-05-02 0:00:33'
       }]
     }
   },
@@ -70,7 +75,7 @@ export default {
 </script>
 
 <style lang="stylus">
-#myinvite
+#mingxi
   .title
     font-size 24px
     background rgba(0, 0, 0, .25)

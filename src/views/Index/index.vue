@@ -7,7 +7,7 @@
         class="el-menu-vertical-demo"
         :collapse="isCollapse"
         @close="handleClose"
-        text-color="#fff"
+        text-color="#999"
         active-text-color="#ffd04b">
         <el-menu-item index="-1">
           <img class="logo" src="../../assets/img/login.png" alt="">
@@ -34,7 +34,7 @@
               <img src="../../assets/img/mima.png" alt="">
               修改登录密码
             </el-menu-item>
-            <el-menu-item index="4-2" @click="layout('anquan')">
+            <el-menu-item index="4-2" @click="goPage('anquan')">
               <img src="../../assets/img/mima.png" alt="">
               修改安全密码
             </el-menu-item>
@@ -59,7 +59,7 @@
               <img src="../../assets/img/yaoqing.png" alt="">
               我的邀请
             </el-menu-item>
-            <el-menu-item index="6-3" @click="goPage">
+            <el-menu-item index="6-3" @click="goPage('/net')">
               <img src="../../assets/img/wangluo.png" alt="">
               社群网络
             </el-menu-item>
@@ -72,31 +72,31 @@
             <span slot="title">财务管理</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="6-1" @click="goPage('/liushui')">
+            <el-menu-item index="7-1" @click="goPage('/liushui')">
               <img src="../../assets/img/liushui.png" alt="">
               我的流水
             </el-menu-item>
-            <el-menu-item index="6-2" @click="goPage">
+            <el-menu-item index="7-2" @click="goPage('/qingdan')">
               <img src="../../assets/img/qingdan.png" alt="">
               贡献清单
             </el-menu-item>
-            <el-menu-item index="6-3" @click="goPage">
+            <el-menu-item index="7-3" @click="goPage('/tibi')">
               <img src="../../assets/img/tibi.png" alt="">
               提币
             </el-menu-item>
-            <el-menu-item index="6-4" @click="goPage">
+            <el-menu-item index="7-4" @click="goPage('/mingxi')">
               <img src="../../assets/img/shuoming.png" alt="">
-              提币说明
+              提币明细
             </el-menu-item>
-            <el-menu-item index="6-5" @click="goPage">
+            <el-menu-item index="7-5" @click="goPage('/neibu')">
               <img src="../../assets/img/neibu.png" alt="">
               内部转账
             </el-menu-item>
-            <el-menu-item index="6-6" @click="goPage">
+            <el-menu-item index="7-6" @click="goPage('/jiedian')">
               <img src="../../assets/img/jiedian.png" alt="">
               节点转账
             </el-menu-item>
-            <el-menu-item index="6-7" @click="goPage">
+            <el-menu-item index="7-7" @click="goPage('/jilu')">
               <img src="../../assets/img/jilu.png" alt="">
               转账记录
             </el-menu-item>
@@ -109,14 +109,27 @@
             <span slot="title">公告中心</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="8-1" @click="goPage">
+            <el-menu-item index="8-1" @click="goPage('/news')">
               <img src="../../assets/img/xinwen.png" alt="">
               新闻公告
             </el-menu-item>
-            <el-menu-item index="8-2" @click="goPage">
-              <img src="../../assets/img/youxiang.png" alt="">
-              内部邮箱
-            </el-menu-item>
+            <el-submenu index="8-2">
+              <template slot="title">
+                <img src="../../assets/img/gonggao.png" alt="">
+                <span slot="title">内部邮箱</span>
+              </template>
+              <el-menu-item-group>
+                <el-menu-item index="8-2-1" @click="goPage('/send')">
+                  发邮件
+                </el-menu-item>
+                <el-menu-item index="8-2-2" @click="goPage('/sendList')">
+                  发件箱
+                </el-menu-item>
+                <el-menu-item index="8-2-2" @click="goPage('/revice')">
+                  收件箱
+                </el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>
@@ -199,13 +212,17 @@ img
     position absolute
     right 0
     .collapse
-      background #333
+      background rgba(0, 0, 0, 0.8)
       width 100%
       .el-icon-menu
         font-size 30px
         padding 10px 20px
-        color #ccc
         cursor pointer
+        color #ccc
+  .el-menu-item
+    color #999 !important
   .el-menu-vertical-demo:not(.el-menu--collapse)
     width 200px
+  .el-submenu__title:hover, .el-menu-item:focus, .el-menu-item:hover
+    background-color rgba(0, 0, 0, .6)
 </style>

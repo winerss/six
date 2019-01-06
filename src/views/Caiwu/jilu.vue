@@ -1,6 +1,6 @@
 <template>
-  <div id="myinvite">
-    <div class="title">我的邀请</div>
+  <div id="jilu">
+    <div class="title">转账记录</div>
     <el-table
       ref="singleTable"
       :data="tableData"
@@ -10,24 +10,24 @@
         label="序号">
       </el-table-column>
       <el-table-column
-        property="number"
-        label="金粉编号">
+        property="account"
+        label="账号">
       </el-table-column>
       <el-table-column
-        property="name"
-        label="姓名">
+        property="num"
+        label="数量">
       </el-table-column>
       <el-table-column
-        property="user"
-        label="邀请人">
+        property="type"
+        label="类型">
+      </el-table-column>
+      <el-table-column
+        property="others"
+        label="备注">
       </el-table-column>
       <el-table-column
         property="date"
-        label="注册日期">
-      </el-table-column>
-      <el-table-column
-        property="status"
-        label="状态">
+        label="日期">
       </el-table-column>
     </el-table>
     <el-pagination
@@ -48,11 +48,12 @@ export default {
       currentPage: 1,
       tableData: [{
         id: 1,
-        number: '413237',
-        name: 'winerss',
-        user: '1456',
-        date: '2016-05-02 0:00:33',
-        status: '已开通'
+        account: 4512,
+        num: 0.00,
+        fear: 12.50,
+        type: '转出转入',
+        others: '转出种子账户到g234567',
+        date: '2016-05-02 0:00:33'
       }]
     }
   },
@@ -70,7 +71,7 @@ export default {
 </script>
 
 <style lang="stylus">
-#myinvite
+#jilu
   .title
     font-size 24px
     background rgba(0, 0, 0, .25)
