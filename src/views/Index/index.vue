@@ -2,25 +2,23 @@
   <div id="index">
     <div class="menu">
       <el-menu
-        default-active="2"
-        @open="handleOpen"
+        :default-active="activeNav"
         class="el-menu-vertical-demo"
         :collapse="isCollapse"
-        @close="handleClose"
         text-color="#999"
         active-text-color="#ffd04b">
-        <el-menu-item index="-1">
+        <el-menu-item index="0">
           <img class="logo" src="../../assets/img/login.png" alt="">
         </el-menu-item>
-        <el-menu-item index="1" @click="goPage('/home')">
+        <el-menu-item index="1" @click="goPage('1', '/home')">
           <img src="../../assets/img/zichan.png" alt="">
           <span slot="title">合约资产</span>
         </el-menu-item>
-        <el-menu-item index="2" @click="goPage('/ziliao')">
+        <el-menu-item index="2" @click="goPage('2', '/ziliao')">
           <img src="../../assets/img/ziliao.png" alt="">
           <span slot="title">资料编辑</span>
         </el-menu-item>
-        <el-menu-item index="3" @click="goPage('/lianjie')">
+        <el-menu-item index="3" @click="goPage('3', '/lianjie')">
           <img src="../../assets/img/lianjie.png" alt="">
           <span slot="title">我的链接</span>
         </el-menu-item>
@@ -30,11 +28,11 @@
             <span slot="title">修改密码</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="4-1" @click="goPage('denglu')">
+            <el-menu-item index="4-1" @click="goPage('4-1', 'denglu')">
               <img src="../../assets/img/mima.png" alt="">
               修改登录密码
             </el-menu-item>
-            <el-menu-item index="4-2" @click="goPage('anquan')">
+            <el-menu-item index="4-2" @click="goPage('4-2', 'anquan')">
               <img src="../../assets/img/mima.png" alt="">
               修改安全密码
             </el-menu-item>
@@ -51,15 +49,15 @@
             <span slot="title">会员管理</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="6-1" @click="goPage('/register')">
+            <el-menu-item index="6-1" @click="goPage('6-1', '/register')">
               <img src="../../assets/img/zhuce.png" alt="">
               立即注册
             </el-menu-item>
-            <el-menu-item index="6-2" @click="goPage('/myinvite')">
+            <el-menu-item index="6-2" @click="goPage('6-2', '/myinvite')">
               <img src="../../assets/img/yaoqing.png" alt="">
               我的邀请
             </el-menu-item>
-            <el-menu-item index="6-3" @click="goPage('/net')">
+            <el-menu-item index="6-3" @click="goPage('6-3', '/net')">
               <img src="../../assets/img/wangluo.png" alt="">
               社群网络
             </el-menu-item>
@@ -72,31 +70,31 @@
             <span slot="title">财务管理</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="7-1" @click="goPage('/liushui')">
+            <el-menu-item index="7-1" @click="goPage('7-1', '/liushui')">
               <img src="../../assets/img/liushui.png" alt="">
               我的流水
             </el-menu-item>
-            <el-menu-item index="7-2" @click="goPage('/qingdan')">
+            <el-menu-item index="7-2" @click="goPage('7-2', '/qingdan')">
               <img src="../../assets/img/qingdan.png" alt="">
               贡献清单
             </el-menu-item>
-            <el-menu-item index="7-3" @click="goPage('/tibi')">
+            <el-menu-item index="7-3" @click="goPage('7-3', '/tibi')">
               <img src="../../assets/img/tibi.png" alt="">
               提币
             </el-menu-item>
-            <el-menu-item index="7-4" @click="goPage('/mingxi')">
+            <el-menu-item index="7-4" @click="goPage('7-4', '/mingxi')">
               <img src="../../assets/img/shuoming.png" alt="">
               提币明细
             </el-menu-item>
-            <el-menu-item index="7-5" @click="goPage('/neibu')">
+            <el-menu-item index="7-5" @click="goPage('7-5', '/neibu')">
               <img src="../../assets/img/neibu.png" alt="">
               内部转账
             </el-menu-item>
-            <el-menu-item index="7-6" @click="goPage('/jiedian')">
+            <el-menu-item index="7-6" @click="goPage('7-6', '/jiedian')">
               <img src="../../assets/img/jiedian.png" alt="">
               节点转账
             </el-menu-item>
-            <el-menu-item index="7-7" @click="goPage('/jilu')">
+            <el-menu-item index="7-7" @click="goPage('7-7', '/jilu')">
               <img src="../../assets/img/jilu.png" alt="">
               转账记录
             </el-menu-item>
@@ -109,7 +107,7 @@
             <span slot="title">公告中心</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="8-1" @click="goPage('/news')">
+            <el-menu-item index="8-1" @click="goPage('8-1', '/news')">
               <img src="../../assets/img/xinwen.png" alt="">
               新闻公告
             </el-menu-item>
@@ -119,13 +117,13 @@
                 <span slot="title">内部邮箱</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="8-2-1" @click="goPage('/send')">
+                <el-menu-item index="8-2-1" @click="goPage('8-2-1', '/send')">
                   发邮件
                 </el-menu-item>
-                <el-menu-item index="8-2-2" @click="goPage('/sendList')">
+                <el-menu-item index="8-2-2" @click="goPage('8-2-2', '/sendList')">
                   发件箱
                 </el-menu-item>
-                <el-menu-item index="8-2-2" @click="goPage('/revice')">
+                <el-menu-item index="8-2-3" @click="goPage('8-2-3' ,'/revice')">
                   收件箱
                 </el-menu-item>
               </el-menu-item-group>
@@ -147,10 +145,12 @@
 export default {
   data () {
     return {
-      isCollapse: false
+      isCollapse: false,
+      activeNav: '6-1'
     }
   },
   mounted () {
+    this.activeNav = localStorage.getItem('active') || '1'
     // if (!localStorage.getItem('sid')) {
     //   this.$message.error('请重新登录')
     //   setTimeout(() => {
@@ -159,19 +159,15 @@ export default {
     // }
   },
   methods: {
-    handleOpen (key, keyPath) {
-      console.log(key, keyPath)
-    },
-    handleClose (key, keyPath) {
-      console.log(key, keyPath)
-    },
     collapse () {
       this.isCollapse = !this.isCollapse
     },
-    goPage (path) {
+    goPage (key, path) {
+      localStorage.setItem('active', key)
       this.$router.push(path)
     },
     layout () {
+      localStorage.removeItem('active')
     }
   },
   components: {
@@ -217,6 +213,7 @@ img
   .container
     position absolute
     right 0
+    min-width 1000px
     .collapse
       background rgba(0, 0, 0, 0.8)
       width 100%
