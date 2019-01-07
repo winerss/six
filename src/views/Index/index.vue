@@ -88,11 +88,11 @@
             </el-menu-item>
             <el-menu-item index="7-5" @click="goPage('7-5', '/neibu')">
               <img src="../../assets/img/neibu.png" alt="">
-              内部转账
+              激活码转账
             </el-menu-item>
             <el-menu-item index="7-6" @click="goPage('7-6', '/jiedian')">
               <img src="../../assets/img/jiedian.png" alt="">
-              节点转账
+              排单币转账
             </el-menu-item>
             <el-menu-item index="7-7" @click="goPage('7-7', '/jilu')">
               <img src="../../assets/img/jilu.png" alt="">
@@ -151,12 +151,12 @@ export default {
   },
   mounted () {
     this.activeNav = localStorage.getItem('active') || '1'
-    // if (!localStorage.getItem('sid')) {
-    //   this.$message.error('请重新登录')
-    //   setTimeout(() => {
-    //     this.$router.push('/login')
-    //   }, 1000)
-    // }
+    if (!localStorage.getItem('sid')) {
+      this.$message.error('请重新登录')
+      setTimeout(() => {
+        this.$router.push('/login')
+      }, 1000)
+    }
   },
   methods: {
     collapse () {

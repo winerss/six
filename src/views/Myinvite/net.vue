@@ -24,7 +24,6 @@ export default {
   },
   methods: {
     handleNodeClick (node) {
-      console.log(node)
       var params = new FormData()
       params.append('sid', localStorage.getItem('sid'))
       params.append('uid', node.id)
@@ -65,6 +64,8 @@ export default {
 #net
   .el-form-item__label
     color #ccc
+  .el-tree-node__content:hover
+    background-color rgba(0, 0, 0, 0)
   .title
     font-size 24px
     background rgba(0, 0, 0, .25)

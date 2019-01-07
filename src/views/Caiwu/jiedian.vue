@@ -1,20 +1,11 @@
 <template>
   <div id="jiedian">
-    <div class="title">节点转账</div>
+    <div class="title">排单币转账</div>
     <div class="content">
-      <p class="tips">转账最低100起转,100的倍数。</p>
+      <p class="tips">排单币余额</p>
       <el-form label-width="120px" class="demo-ruleForm">
-        <el-form-item label="种子账户" required>
-          <el-input v-model="childAcc" placeholder="请输入种子账户"></el-input>
-        </el-form-item>
-        <el-form-item label="奖励账户" required>
-          <el-input v-model="reward" placeholder="请输入奖励账户"></el-input>
-        </el-form-item>
-        <el-form-item label="账户类型" required>
-          <el-input v-model="type" placeholder="请输入账户类型"></el-input>
-        </el-form-item>
-        <el-form-item label="接收节点" required>
-          <el-input v-model="revice" placeholder="请输入接收节点"></el-input>
+        <el-form-item label="接收用户昵称" required>
+          <el-input v-model="host" placeholder="请输入接收用户昵称"></el-input>
         </el-form-item>
         <el-form-item label="转换数量" required>
           <el-input v-model="num" placeholder="请输入转换数量"></el-input>
@@ -34,30 +25,15 @@
 export default {
   data () {
     return {
-      reward: '',
-      childAcc: '',
-      type: '',
-      revice: '',
+      host: '',
       num: '',
       pass: ''
     }
   },
   methods: {
     submitForm () {
-      if (!this.childAcc) {
-        this.$message.error('请输入种子账户')
-        return false
-      }
-      if (!this.reward) {
-        this.$message.error('请输入种子账户')
-        return false
-      }
-      if (!this.type) {
-        this.$message.error('请输入转账类型')
-        return false
-      }
-      if (!this.revice) {
-        this.$message.error('请输入接收节点')
+      if (!this.host) {
+        this.$message.error('请输入接收用户昵称')
         return false
       }
       if (!this.num) {
@@ -69,20 +45,19 @@ export default {
         return false
       }
       var params = new FormData()
-      params.append('username', this.childAcc)
-      params.append('username', this.reward)
-      params.append('password', this.type)
-      params.append('password', this.revice)
-      params.append('username', this.num)
-      params.append('password', this.pass)
-      this.axios.post(process.env.API_ROOT + '/api/login/dologin', params).then((res) => {
+      params.append('type', 2)
+      params.append('host', this.host)
+      params.append('amount', this.num)
+      params.append('erji', this.pass)
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/transfer/from_host', params).then((res) => {
         let data = res.data
         if (data.code === 1) {
           this.$message({
             message: data.msg,
             type: 'success'
           })
-          this.$router.push('')
+          window.location.reload()
         } else {
           this.$message.error(data.msg)
         }

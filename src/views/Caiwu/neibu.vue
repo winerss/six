@@ -1,17 +1,11 @@
 <template>
   <div id="neibu">
-    <div class="title">内部转账</div>
+    <div class="title">激活码转账</div>
     <div class="content">
-      <p class="tips">内部转账最低100起转,100的倍数。</p>
+      <p class="tips">激活码余额</p>
       <el-form label-width="120px" class="demo-ruleForm">
-        <el-form-item label="认筹账户" required>
-          <el-input v-model="account" placeholder="请输入认筹账户"></el-input>
-        </el-form-item>
-        <el-form-item label="种子账户" required>
-          <el-input v-model="childAcc" placeholder="请输入种子账户"></el-input>
-        </el-form-item>
-        <el-form-item label="转账类型" required>
-          <el-input v-model="type" placeholder="请输入转账类型"></el-input>
+        <el-form-item label="接收用户昵称" required>
+          <el-input v-model="host" placeholder="请输入接收用户昵称"></el-input>
         </el-form-item>
         <el-form-item label="转换数量" required>
           <el-input v-model="num" placeholder="请输入转换数量"></el-input>
@@ -31,25 +25,15 @@
 export default {
   data () {
     return {
-      account: '',
-      childAcc: '',
-      type: '',
+      host: '',
       num: '',
       pass: ''
     }
   },
   methods: {
     submitForm () {
-      if (!this.account) {
-        this.$message.error('请输入认筹账户')
-        return false
-      }
-      if (!this.childAcc) {
-        this.$message.error('请输入种子账户')
-        return false
-      }
-      if (!this.type) {
-        this.$message.error('请输入转账类型')
+      if (!this.host) {
+        this.$message.error('请输入接收用户昵称')
         return false
       }
       if (!this.num) {
@@ -61,19 +45,19 @@ export default {
         return false
       }
       var params = new FormData()
-      params.append('username', this.account)
-      params.append('username', this.childAcc)
-      params.append('password', this.type)
-      params.append('username', this.num)
-      params.append('password', this.pass)
-      this.axios.post(process.env.API_ROOT + '/api/login/dologin', params).then((res) => {
+      params.append('type', 1)
+      params.append('host', this.host)
+      params.append('amount', this.num)
+      params.append('erji', this.pass)
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/transfer/from_host', params).then((res) => {
         let data = res.data
         if (data.code === 1) {
           this.$message({
             message: data.msg,
             type: 'success'
           })
-          this.$router.push('')
+          window.location.reload()
         } else {
           this.$message.error(data.msg)
         }

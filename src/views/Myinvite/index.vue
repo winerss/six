@@ -10,24 +10,31 @@
         label="序号">
       </el-table-column>
       <el-table-column
-        property="number"
-        label="金粉编号">
-      </el-table-column>
-      <el-table-column
-        property="name"
-        label="姓名">
+        property="nickname"
+        label="昵称">
       </el-table-column>
       <el-table-column
         property="user"
         label="邀请人">
+        <template slot-scope="sope">
+          {{invite}}
+        </template>
       </el-table-column>
       <el-table-column
-        property="date"
+        property="create_time"
         label="注册日期">
       </el-table-column>
       <el-table-column
-        property="status"
+        property="is_use"
         label="状态">
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            type="primary"
+            v-if="scope.row.is_use == 0"
+            @click="handleEdit(scope.$index, scope.row)">开通</el-button>
+          <el-tag v-if="scope.row.is_use == 1" type="success">已开通</el-tag>
+        </template>
       </el-table-column>
     </el-table>
     <el-pagination
@@ -46,14 +53,8 @@ export default {
     return {
       total: 1000,
       currentPage: 1,
-      tableData: [{
-        id: 1,
-        number: '413237',
-        name: 'winerss',
-        user: '1456',
-        date: '2016-05-02 0:00:33',
-        status: '已开通'
-      }]
+      tableData: [],
+      invite: ''
     }
   },
   methods: {
@@ -62,7 +63,53 @@ export default {
     },
     handleCurrentChange (val) {
       console.log(`当前页: ${val}`)
+    },
+    get_user_info () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/user/get_user_info', params).then((res) => {
+        let data = res.data
+        if (data.code === 1) {
+          this.invite = data.data.nickname
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
+    },
+    getData () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      params.append('page', 1)
+      this.axios.post(process.env.API_ROOT + '/api/user/recmlists', params).then((res) => {
+        let data = res.data
+        if (data.code === 1) {
+          this.tableData = data.data
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
+    },
+    handleEdit () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      // params.append('id', )
+      this.axios.post(process.env.API_ROOT + '/api/user/recmlists', params).then((res) => {
+        let data = res.data
+        if (data.code === 1) {
+          this.$message({
+            message: data.msg,
+            type: 'success'
+          })
+          this.tableData = data.data
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
     }
+  },
+  mounted () {
+    this.get_user_info()
+    this.getData()
   },
   components: {
   }

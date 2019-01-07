@@ -5,7 +5,7 @@
       <p class="tips">最低1000.00，1000.00倍数提币，矿工费0.00%。</p>
       <el-form label-width="120px" class="demo-ruleForm">
         <el-form-item label="奖励账户">
-          <el-input v-model="account" placeholder="请输入奖励账户"></el-input>
+          <el-input v-model="all_point" disabled placeholder="请输入奖励账户"></el-input>
         </el-form-item>
         <el-form-item label="提币数量" required="">
           <el-input v-model="num" placeholder="请输入提币数量"></el-input>
@@ -27,15 +27,24 @@ export default {
     return {
       account: '',
       num: '',
-      pass: ''
+      pass: '',
+      all_point: ''
     }
   },
   methods: {
+    get_user_info () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/user/get_user_info', params).then((res) => {
+        let data = res.data
+        if (data.code === 1) {
+          this.all_point = data.data.all_point
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
+    },
     submitForm () {
-      if (!this.account) {
-        this.$message.error('请输入奖励账户')
-        return false
-      }
       if (!this.num) {
         this.$message.error('请输入提币数量')
         return false
@@ -45,22 +54,24 @@ export default {
         return false
       }
       var params = new FormData()
-      params.append('username', this.account)
-      params.append('username', this.num)
-      params.append('password', this.pass)
-      this.axios.post(process.env.API_ROOT + '/api/login/dologin', params).then((res) => {
+      params.append('sid', localStorage.getItem('sid'))
+      params.append('amount', this.num)
+      params.append('erji', this.pass)
+      this.axios.post(process.env.API_ROOT + '/api/transfer/change_cash', params).then((res) => {
         let data = res.data
         if (data.code === 1) {
           this.$message({
             message: data.msg,
             type: 'success'
           })
-          this.$router.push('')
         } else {
           this.$message.error(data.msg)
         }
       })
     }
+  },
+  mounted () {
+    this.get_user_info()
   },
   components: {
   }

@@ -41,6 +41,7 @@ export default {
             message: data.msg,
             type: 'success'
           })
+          localStorage.setItem('sid', data.data.sid)
           this.$router.push('/home')
         } else {
           this.$message.error(data.msg)
