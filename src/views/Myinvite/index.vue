@@ -91,31 +91,31 @@ export default {
     },
     handleEdit (index, row) {
       this.$confirm('激活需要消耗一个激活码!', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          var params = new FormData()
-          params.append('sid', localStorage.getItem('sid'))
-          params.append('userid', row.id)
-          this.axios.post(process.env.API_ROOT + '/api/login/memberuse', params).then((res) => {
-            let data = res.data
-            if (data.code === 1) {
-              this.$message({
-                message: data.msg,
-                type: 'success'
-              })
-              window.location.reload()
-            } else {
-              this.$message.error(data.msg)
-            }
-          })
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消'
-          });          
-        });
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        var params = new FormData()
+        params.append('sid', localStorage.getItem('sid'))
+        params.append('userid', row.id)
+        this.axios.post(process.env.API_ROOT + '/api/login/memberuse', params).then((res) => {
+          let data = res.data
+          if (data.code === 1) {
+            this.$message({
+              message: data.msg,
+              type: 'success'
+            })
+            window.location.reload()
+          } else {
+            this.$message.error(data.msg)
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消'
+        })
+      })
     }
   },
   mounted () {
