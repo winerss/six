@@ -132,29 +132,8 @@ export default {
   },
   methods: {
     getData () {
-      if (this.name.length > 10 || this.name.length < 3) {
-        this.$message.error('请输入正确的金粉编号')
-        return false
-      }
-      if (!this.password) {
-        this.$message.error('请输入密码')
-        return false
-      }
-      var params = new FormData()
-      params.append('username', this.name)
-      params.append('password', this.password)
-      this.axios.post(process.env.API_ROOT + '/api/login/dologin', params).then((res) => {
-        let data = res.data
-        if (data.code === 1) {
-          this.$message({
-            message: data.msg,
-            type: 'success'
-          })
-          this.$router.push('/home')
-        } else {
-          this.$message.error(data.msg)
-        }
-      })
+      localStorage.clear()
+      this.$router.push('/login')
     }
   },
   components: {

@@ -167,7 +167,8 @@ export default {
       this.$router.push(path)
     },
     layout () {
-      localStorage.removeItem('active')
+      localStorage.clear()
+      this.$router.push('/login')
     }
   },
   components: {

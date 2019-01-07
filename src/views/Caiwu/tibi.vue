@@ -11,7 +11,7 @@
           <el-input v-model="num" placeholder="请输入提币数量"></el-input>
         </el-form-item>
         <el-form-item label="安全密码" required="">
-          <el-input v-model="pass" placeholder="请输入安全密码"></el-input>
+          <el-input v-model="pass" type="password" placeholder="请输入安全密码"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm">提交申请</el-button>

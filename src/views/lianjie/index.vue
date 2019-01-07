@@ -1,13 +1,15 @@
 <template>
   <div id="lianjie">
-    <div class="title">合约资产</div>
+    <div class="title">我的链接</div>
     <div class="content">
       <el-form label-width="100px" class="demo-ruleForm">
         <el-form-item label="邀请链接">
-          <a href="http://www.wglcoin.com/member/userreg.aspx?t=413237">http://www.wglcoin.com/member/userreg.aspx?t=413237</a>
+          <a :href="url">{{url}}</a>
         </el-form-item>
         <el-form-item label="二维码">
-          <img src="../../assets/img/erweima.png" alt="">
+          <div class="qrcode">
+            <div id="code"></div>
+          </div>
         </el-form-item>
       </el-form>
     </div>
@@ -15,12 +17,34 @@
 </template>
 
 <script>
+import QRCode from 'qrcodejs2'
+
 export default {
   data () {
     return {
+      url: ''
     }
   },
   methods: {
+    getData () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/block/get_user_qcode', params).then((res) => {
+        this.url = res.data.data.url
+        this.qrcode()
+      })
+    },
+    qrcode () {
+      let qrcode = new QRCode('code', {
+        width: 150,
+        height: 150, // 高度
+        text: this.url // 二维码内容
+      })
+      console.log(qrcode)
+    }
+  },
+  mounted () {
+    this.getData()
   },
   components: {
   }

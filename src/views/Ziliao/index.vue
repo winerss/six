@@ -35,6 +35,11 @@ export default {
         this.$message.error('请输入手机号码')
         return false
       }
+      let reg = /^(13[0-9]|15[012356789]|17[3678]|18[0-9]|14[57])[0-9]{8}$/
+      if (!reg.test(this.phone)) {
+        this.$message.error('请检查您的手机格式')
+        return false
+      }
       if (!this.address) {
         this.$message.error('请输入钱包地址')
         return false
