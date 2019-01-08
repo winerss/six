@@ -18,6 +18,11 @@ import mingxi from '@/views/caiwu/mingxi'
 import neibu from '@/views/caiwu/neibu'
 import jiedian from '@/views/caiwu/jiedian'
 import jilu from '@/views/caiwu/jilu'
+import paidan from '@/views/caiwu/paidan'
+import pipei from '@/views/caiwu/pipei'
+import myrecord from '@/views/caiwu/myrecord'
+import mypipei from '@/views/caiwu/mypipei'
+
 // 邮箱
 import news from '@/views/news'
 import send from '@/views/news/send'
@@ -133,6 +138,34 @@ export default new Router({
         component: jiedian,
         meta: {
           title: '节点转账'
+        }
+      }, {
+        path: '/paidan',
+        name: 'paidan',
+        component: paidan,
+        meta: {
+          title: '排单'
+        }
+      }, {
+        path: '/pipei',
+        name: 'pipei',
+        component: pipei,
+        meta: {
+          title: '排单匹配'
+        }
+      }, {
+        path: '/myrecord',
+        name: 'myrecord',
+        component: myrecord,
+        meta: {
+          title: '我的排单记录'
+        }
+      }, {
+        path: '/mypipei',
+        name: 'mypipei',
+        component: mypipei,
+        meta: {
+          title: '我的排单记录'
         }
       }, {
         path: '/jilu',

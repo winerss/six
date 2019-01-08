@@ -14,35 +14,30 @@
           <img src="../../assets/img/zichan.png" alt="">
           <span slot="title">合约资产</span>
         </el-menu-item>
-        <el-menu-item index="2" @click="goPage('2', '/ziliao')">
-          <img src="../../assets/img/ziliao.png" alt="">
-          <span slot="title">资料编辑</span>
-        </el-menu-item>
-        <el-menu-item index="3" @click="goPage('3', '/lianjie')">
-          <img src="../../assets/img/lianjie.png" alt="">
-          <span slot="title">我的链接</span>
-        </el-menu-item>
         <el-submenu index="4">
           <template slot="title">
-            <img src="../../assets/img/mima.png" alt="">
-            <span slot="title">修改密码</span>
+            <img src="../../assets/img/ziliao.png" alt="">
+            <span slot="title">资料编辑</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="4-1" @click="goPage('4-1', 'denglu')">
+            <el-menu-item index="4-1" @click="goPage('4-1', '/lianjie')">
+              <img src="../../assets/img/lianjie.png" alt="">
+              <span slot="title">我的链接</span>
+            </el-menu-item>
+            <el-menu-item index="4-2" @click="goPage('4-2', '/ziliao')">
+              <img src="../../assets/img/ziliao.png" alt="">
+              <span slot="title">资料修改</span>
+            </el-menu-item>
+            <el-menu-item index="4-3" @click="goPage('4-3', 'denglu')">
               <img src="../../assets/img/mima.png" alt="">
               修改登录密码
             </el-menu-item>
-            <el-menu-item index="4-2" @click="goPage('4-2', 'anquan')">
+            <el-menu-item index="4-4" @click="goPage('4-4', 'anquan')">
               <img src="../../assets/img/mima.png" alt="">
               修改安全密码
             </el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-        <el-menu-item index="5" @click="layout">
-          <img src="../../assets/img/zhuxiao.png" alt="">
-          <span slot="title">注销登录</span>
-        </el-menu-item>
-
         <el-submenu index="6">
           <template slot="title">
             <img src="../../assets/img/huiyuan.png" alt="">
@@ -98,6 +93,26 @@
               <img src="../../assets/img/jilu.png" alt="">
               转账记录
             </el-menu-item>
+            <el-submenu index="7-8">
+              <template slot="title">
+                <img src="../../assets/img/tibi.png" alt="">
+                <span slot="title">排单平台</span>
+              </template>
+              <el-menu-item-group>
+                <el-menu-item index="7-8-1" @click="goPage('7-8-1', '/paidan')">
+                  发起排单
+                </el-menu-item>
+                <el-menu-item index="7-8-2" @click="goPage('7-8-2', '/pipei')">
+                  排单匹配
+                </el-menu-item>
+                <el-menu-item index="7-8-3" @click="goPage('7-8-3' ,'/myrecord')">
+                  我的排单记录
+                </el-menu-item>
+                <el-menu-item index="7-8-4" @click="goPage('7-8-4' ,'/mypipei')">
+                  我匹配的排单记录
+                </el-menu-item>
+              </el-menu-item-group>
+            </el-submenu>
           </el-menu-item-group>
         </el-submenu>
 
@@ -130,6 +145,10 @@
             </el-submenu>
           </el-menu-item-group>
         </el-submenu>
+        <el-menu-item index="5" @click="layout">
+          <img src="../../assets/img/zhuxiao.png" alt="">
+          <span slot="title">注销登录</span>
+        </el-menu-item>
       </el-menu>
     </div>
     <div class="container" :class="isCollapse==true?'min-conatiner': 'max-conatiner'">
@@ -202,7 +221,7 @@ img
     float left
     .el-menu
       height 100%
-      overflow hidden
+      overflow-x hidden
       border-right none
       background rgba(0 ,0, 0, .25)
   .min-conatiner

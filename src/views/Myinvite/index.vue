@@ -59,10 +59,30 @@ export default {
   },
   methods: {
     handleSizeChange (val) {
-      console.log(`每页 ${val} 条`)
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      params.append('page', val)
+      this.axios.post(process.env.API_ROOT + '/api/user/recmlists', params).then((res) => {
+        let data = res.data
+        if (data.code === 1) {
+          this.tableData = data.data
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
     },
     handleCurrentChange (val) {
-      console.log(`当前页: ${val}`)
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      params.append('page', val)
+      this.axios.post(process.env.API_ROOT + '/api/user/recmlists', params).then((res) => {
+        let data = res.data
+        if (data.code === 1) {
+          this.tableData = data.data
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
     },
     get_user_info () {
       var params = new FormData()
