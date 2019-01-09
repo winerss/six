@@ -60,10 +60,15 @@ export default {
     background rgba(0, 0, 0, .25)
     padding 20px
     color #ccc
+    @media screen and (max-width:480px)
+      font-size 14px
+      padding 8px
   .content
     background rgba(0, 0, 0, .25)
     margin 20px
     padding 40px
+    @media screen and (max-width:480px)
+      padding 40px 0
     a
       color #fff
     img

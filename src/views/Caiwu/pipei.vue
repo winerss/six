@@ -49,7 +49,7 @@
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage"
       layout="prev, pager, next, jumper"
-      :total="total">
+      :total="pages">
     </el-pagination>
   </div>
 </template>
@@ -64,15 +64,38 @@ export default {
       num: '',
       zhifu: '',
       dialogVisible: false,
+      pages: 0,
       id: ''
     }
   },
   methods: {
     handleSizeChange (val) {
-      console.log(`每页 ${val} 条`)
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      params.append('page', val)
+      this.axios.post(process.env.API_ROOT + '/api/transfer/match_transfer', params).then((res) => {
+        let data = res.data
+        console.log(data)
+        if (data.code === 1) {
+          this.tableData = data.data.data
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
     },
     handleCurrentChange (val) {
-      console.log(`当前页: ${val}`)
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      params.append('page', val)
+      this.axios.post(process.env.API_ROOT + '/api/transfer/match_transfer', params).then((res) => {
+        let data = res.data
+        console.log(data)
+        if (data.code === 1) {
+          this.tableData = data.data.data
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
     },
     getData () {
       var params = new FormData()
@@ -80,8 +103,10 @@ export default {
       params.append('page', 1)
       this.axios.post(process.env.API_ROOT + '/api/transfer/match_transfer', params).then((res) => {
         let data = res.data
+        console.log(data)
         if (data.code === 1) {
-          this.tableData = data.data
+          this.tableData = data.data.data
+          this.pages = Number(data.data.page) * 10
         } else {
           this.$message.error(data.msg)
         }

@@ -42,7 +42,7 @@
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage"
       layout="prev, pager, next, jumper"
-      :total="total">
+      :total="pages">
     </el-pagination>
   </div>
 </template>
@@ -54,6 +54,7 @@ export default {
       total: 1000,
       currentPage: 1,
       tableData: [],
+      pages: 0,
       invite: ''
     }
   },
@@ -65,7 +66,7 @@ export default {
       this.axios.post(process.env.API_ROOT + '/api/user/recmlists', params).then((res) => {
         let data = res.data
         if (data.code === 1) {
-          this.tableData = data.data
+          this.tableData = data.data.data
         } else {
           this.$message.error(data.msg)
         }
@@ -78,7 +79,7 @@ export default {
       this.axios.post(process.env.API_ROOT + '/api/user/recmlists', params).then((res) => {
         let data = res.data
         if (data.code === 1) {
-          this.tableData = data.data
+          this.tableData = data.data.data
         } else {
           this.$message.error(data.msg)
         }
@@ -101,9 +102,11 @@ export default {
       params.append('sid', localStorage.getItem('sid'))
       params.append('page', 1)
       this.axios.post(process.env.API_ROOT + '/api/user/recmlists', params).then((res) => {
+        console.log(res.data)
         let data = res.data
         if (data.code === 1) {
-          this.tableData = data.data
+          this.tableData = data.data.data
+          this.pages = Number(data.data.page) * 10
         } else {
           this.$message.error(data.msg)
         }

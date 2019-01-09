@@ -1,37 +1,61 @@
 <template>
   <div id="mypipei">
-    <div class="title">我的拍单记录</div>
+    <div class="title">我匹配的排单记录</div>
+    <div class="tips" v-show="popupVisible">
+      <div class="wrapper">
+        <img :src="photo" alt="">
+        <div class="btn">
+          <el-button style="float: left;" @click="cancel">取消</el-button>
+          <el-button style="float: right" @click="cancel" type="primary">确定</el-button>
+        </div>
+      </div>
+    </div>
     <el-table
       ref="singleTable"
       :data="tableData"
       highlight-current-row>
       <el-table-column
-        property="id"
-        label="序号">
+        property="father.self_nickname"
+        label="主单发起人">
       </el-table-column>
       <el-table-column
-        property="tibiNum"
-        label="提币数量">
+        property="father.amount"
+        label="主单数量">
       </el-table-column>
       <el-table-column
-        property="num"
-        label="实发数量">
+        property="father.create_time"
+        label="主单发起时间">
       </el-table-column>
       <el-table-column
-        property="fear"
-        label="矿工费">
+        property="amount"
+        label="我匹配的数量">
+      </el-table-column>
+      <el-table-column
+        property="create_time"
+        label="匹配日期">
+      </el-table-column>
+      <el-table-column
+        property="account"
+        label="收款账号">
       </el-table-column>
       <el-table-column
         property="status"
-        label="提币状态">
-      </el-table-column>
-      <el-table-column
-        property="date"
-        label="申请日期">
-      </el-table-column>
-      <el-table-column
-        property="conDate"
-        label="确认时间">
+        label="操作"
+        width="300px">
+        <template slot-scope="scope">
+          <el-button
+            v-show="scope.row.status == '2'"
+            style="float:left;"
+            size="mini"
+            type="primary"
+            @click="look(scope.row.pic)">查看付款凭证</el-button>
+          <el-button
+            v-show="scope.row.status == '2'"
+            size="mini"
+            style="float:left;"
+            type="primary"
+            @click="confirm(scope.row.id)">确认收款</el-button>
+        </template>
       </el-table-column>
     </el-table>
     <el-pagination
@@ -39,7 +63,7 @@
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage"
       layout="prev, pager, next, jumper"
-      :total="total">
+      :total="pages">
     </el-pagination>
   </div>
 </template>
@@ -50,24 +74,76 @@ export default {
     return {
       total: 1000,
       currentPage: 1,
-      tableData: []
+      popupVisible: false,
+      tableData: [],
+      photo: '',
+      pages: 0
     }
   },
   methods: {
     handleSizeChange (val) {
-      console.log(`每页 ${val} 条`)
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      params.append('page', 1)
+      this.axios.post(process.env.API_ROOT + '/api/transfer/self_pipei', params).then((res) => {
+        console.log(res)
+        let data = res.data
+        if (data.code === 1) {
+          this.tableData = data.data.data
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
+    },
+    cancel () {
+      this.popupVisible = false
+    },
+    look (url) {
+      console.log(url)
+      this.popupVisible = true
+      this.photo = 'https://www.dadan299.com/' + url
     },
     handleCurrentChange (val) {
-      console.log(`当前页: ${val}`)
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      params.append('page', 1)
+      this.axios.post(process.env.API_ROOT + '/api/transfer/self_pipei', params).then((res) => {
+        console.log(res)
+        let data = res.data
+        if (data.code === 1) {
+          this.tableData = data.data.data
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
+    },
+    confirm (id) {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      params.append('id', id)
+      this.axios.post(process.env.API_ROOT + '/api/transfer/ok_order', params).then((res) => {
+        let data = res.data
+        if (data.code === 1) {
+          this.$message({
+            message: data.msg,
+            type: 'success'
+          })
+          // window.location.reload()
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
     },
     getData () {
       var params = new FormData()
       params.append('sid', localStorage.getItem('sid'))
       params.append('page', 1)
-      this.axios.post(process.env.API_ROOT + '/api/transfer/match_transfer', params).then((res) => {
+      this.axios.post(process.env.API_ROOT + '/api/transfer/self_pipei', params).then((res) => {
+        console.log(res)
         let data = res.data
         if (data.code === 1) {
-          this.tableData = data.data
+          this.tableData = data.data.data
+          this.pages = Number(data.data.page) * 10
         } else {
           this.$message.error(data.msg)
         }
@@ -84,6 +160,35 @@ export default {
 
 <style lang="stylus">
 #mypipei
+  .tips
+    position fixed
+    top 0
+    left 0
+    z-index 9999
+    width 100%
+    height 100%
+    background rgba(0,0,0,.4)
+    border-radius 8px;
+    .wrapper
+      position relative
+      background #fff;
+      height 400px
+      width 80%
+      max-width 400px;
+      margin 100px auto
+      border-radius 10px
+      img
+        display block
+        margin 0 auto
+        min-width 30%
+        max-width 80%
+        padding-top 20px
+      .btn
+        position absolute
+        bottom 20px
+        left 50%
+        margin-left -100px
+        width 200px
   .title
     font-size 24px
     background rgba(0, 0, 0, .25)

@@ -13,15 +13,15 @@ export default {
 <style lang="stylus">
 .el-table
   width inherit
-.el-table th, .el-table tr
-  background rgba(0,0,0,0.8) !important
-  color #ccc
-.el-table td, .el-table th.is-leaf
-  border-bottom 1px solid rgba(255, 255, 255, .25)
-.el-table--enable-row-hover .el-table__body tr:hover>td
-  background rgba(0, 0, 0, 0.25)
-.el-table--border::after, .el-table--group::after, .el-table::before
-  background-color rgba(255, 255, 255, .25)
+// .el-table th, .el-table tr
+//   background rgba(0,0,0,0.8) !important
+//   color #ccc
+// .el-table td, .el-table th.is-leaf
+//   border-bottom 1px solid rgba(255, 255, 255, .25)
+// .el-table--enable-row-hover .el-table__body tr:hover>td
+//   background rgba(0, 0, 0, 0.25)
+// .el-table--border::after, .el-table--group::after, .el-table::before
+//   background-color rgba(255, 255, 255, .25)
 .el-dialog, .el-pager li
   background rgba(0, 0, 0, .25)
 .el-pagination .btn-next, .el-pagination .btn-prev

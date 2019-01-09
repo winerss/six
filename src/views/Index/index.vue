@@ -233,7 +233,7 @@ img
   .container
     position absolute
     right 0
-    min-width 1000px
+    // min-width 1000px
     .collapse
       background rgba(0, 0, 0, 0.8)
       width 100%
