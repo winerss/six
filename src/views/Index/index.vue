@@ -164,7 +164,7 @@
 export default {
   data () {
     return {
-      isCollapse: false,
+      isCollapse: true,
       activeNav: '6-1'
     }
   },

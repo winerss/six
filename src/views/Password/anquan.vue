@@ -49,7 +49,7 @@ export default {
       }
       var params = new FormData()
       params.append('sid', localStorage.getItem('sid'))
-      params.append('password', this.password)
+      params.append('password', this.newpsd)
       params.append('old_password', this.old_password)
       params.append('type', 2)
       this.axios.post(process.env.API_ROOT + '/api/user/edit_password1', params).then((res) => {

@@ -24,7 +24,7 @@ export default {
     },
     login () {
       if (this.name.length > 10 || this.name.length < 3) {
-        this.$message.error('请输入正确的金粉编号')
+        this.$message.error('请输入正确的昵称')
         return false
       }
       if (!this.password) {

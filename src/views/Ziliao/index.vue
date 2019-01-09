@@ -6,10 +6,10 @@
     <div class="content">
       <el-form label-width="80px" class="demo-ruleForm">
         <el-form-item label="手机号码">
-          <el-input v-model="phone" disabled placeholder="请输入手机号码"></el-input>
+          <el-input v-model="phone" placeholder="请输入手机号码"></el-input>
         </el-form-item>
         <el-form-item label="钱包地址">
-          <el-input v-model="address" disabled="" placeholder="请输入钱包地址"></el-input>
+          <el-input v-model="address" placeholder="请输入钱包地址"></el-input>
         </el-form-item>
         <el-form-item label="安全密钥" required>
           <el-input type="password" v-model="pass" placeholder="请输入安全密钥"></el-input>
