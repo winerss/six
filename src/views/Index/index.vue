@@ -164,7 +164,7 @@
 export default {
   data () {
     return {
-      isCollapse: true,
+      isCollapse: false,
       activeNav: '6-1'
     }
   },
@@ -176,6 +176,9 @@ export default {
       setTimeout(() => {
         this.$router.push('/login')
       }, 1000)
+    }
+    if (document.body.clientWidth < 480) {
+      this.isCollapse = true
     }
   },
   methods: {
