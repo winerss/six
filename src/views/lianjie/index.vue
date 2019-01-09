@@ -1,18 +1,18 @@
 <template>
   <div id="lianjie">
-    <div class="title">我的链接</div>
-    <div class="content">
-      <el-form label-width="100px" class="demo-ruleForm">
-        <el-form-item label="邀请链接">
-          <a :href="url">{{url}}</a>
-        </el-form-item>
-        <el-form-item label="二维码">
-          <div class="qrcode">
-            <div id="code"></div>
-          </div>
-        </el-form-item>
-      </el-form>
-    </div>
+    <el-breadcrumb class="title" separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item>我的链接</el-breadcrumb-item>
+    </el-breadcrumb>
+    <el-card class="box-card">
+      <div class="text item">
+        <p class="name">邀请链接:</p>
+        <a :href="url">{{url}}</a>
+        <p class="name">二维码</p>
+        <div class="qrcode">
+          <div id="code"></div>
+        </div>
+      </div>
+    </el-card>
   </div>
 </template>
 
@@ -53,25 +53,38 @@ export default {
 
 <style lang="stylus">
 #lianjie
-  .el-form-item__label
-    color #ccc
   .title
-    font-size 24px
-    background rgba(0, 0, 0, .25)
-    padding 20px
+    padding 12px 20px
     color #ccc
+    font-size 20px
+    border-bottom 1px solid #ccc
     @media screen and (max-width:480px)
+      padding 8px 10px
       font-size 14px
-      padding 8px
-  .content
-    background rgba(0, 0, 0, .25)
+  .box-card
     margin 20px
     padding 40px
     @media screen and (max-width:480px)
-      padding 40px 0
+      padding 10px 0
+    .name
+      font-size 18px
+      @media screen and (max-width:480px)
+        font-size 14px
     a
-      color #fff
+      color #409EFF
+      padding-left 80px
+      line-height 40px
+      font-size 20px
+      text-decoration underline
+      @media screen and (max-width:480px)
+        font-size 14px
+        padding 0 8px
+        line-height 20px
     img
+      margin-top 20px
+      margin-left 80px
       height 200px
       width 200px
+      @media screen and (max-width:480px)
+        margin 0 auto
 </style>

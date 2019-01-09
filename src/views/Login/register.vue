@@ -25,9 +25,7 @@
         <el-form-item label="安全密钥" required>
           <el-input type="password" v-model="pass" placeholder="请输入安全密钥"></el-input>
         </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm">确认注册</el-button>
-        </el-form-item>
+        <el-button type="primary" @click="submitForm">确认注册</el-button>
       </el-form>
     </div>
   </div>
@@ -107,17 +105,23 @@ export default {
 <style lang="stylus">
 #register
   .el-form-item__label
-    color #ccc
+    color #333
+  .el-button
+    display block
+    margin 0 auto
   .title
-    font-size 24px
-    background rgba(0, 0, 0, .25)
-    padding 20px
+    padding 12px 20px
     color #ccc
+    font-size 20px
+    border-bottom 1px solid #ccc
+    @media screen and (max-width:480px)
+      padding 8px 10px
+      font-size 14px
   .content
     background rgba(0, 0, 0, .25)
     margin 20px
     padding 40px
-    .code-wrapper
-      .el-input
-        width 80%
+    @media screen and (max-width:480px)
+      padding 0
+      background none
 </style>

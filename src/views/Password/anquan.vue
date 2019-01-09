@@ -1,6 +1,8 @@
 <template>
   <div id="anquan">
-    <div class="title">安全密码修改</div>
+    <el-breadcrumb class="title" separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item>安全密码修改</el-breadcrumb-item>
+    </el-breadcrumb>
     <div class="content">
       <el-form label-width="120px" class="demo-ruleForm">
         <el-form-item label="原密码">
@@ -12,9 +14,7 @@
         <el-form-item label="确认新安全密码">
           <el-input v-model="renewpsd" type="password" placeholder="请输入确认新安全密码"></el-input>
         </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm">保存</el-button>
-        </el-form-item>
+        <el-button type="primary" @click="submitForm">保存</el-button>
       </el-form>
     </div>
   </div>
@@ -74,16 +74,23 @@ export default {
 <style lang="stylus">
 #anquan
   .el-form-item__label
-    color #ccc
+    color #333
   .el-button
     display block
+    margin 0 auto
   .title
-    font-size 24px
-    background rgba(0, 0, 0, .25)
-    padding 20px
+    padding 12px 20px
     color #ccc
+    font-size 20px
+    border-bottom 1px solid #ccc
+    @media screen and (max-width:480px)
+      padding 8px 10px
+      font-size 14px
   .content
     background rgba(0, 0, 0, .25)
     margin 20px
     padding 40px
+    @media screen and (max-width:480px)
+      padding 0
+      background none
 </style>

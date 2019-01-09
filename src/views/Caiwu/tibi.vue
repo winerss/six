@@ -1,11 +1,12 @@
 <template>
   <div id="tibi">
-    <div class="title">提币</div>
+    <el-breadcrumb class="title" separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item>提币</el-breadcrumb-item>
+    </el-breadcrumb>
     <div class="content">
-      <p class="tips">最低1000.00，1000.00倍数提币，矿工费0.00%。</p>
-      <el-form label-width="120px" class="demo-ruleForm">
+      <el-form label-width="80px" class="demo-ruleForm">
         <el-form-item label="奖励账户">
-          <el-input v-model="all_point" disabled placeholder="请输入奖励账户"></el-input>
+          <el-input v-model="nickname" disabled placeholder="请输入奖励账户"></el-input>
         </el-form-item>
         <el-form-item label="提币数量" required="">
           <el-input v-model="num" placeholder="请输入提币数量"></el-input>
@@ -13,9 +14,7 @@
         <el-form-item label="安全密码" required="">
           <el-input v-model="pass" type="password" placeholder="请输入安全密码"></el-input>
         </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm">提交申请</el-button>
-        </el-form-item>
+        <el-button type="primary" @click="submitForm">提交申请</el-button>
       </el-form>
     </div>
   </div>
@@ -28,7 +27,7 @@ export default {
       account: '',
       num: '',
       pass: '',
-      all_point: ''
+      nickname: ''
     }
   },
   methods: {
@@ -38,7 +37,7 @@ export default {
       this.axios.post(process.env.API_ROOT + '/api/user/get_user_info', params).then((res) => {
         let data = res.data
         if (data.code === 1) {
-          this.all_point = data.data.all_point
+          this.nickname = data.data.nickname
         } else {
           this.$message.error(data.msg)
         }
@@ -81,26 +80,23 @@ export default {
 <style lang="stylus">
 #tibi
   .el-form-item__label
-    color #ccc
+    color #333
   .el-button
     display block
+    margin 0 auto
   .title
-    font-size 24px
-    background rgba(0, 0, 0, .25)
-    padding 20px
+    padding 12px 20px
     color #ccc
+    font-size 20px
+    border-bottom 1px solid #ccc
+    @media screen and (max-width:480px)
+      padding 8px 10px
+      font-size 14px
   .content
-    position relative
     background rgba(0, 0, 0, .25)
     margin 20px
-    padding 80px 40px
-    .tips
-      position absolute
-      top 20px
-      left 20px
-      right 20px
-      padding-bottom 10px
-      border-bottom 1px solid #ccc
-      color #ccc
-      font-size 20px
+    padding 40px
+    @media screen and (max-width:480px)
+      padding 0
+      background none
 </style>

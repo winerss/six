@@ -1,6 +1,8 @@
 <template>
   <div id="pipei">
-    <div class="title">排单匹配</div>
+    <el-breadcrumb class="title" separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item>排单匹配</el-breadcrumb-item>
+    </el-breadcrumb>
     <div class="tips" v-show="dialogVisible">
       <el-form label-width="84px">
         <el-form-item label="数量">
@@ -160,13 +162,18 @@ export default {
     background rgb(255, 255, 255)
     border-radius 8px;
     color #333
-    .el-input__inner
-      background-color #fff
+    @media screen and (max-width:480px)
+      width 100%
+      left 0
+      padding 20px 0
   .title
-    font-size 24px
-    background rgba(0, 0, 0, .25)
-    padding 20px
+    padding 12px 20px
     color #ccc
+    font-size 20px
+    border-bottom 1px solid #ccc
+    @media screen and (max-width:480px)
+      padding 8px 10px
+      font-size 14px
   .el-table
     margin 20px
   .el-pagination

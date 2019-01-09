@@ -1,119 +1,63 @@
 <template>
   <div id="home">
-    <div class="title">合约资产</div>
+    <el-breadcrumb class="title" separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item>合约资产</el-breadcrumb-item>
+    </el-breadcrumb>
     <div class="content">
-      <el-row>
-        <el-col :span="8">
-          <div class="wrapper">
-            <div class="left">
-              <img src="../../assets/img/qianbao.png" alt="">
-            </div>
-            <div class="right">
-              <h2>{{data.zhu_point}}</h2>
-              <p>激活码</p>
-            </div>
-          </div>
-        </el-col>
-        <el-col :span="8">
-          <div class="wrapper">
-            <div class="left">
-              <img src="../../assets/img/star.png" alt="">
-            </div>
-            <div class="right">
-              <h2>{{data.all_point}}</h2>
-              <p>大盘币</p>
-            </div>
-          </div>
-        </el-col>
-        <el-col :span="8">
-          <div class="wrapper">
-            <div class="left">
-              <img src="../../assets/img/glass.png" alt="">
-            </div>
-            <div class="right">
-              <h2>{{data.enroll_point}}</h2>
-              <p>排单币</p>
-            </div>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="8" >
-          <div class="wrapper">
-            <div class="left">
-              <img src="../../assets/img/heart.png" alt="">
-            </div>
-            <div class="right">
-              <h2>{{data.tui_sum}}</h2>
-              <p>推荐人数</p>
-            </div>
-          </div>
-        </el-col>
-        <el-col :span="8" >
-          <div class="wrapper">
-            <div class="left">
-              <img src="../../assets/img/coin.png" alt="">
-            </div>
-            <div class="right">
-              <h2>{{data.team_sum}}</h2>
-              <p>团队人数</p>
-            </div>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="24" >
-          <div class="wrapper">
-            <div class="title">最新公告</div>
-            <div class="item" v-for="(item, index) in news" :key="index" @click="goDetail(item.id)">
-              <p class="name">{{item.content}}</p>
-              <p class="date">{{item.date}}</p>
-            </div>
-          </div>
-        </el-col>
-        <!-- <el-col :span="8" >
-          <div class="wrapper">
-            <div class="title">信息咨询</div>
-            <div class="item">
-              <div class="left">
-                <img src="../../assets/img/info.png" alt="">
-              </div>
-              <div class="center">
-                <p class="name">个人信息</p>
-                <p class="date">注册日期：2018-07-18</p>
-              </div>
-              <div class="right">
-                <p>413237[成熟]</p>
-              </div>
-            </div>
-            <div class="item">
-              <div class="left">
-                <img src="../../assets/img/shequn.png" alt="">
-              </div>
-              <div class="center">
-                <p class="name">我的社群</p>
-                <p class="date">社群：128</p>
-              </div>
-              <div class="right">
-                <p></p>
-              </div>
-            </div>
-            <div class="item">
-              <div class="left">
-                <img src="../../assets/img/email.png" alt="">
-              </div>
-              <div class="center">
-                <p class="name">我的收件箱</p>
-                <p class="date">0</p>
-              </div>
-              <div class="right">
-                <p>0条新信息</p>
-              </div>
-            </div>
-            <p class="date"></p>
-          </div>
-        </el-col> -->
-      </el-row>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <img src="../../assets/img/qianbao.png" alt="">
+          <span>激活码</span>
+        </div>
+        <div class="text item">
+          <h2>{{data.zhu_point}}</h2>
+        </div>
+      </el-card>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <img src="../../assets/img/star.png" alt="">
+          <span>大盘币</span>
+        </div>
+        <div class="text item">
+          <h2>{{data.all_point}}</h2>
+        </div>
+      </el-card>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <img src="../../assets/img/qianbao.png" alt="">
+          <span>排单币</span>
+        </div>
+        <div class="text item">
+          <h2>{{data.enroll_point}}</h2>
+        </div>
+      </el-card>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <img src="../../assets/img/heart.png" alt="">
+          <span>推荐人数</span>
+        </div>
+        <div class="text item">
+          <h2>{{data.tui_sum}}</h2>
+        </div>
+      </el-card>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <img src="../../assets/img/qianbao.png" alt="">
+          <span>团队人数</span>
+        </div>
+        <div class="text item">
+          <h2>{{data.team_sum}}</h2>
+        </div>
+      </el-card>
+      <el-card class="box-card news">
+        <div slot="header" class="clearfix">
+          <span>最新公告</span>
+        </div>
+        <div class="text item" v-for="(item, index) in news" :key="index" @click="goDetail(item.id)">
+          <p class="name">{{item.content}}</p>
+          <p class="date">{{item.date}}</p>
+        </div>
+      </el-card>
     </div>
   </div>
 </template>
@@ -163,70 +107,43 @@ export default {
 <style lang="stylus">
 #home
   .title
-    font-size 24px
-    background rgba(0, 0, 0, .25)
-    padding 20px
+    padding 12px 20px
     color #ccc
+    font-size 20px
+    border-bottom 1px solid #ccc
+    @media screen and (max-width:480px)
+      padding 8px 10px
+      font-size 14px
   .content
-    padding 20px
-    .none
-      background none !important
-    .el-col-8
-      padding 0 20px
-      .wrapper
-        background rgba(0, 0, 0, .25)
-        margin-top 20px
-        padding 0 10px
-        border-radius 8px
-        .left
+    .box-card
+      width 27%
+      margin-left 2%
+      margin-top 30px
+      background rgba(0, 0, 0, 0.8)
+      color #ccc
+      @media screen and (max-width:480px)
+        width 95%
+        margin-top 10px
+      float left
+      .clearfix
+        font-size 18px
+        img
           float left
-          img
-            height 42px
-            width 42px
-            margin 19px 30px 0 10px
-        .right
-          color #ccc
-          h2
-            font-size 30px
-            line-height 50px
-          p
-            font-size 14px
-            line-height 20px
-    .el-col-24, .el-col-8
-      padding 0 20px
-      .wrapper
-        background rgba(0, 0, 0, .25)
-        margin-top 20px
-        padding 0 10px
-        border-radius 8px
-        color #ccc
-        padding-bottom 20px
-        .title
-          font-size 16px
-          background none
-          padding 10px
-    .el-col-24
+          margin-right 10px
       .item
-        display flex
-        justify-content space-between
-        line-height 20px
-        cursor pointer
-        p
-          padding 4px 10px
-    .el-col-8
+        font-size 24px
+    .news
+      width 85%
+      padding-bottom 20px
+      @media screen and (max-width:480px)
+        width 95%
+        margin-bottom 20px
       .item
-        line-height 20px
-        margin-top 8px
         overflow hidden
-        .left
-          img
-            float left
-            width 20px
-            height 20px
-            margin 2px 10px
-        .center
+        .name
           float left
-        .right
+          font-size 18px
+        .date
           float right
-          text-align right
+          font-size 16px
 </style>

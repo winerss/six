@@ -1,7 +1,9 @@
 <template>
   <div id="jilu">
+    <el-breadcrumb class="title" separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item>我的流水</el-breadcrumb-item>
+    </el-breadcrumb>
     <div class="toolbar">
-      <span class="title">我的流水</span>
       <el-radio v-model="radio" label="4">激活码转账</el-radio>
       <el-radio v-model="radio" label="5">排单币转账</el-radio>
       <el-button size="small" style="float: right;"  @click="search" type="primary">查询</el-button>
@@ -129,6 +131,14 @@ export default {
 
 <style lang="stylus">
 #jilu
+  .title
+    padding 12px 20px
+    color #ccc
+    font-size 20px
+    border-bottom 1px solid #ccc
+    @media screen and (max-width:480px)
+      padding 8px 10px
+      font-size 14px
   .toolbar
     font-size 24px
     background #fff

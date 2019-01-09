@@ -1,8 +1,10 @@
 <template>
   <div id="jiedian">
-    <div class="title">排单币转账</div>
+    <el-breadcrumb class="title" separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item>排单币转账</el-breadcrumb-item>
+    </el-breadcrumb>
     <div class="content">
-      <p class="tips">排单币余额</p>
+      <p class="tips">排单币余额:{{enroll_point}}</p>
       <el-form label-width="120px" class="demo-ruleForm">
         <el-form-item label="接收用户昵称" required>
           <el-input v-model="host" placeholder="请输入接收用户昵称"></el-input>
@@ -13,9 +15,7 @@
         <el-form-item label="安全密码" required>
           <el-input v-model="pass" type="password" placeholder="请输入安全密码"></el-input>
         </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm">确认转账</el-button>
-        </el-form-item>
+        <el-button type="primary" @click="submitForm">确认转账</el-button>
       </el-form>
     </div>
   </div>
@@ -27,6 +27,7 @@ export default {
     return {
       host: '',
       num: '',
+      enroll_point: '',
       pass: ''
     }
   },
@@ -62,7 +63,23 @@ export default {
           this.$message.error(data.msg)
         }
       })
+    },
+    get_user_info () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/user/get_user_info', params).then((res) => {
+        let data = res.data
+        if (data.code === 1) {
+          console.log(data.data)
+          this.enroll_point = data.data.enroll_point
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
     }
+  },
+  mounted () {
+    this.get_user_info()
   },
   components: {
   }
@@ -72,26 +89,37 @@ export default {
 <style lang="stylus">
 #jiedian
   .el-form-item__label
-    color #ccc
+    color #333
   .el-button
     display block
+    margin 0 auto
   .title
-    font-size 24px
-    background rgba(0, 0, 0, .25)
-    padding 20px
+    padding 12px 20px
     color #ccc
+    font-size 20px
+    border-bottom 1px solid #ccc
+    @media screen and (max-width:480px)
+      padding 8px 10px
+      font-size 14px
   .content
     position relative
     background rgba(0, 0, 0, .25)
     margin 20px
-    padding 80px 40px
+    padding 60px 40px
+    @media screen and (max-width:480px)
+      padding 40px 0
+      background none
     .tips
       position absolute
       top 20px
       left 20px
       right 20px
       padding-bottom 10px
-      border-bottom 1px solid #ccc
-      color #ccc
-      font-size 20px
+      border-bottom 1px solid #333
+      color #333
+      font-size 16px
+      @media screen and (max-width:480px)
+        top 0px
+        left 0
+        right 0
 </style>

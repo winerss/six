@@ -2,10 +2,10 @@
   <div id="login">
     <div class="login">
       <img src="../../assets/img/login.png" alt="">
-      <input v-model="name" placeholder="请输入金粉编号"/>
-      <input v-model="password" type="password" placeholder="请输入密码"/>
-      <button @click="login">立即登录</button>
-      <button>找回密码</button>
+      <el-input v-model="name" placeholder="请输入昵称"></el-input>
+      <el-input v-model="password" type="password" placeholder="请输入密码"></el-input>
+      <el-button type="primary" @click="login">立即登录</el-button>
+      <el-button type="primary">找回密码</el-button>
     </div>
   </div>
 </template>
@@ -49,6 +49,13 @@ export default {
       })
     }
   },
+  mounted () {
+    var params = new FormData()
+    params.append('sid', localStorage.getItem('sid'))
+    this.axios.post(process.env.API_ROOT + '/api/transfer/websitename', params).then((res) => {
+      document.title = res.data.data
+    })
+  },
   components: {
   }
 }
@@ -59,33 +66,18 @@ export default {
   position absolute
   height 100%
   width 100%
-  background url('../../assets/img/loginbg.jpg')
   background-size cover
   .login
     width 80%
     max-width 600px
     margin 0 auto
-  input
-    width 98%
-    height 40px
-    line-height 40px
-    margin-top 20px
-    padding 0 1%
-    border-radius 4px
-    background none
-    border 1px solid #ccc
-    color #f5f5f5
-  button
-    width 100%
-    height 40px
-    line-height 40px
-    padding 0
-    margin-top 20px
-    background rgba(0, 0, 0, 0.7)
-    border none
-    outline none
-    color #f5f5f5
-    cursor pointer
+    .el-input
+      margin-top 20px
+    .el-button
+      width 100%
+      margin-top 20px
+    .el-button+.el-button
+      margin-left 0
   img
     display block
     width 120px

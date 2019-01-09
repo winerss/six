@@ -1,7 +1,9 @@
 <template>
   <div id="caiwu">
+    <el-breadcrumb class="title" separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item>我的流水</el-breadcrumb-item>
+    </el-breadcrumb>
     <div class="toolbar">
-      <span class="title">我的流水</span>
       <el-radio v-model="radio" label="0">全部流水</el-radio>
       <el-radio v-model="radio" label="1">激活码流水</el-radio>
       <el-radio v-model="radio" label="2">大盘币流水</el-radio>
@@ -131,6 +133,14 @@ export default {
 
 <style lang="stylus">
 #caiwu
+  .title
+    padding 12px 20px
+    color #ccc
+    font-size 20px
+    border-bottom 1px solid #ccc
+    @media screen and (max-width:480px)
+      padding 8px 10px
+      font-size 14px
   .toolbar
     font-size 24px
     background #fff

@@ -153,10 +153,13 @@ export default {
 <style lang="stylus">
 #myinvite
   .title
-    font-size 24px
-    background rgba(0, 0, 0, .25)
-    padding 20px
+    padding 12px 20px
     color #ccc
+    font-size 20px
+    border-bottom 1px solid #ccc
+    @media screen and (max-width:480px)
+      padding 8px 10px
+      font-size 14px
   .el-table
     margin 20px
   .el-pagination

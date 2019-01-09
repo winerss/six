@@ -1,6 +1,8 @@
 <template>
   <div id="myrecord">
-    <div class="title">我的排单记录</div>
+    <el-breadcrumb class="title" separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item>我的排单记录</el-breadcrumb-item>
+    </el-breadcrumb>
     <div class="tips" v-show="popupVisible">
       <div class="wrapper">
         <img :src="photo" alt="">
@@ -191,10 +193,13 @@ export default {
         margin-left -100px
         width 200px
   .title
-    font-size 24px
-    background rgba(0, 0, 0, .25)
-    padding 20px
+    padding 12px 20px
     color #ccc
+    font-size 20px
+    border-bottom 1px solid #ccc
+    @media screen and (max-width:480px)
+      padding 8px 10px
+      font-size 14px
   .el-table
     margin 20px
   .el-pagination
@@ -212,4 +217,18 @@ export default {
       background: rgba(0, 0, 0, 0);
       opacity: 0;
       filter: opacity(0)
+  .el-table__expanded-cell
+    @media screen and (max-width:480px)
+      padding 0
+    .el-form-item
+      @media screen and (max-width:480px)
+        margin 0
+    .el-form-item__label, .el-form-item__content
+      @media screen and (max-width:480px)
+        line-height 20px
+    .el-form
+      @media screen and (max-width:480px)
+        background #ccc
+        margin-top 20px
+        padding 6px
 </style>

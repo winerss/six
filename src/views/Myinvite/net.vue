@@ -1,6 +1,8 @@
 <template>
   <div id="net">
-    <div class="title">基本信息</div>
+    <el-breadcrumb class="title" separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item>基本信息</el-breadcrumb-item>
+    </el-breadcrumb>
     <div class="content">
       <el-tree
         :data="data"
@@ -62,19 +64,19 @@ export default {
 
 <style lang="stylus">
 #net
-  .el-form-item__label
-    color #ccc
-  .el-tree-node__content:hover
-    background-color rgba(0, 0, 0, 0)
   .title
-    font-size 24px
-    background rgba(0, 0, 0, .25)
-    padding 20px
+    padding 12px 20px
     color #ccc
+    font-size 20px
+    border-bottom 1px solid #ccc
+    @media screen and (max-width:480px)
+      padding 8px 10px
+      font-size 14px
   .content
     background rgba(0, 0, 0, .25)
     margin 20px
     padding 40px
-    .el-tree
+    @media screen and (max-width:480px)
+      padding 0
       background none
 </style>

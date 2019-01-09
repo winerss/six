@@ -169,6 +169,7 @@ export default {
     }
   },
   mounted () {
+    this.websitename()
     this.activeNav = localStorage.getItem('active') || '1'
     if (!localStorage.getItem('sid')) {
       this.$message.error('请重新登录')
@@ -188,6 +189,14 @@ export default {
     layout () {
       localStorage.clear()
       this.$router.push('/login')
+    },
+    websitename () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/transfer/websitename', params).then((res) => {
+        this.name = res.data.data
+        document.title = res.data.data
+      })
     }
   },
   components: {
@@ -204,7 +213,6 @@ img
   bottom 0
   left 0
   right 0
-  background url('../../assets/img/max.jpg')
   background-size cover
   .logo
     width 40px
@@ -219,6 +227,7 @@ img
     position relative
     height 100%
     float left
+    background rgba(0,0,0,0.8)
     .el-menu
       height 100%
       overflow-x hidden
@@ -226,14 +235,19 @@ img
       background rgba(0 ,0, 0, .25)
   .min-conatiner
     left 64px
-    transition: left .4s;
+    transition: left .4s
+    @media screen and (max-width:480px)
+      left 0
+      background #fff
+      z-index 999
   .max-conatiner
     left 200px
     transition: left .5s;
   .container
     position absolute
     right 0
-    // min-width 1000px
+    top 0
+    bottom 0
     .collapse
       background rgba(0, 0, 0, 0.8)
       width 100%
