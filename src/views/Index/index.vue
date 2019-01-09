@@ -69,10 +69,10 @@
               <img src="../../assets/img/liushui.png" alt="">
               我的流水
             </el-menu-item>
-            <el-menu-item index="7-2" @click="goPage('7-2', '/qingdan')">
+            <!-- <el-menu-item index="7-2" @click="goPage('7-2', '/qingdan')">
               <img src="../../assets/img/qingdan.png" alt="">
               贡献清单
-            </el-menu-item>
+            </el-menu-item> -->
             <el-menu-item index="7-3" @click="goPage('7-3', '/tibi')">
               <img src="../../assets/img/tibi.png" alt="">
               提币
@@ -116,7 +116,7 @@
           </el-menu-item-group>
         </el-submenu>
 
-        <el-submenu index="8">
+        <!-- <el-submenu index="8">
           <template slot="title">
             <img src="../../assets/img/gonggao.png" alt="">
             <span slot="title">公告中心</span>
@@ -144,7 +144,7 @@
               </el-menu-item-group>
             </el-submenu>
           </el-menu-item-group>
-        </el-submenu>
+        </el-submenu> -->
         <el-menu-item index="5" @click="layout">
           <img src="../../assets/img/zhuxiao.png" alt="">
           <span slot="title">注销登录</span>

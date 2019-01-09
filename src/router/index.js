@@ -22,6 +22,7 @@ import paidan from '@/views/caiwu/paidan'
 import pipei from '@/views/caiwu/pipei'
 import myrecord from '@/views/caiwu/myrecord'
 import mypipei from '@/views/caiwu/mypipei'
+import noticeDetail from '@/views/Home/noticeDetail'
 
 // 邮箱
 import news from '@/views/news'
@@ -201,6 +202,13 @@ export default new Router({
         component: revice,
         meta: {
           title: '收件箱'
+        }
+      }, {
+        path: '/noticeDetail/:id',
+        name: 'noticeDetail',
+        component: noticeDetail,
+        meta: {
+          title: '新闻详情'
         }
       }]
     },
