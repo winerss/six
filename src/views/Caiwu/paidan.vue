@@ -6,13 +6,13 @@
     <div class="content">
       <p class="tips">利息: {{data.lxn_scale * 100}}% 排单周期: {{data.zq_scale}}(天) 排单手续费{{data.sx_scale * 100}}%</p>
       <el-form label-width="80px" class="demo-ruleForm">
-        <el-form-item label="转换数量" required>
-          <el-input v-model="num" placeholder="请输入转换数量"></el-input>
+        <el-form-item label="发起数量" required>
+          <el-input v-model="num" placeholder="请输入发起数量"></el-input>
         </el-form-item>
         <el-form-item label="安全密码" required>
           <el-input v-model="pass" type="password" placeholder="请输入安全密码"></el-input>
         </el-form-item>
-        <el-button type="primary" @click="submitForm">确认转账</el-button>
+        <el-button type="primary" @click="submitForm">确认发起</el-button>
       </el-form>
     </div>
   </div>

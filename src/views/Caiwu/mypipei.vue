@@ -21,6 +21,10 @@
         label="主单发起人">
       </el-table-column>
       <el-table-column
+        property="father.self_tel"
+        label="电话">
+      </el-table-column>
+      <el-table-column
         property="father.amount"
         label="主单数量">
       </el-table-column>

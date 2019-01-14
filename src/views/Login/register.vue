@@ -4,13 +4,13 @@
     <div class="content">
       <el-form label-width="100px" class="demo-ruleForm">
         <el-form-item label="昵称" required>
-          <el-input v-model="name" placeholder="请输入昵称"></el-input>
+          <el-input v-model="name" placeholder="请输入请输入6到12位数字+字母昵称"></el-input>
         </el-form-item>
         <el-form-item label="钱包地址" required>
           <el-input v-model="money_address" placeholder="请输入钱包地址"></el-input>
         </el-form-item>
         <el-form-item label="邀请人昵称" required>
-          <el-input v-model="user" placeholder="请输入邀请人昵称"></el-input>
+          <el-input v-model="user" disabled="" placeholder="请输入邀请人昵称"></el-input>
         </el-form-item>
         <el-form-item label="手机号码" required>
           <el-input v-model="phone" placeholder="请输入手机号码"></el-input>
@@ -20,10 +20,10 @@
           <el-button type="primary">获取验证码</el-button>
         </el-form-item> -->
         <el-form-item label="登录密码" required>
-          <el-input v-model="password" type="password" placeholder="请输入登录密码"></el-input>
+          <el-input v-model="password" type="password" placeholder="请输入6到12位登录密码"></el-input>
         </el-form-item>
         <el-form-item label="安全密钥" required>
-          <el-input type="password" v-model="pass" placeholder="请输入安全密钥"></el-input>
+          <el-input type="password" v-model="pass" placeholder="请输入6到12位安全密钥"></el-input>
         </el-form-item>
         <el-button type="primary" @click="submitForm">确认注册</el-button>
       </el-form>
@@ -46,9 +46,26 @@ export default {
     }
   },
   methods: {
+    get_user_info () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/user/get_user_info', params).then((res) => {
+        let data = res.data
+        if (data.code === 1) {
+          this.user = data.data.nickname
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
+    },
     submitForm () {
       if (!this.name) {
         this.$message.error('请输入昵称')
+        return false
+      }
+      var reg = /^[0-9a-zA-Z]{6,12}$/
+      if (!reg.test(this.name)) {
+        this.$message.error('请输入6到12位数字+字母')
         return false
       }
       if (!this.money_address) {
@@ -63,16 +80,21 @@ export default {
         this.$message.error('请输入手机号')
         return false
       }
+      var myreg = /^[1][3,4,5,7,8][0-9]{9}$/
+      if (!myreg.test(this.phone)) {
+        this.$message.error('请输入正确的手机号')
+        return false
+      }
       // if (!this.code) {
       //   this.$message.error('请输入验证码')
       //   return false
       // }
-      if (!this.password) {
-        this.$message.error('请输入登录密码')
+      if (!this.password || this.password.length < 6 || this.password.length > 12) {
+        this.$message.error('请正确输入登录密码')
         return false
       }
-      if (!this.pass) {
-        this.$message.error('请输入安全密钥')
+      if (!this.pass || this.pass.length < 6 || this.pass.length > 12) {
+        this.$message.error('请正确输入安全密钥')
         return false
       }
       var params = new FormData()
@@ -96,6 +118,9 @@ export default {
         }
       })
     }
+  },
+  mounted () {
+    this.get_user_info()
   },
   components: {
   }

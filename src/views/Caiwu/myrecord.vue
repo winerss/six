@@ -22,6 +22,9 @@
             <el-form-item label="匹配人名称">
               <span>{{ item.self_nickname }}</span>
             </el-form-item>
+            <el-form-item label="匹配人电话">
+              <span>{{ item.self_tel }}</span>
+            </el-form-item>
             <el-form-item label="匹配数量">
               <span>{{ item.amount }}</span>
             </el-form-item>
@@ -48,6 +51,10 @@
       <el-table-column
         property="amount"
         label="排单数量">
+      </el-table-column>
+      <el-table-column
+        property="手机号"
+        label="手机号">
       </el-table-column>
       <el-table-column
         property="matchmoney"

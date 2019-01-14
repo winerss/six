@@ -6,8 +6,8 @@
       :data="tableData"
       highlight-current-row>
       <el-table-column
-        property="id"
-        label="序号">
+        label="序号"
+        type="index">
       </el-table-column>
       <el-table-column
         property="nickname"

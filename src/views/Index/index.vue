@@ -166,6 +166,9 @@
             <el-dropdown-item @click.native="goUrl(2)">我匹配的排单未完成数<el-badge :value="num2" class="item"></el-badge></el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
+        <p class="reload">
+          <i @click="reload()" style="color: #409EFF;font-size: 26px;" class="el-icon-refresh"></i><br>
+        </p>
       </div>
       <router-view></router-view>
     </div>
@@ -202,6 +205,9 @@ export default {
   methods: {
     collapse () {
       this.isCollapse = !this.isCollapse
+    },
+    reload () {
+      window.location.reload()
     },
     goPage (key, path) {
       localStorage.setItem('active', key)
@@ -320,16 +326,31 @@ img
         color #ccc
     .message
       position absolute
-      right 50px
-      top 2px
+      right 20px
+      top 10px
       bottom 0
       height 40px
-      width 40px
+      width 100px
+      .reload
+        float left
+        margin-left 20px
+        margin-top 2px
+        font-weight bold
+        color #cccccc
+        line-height 20px
+        @media screen and (max-width:480px)
+          margin-top 8px
+      .el-dropdown
+        float left
+      .el-button
+        padding 0
+        background #333
+        border-color #333
       @media screen and (max-width:480px)
-        right 20px
-        top 4px
+        right 2px
+        top 6px
         height 40px
-        width 40px
+        width 80px
       .el-badge__content
         position absolute
         top -30px
@@ -340,8 +361,10 @@ img
           font-size 8px
       img
         width 24px
+        margin-top 5px
         @media screen and (max-width:480px)
           width 20px
+          margin-top 14px
   .el-menu-vertical-demo:not(.el-menu--collapse)
     width 200px
   .el-submenu__title:hover, .el-menu-item:focus, .el-menu-item:hover
