@@ -115,6 +115,8 @@ export default {
       font-size 14px
   .el-table
     margin 20px
+    @media screen and (max-width:480px)
+      margin 0
   .el-pagination
     text-align right
     margin-right 20px

@@ -146,6 +146,8 @@ export default {
     color #333
   .el-table
     margin 20px
+    @media screen and (max-width:480px)
+      margin 0
   .el-pagination
     text-align right
     margin-right 20px

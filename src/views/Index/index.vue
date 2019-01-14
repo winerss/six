@@ -7,8 +7,9 @@
         :collapse="isCollapse"
         text-color="#999"
         active-text-color="#ffd04b">
-        <el-menu-item index="0">
+        <el-menu-item index="0" style="margin-bottom: 40px">
           <img class="logo" src="../../assets/img/login.png" alt="">
+          <div class="nickname"><span>{{data.nickname}}</span></div>
         </el-menu-item>
         <el-menu-item index="1" @click="goPage('1', '/home')">
           <img src="../../assets/img/zichan.png" alt="">
@@ -93,29 +94,28 @@
               <img src="../../assets/img/jilu.png" alt="">
               转账记录
             </el-menu-item>
-            <el-submenu index="7-8">
+          </el-menu-item-group>
+          </el-submenu>
+            <el-submenu index="8">
               <template slot="title">
                 <img src="../../assets/img/tibi.png" alt="">
                 <span slot="title">排单平台</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="7-8-1" @click="goPage('7-8-1', '/paidan')">
+                <el-menu-item index="8-1" @click="goPage('8-1', '/paidan')">
                   发起排单
                 </el-menu-item>
-                <el-menu-item index="7-8-2" @click="goPage('7-8-2', '/pipei')">
+                <el-menu-item index="8-2" @click="goPage('8-2', '/pipei')">
                   排单匹配
                 </el-menu-item>
-                <el-menu-item index="7-8-3" @click="goPage('7-8-3' ,'/myrecord')">
+                <el-menu-item index="8-3" @click="goPage('8-3' ,'/myrecord')">
                   我的排单记录
                 </el-menu-item>
-                <el-menu-item index="7-8-4" @click="goPage('7-8-4' ,'/mypipei')">
+                <el-menu-item index="8-4" @click="goPage('8-4' ,'/mypipei')">
                   我匹配的排单记录
                 </el-menu-item>
               </el-menu-item-group>
             </el-submenu>
-          </el-menu-item-group>
-        </el-submenu>
-
         <!-- <el-submenu index="8">
           <template slot="title">
             <img src="../../assets/img/gonggao.png" alt="">
@@ -155,6 +155,18 @@
       <div class="collapse">
         <i class="el-icon-menu" @click="collapse"></i>
       </div>
+      <div class="message">
+        <el-dropdown>
+          <el-button type="primary" size="small">
+            <el-badge v-show="num3 > 0" :value="num3" class="item"></el-badge>
+            <img src="../../assets/img/bell.png" alt="">
+          </el-button>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item @click.native="goUrl(1)">我的排单未完成匹配数<el-badge :value="num1" class="item"></el-badge></el-dropdown-item>
+            <el-dropdown-item @click.native="goUrl(2)">我匹配的排单未完成数<el-badge :value="num2" class="item"></el-badge></el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
       <router-view></router-view>
     </div>
   </div>
@@ -165,11 +177,17 @@ export default {
   data () {
     return {
       isCollapse: false,
-      activeNav: '6-1'
+      activeNav: '',
+      num1: 0,
+      data: {},
+      num2: 0,
+      num3: 0
     }
   },
   mounted () {
     this.websitename()
+    this.get_user_info()
+    this.painotice()
     this.activeNav = localStorage.getItem('active') || '1'
     if (!localStorage.getItem('sid')) {
       this.$message.error('请重新登录')
@@ -200,6 +218,35 @@ export default {
         this.name = res.data.data
         document.title = res.data.data
       })
+    },
+    goUrl (type) {
+      if (type === 1) {
+        this.$router.push('/myrecord')
+        localStorage.setItem('active', '8-3')
+      } else {
+        this.$router.push('/mypipei')
+        localStorage.setItem('active', '8-4')
+      }
+    },
+    get_user_info () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/user/get_user_info', params).then((res) => {
+        let data = res.data
+        if (data.code === 1) {
+          console.log(data.data)
+          this.data = data.data
+        }
+      })
+    },
+    painotice () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/user/painotice', params).then((res) => {
+        this.num1 = res.data.data[1].count
+        this.num2 = res.data.data[2].count
+        this.num3 = res.data.data[1].count + res.data.data[2].count
+      })
     }
   },
   components: {
@@ -207,7 +254,7 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scope>
 img
   width 20px
 #index
@@ -217,11 +264,23 @@ img
   left 0
   right 0
   background-size cover
+  .nickname
+    margin-top 4px
+    font-size 16px
+    color #ccc
+    line-height 30px
+    text-align center
+    span
+      font-size 18px
+    @media screen and (max-width:480px)
+      line-height 28px
+      margin-left 8px
+      margin-top 0
+      margin-bottom -8px
   .logo
     width 40px
-    padding-top 8px
-    margin-left 40px
     display block
+    margin 8px auto
   .el-menu--collapse
     .logo
       margin-left -10px
@@ -259,6 +318,30 @@ img
         padding 10px 20px
         cursor pointer
         color #ccc
+    .message
+      position absolute
+      right 50px
+      top 2px
+      bottom 0
+      height 40px
+      width 40px
+      @media screen and (max-width:480px)
+        right 20px
+        top 4px
+        height 40px
+        width 40px
+      .el-badge__content
+        position absolute
+        top -30px
+        right -35px
+        border 0
+        line-height: 16px;
+        @media screen and (max-width:480px)
+          font-size 8px
+      img
+        width 24px
+        @media screen and (max-width:480px)
+          width 20px
   .el-menu-vertical-demo:not(.el-menu--collapse)
     width 200px
   .el-submenu__title:hover, .el-menu-item:focus, .el-menu-item:hover

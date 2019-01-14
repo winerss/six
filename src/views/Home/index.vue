@@ -4,6 +4,7 @@
       <el-breadcrumb-item>合约资产</el-breadcrumb-item>
     </el-breadcrumb>
     <div class="content">
+      <div class="nickname">用户：<span>{{data.nickname}}</span></div>
       <el-card class="box-card">
         <div slot="header" class="clearfix">
           <img src="../../assets/img/qianbao.png" alt="">
@@ -49,6 +50,17 @@
           <h2>{{data.team_sum}}</h2>
         </div>
       </el-card>
+      <el-card class="box-card news msg">
+        <div slot="header" class="clearfix">
+          <span>我的信息</span>
+        </div>
+        <div class="text item">
+          <p class="name" @click="goUrl(1)">我的排单未完成匹配数<el-badge v-show="num1 > 0" :value="num1" class="item"></el-badge></p>
+        </div>
+        <div class="text item">
+          <p class="name" @click="goUrl(2)">我匹配的排单未完成数<el-badge v-show="num2 > 0" :value="num2" class="item"></el-badge></p>
+        </div>
+      </el-card>
       <el-card class="box-card news">
         <div slot="header" class="clearfix">
           <span>最新公告</span>
@@ -67,6 +79,8 @@ export default {
   data () {
     return {
       data: {},
+      num1: 0,
+      num2: 0,
       news: []
     }
   },
@@ -91,6 +105,23 @@ export default {
         this.news = res.data.data.slice(0, 5)
       })
     },
+    goUrl (type) {
+      if (type === 1) {
+        this.$router.push('/myrecord')
+        localStorage.setItem('active', '8-3')
+      } else {
+        this.$router.push('/mypipei')
+        localStorage.setItem('active', '8-4')
+      }
+    },
+    painotice () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/user/painotice', params).then((res) => {
+        this.num1 = res.data.data[1].count
+        this.num2 = res.data.data[2].count
+      })
+    },
     goDetail (id) {
       this.$router.push('/noticeDetail/' + id)
     }
@@ -98,6 +129,7 @@ export default {
   mounted () {
     this.get_user_info()
     this.get_record()
+    this.painotice()
   },
   components: {
   }
@@ -106,6 +138,11 @@ export default {
 
 <style lang="stylus">
 #home
+  @media screen and (max-width:480px)
+    .el-card__header
+      padding 12px 10px
+    .el-card__body
+      padding 10px
   .title
     padding 12px 20px
     color #ccc
@@ -114,6 +151,21 @@ export default {
     @media screen and (max-width:480px)
       padding 8px 10px
       font-size 14px
+  .nickname
+    margin-top 10px
+    margin-bottom -20px
+    font-size 16px
+    color #333
+    line-height 40px
+    margin-left 30px
+    text-align left
+    span
+      font-size 18px
+    @media screen and (max-width:480px)
+      line-height 28px
+      margin-left 8px
+      margin-top 0
+      margin-bottom -8px
   .content
     .box-card
       width 27%
@@ -122,27 +174,44 @@ export default {
       background rgba(0, 0, 0, 0.8)
       color #ccc
       @media screen and (max-width:480px)
-        width 95%
+        width 46%
         margin-top 10px
       float left
       .clearfix
         font-size 18px
+        @media screen and (max-width:480px)
+          font-size 14px
         img
           float left
           margin-right 10px
+          @media screen and (max-width:480px)
+            height 20px
+            margin-top -4px
       .item
         font-size 24px
+        @media screen and (max-width:480px)
+          font-size 18px
     .news
-      width 85%
+      width 40%
+      margin-left 2%
       padding-bottom 20px
       @media screen and (max-width:480px)
         width 95%
         margin-bottom 20px
+        padding-bottom 0
       .item
         overflow hidden
         .name
           float left
           font-size 18px
+          cursor pointer
+          line-height 24px
+          .el-badge
+            vertical-align inherit
+            .el-badge__content
+              margin-top -4px
+              border 0
+              line-height 16px
         .date
           float right
           font-size 16px

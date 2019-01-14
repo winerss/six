@@ -8,8 +8,8 @@
         <el-form-item label="数量">
           <el-input v-model="num"></el-input>
         </el-form-item>
-        <el-form-item label="支付宝账号">
-          <el-input v-model="zhifu"></el-input>
+        <el-form-item label="钱包地址">
+          <el-input disabled v-model="zhifu"></el-input>
         </el-form-item>
         <el-button style="float: right;margin-right: 10px;" @click="cancel">取消</el-button>
         <el-button style="float: right;margin-right: 10px;" @click="confirm" type="primary">确定</el-button>
@@ -114,6 +114,18 @@ export default {
         }
       })
     },
+    get_user_info () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/user/get_user_info', params).then((res) => {
+        let data = res.data
+        if (data.code === 1) {
+          this.zhifu = data.data.money_address
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
+    },
     cancel () {
       this.dialogVisible = false
     },
@@ -144,6 +156,7 @@ export default {
   },
   mounted () {
     this.getData()
+    this.get_user_info()
   },
   components: {
   }
@@ -176,6 +189,8 @@ export default {
       font-size 14px
   .el-table
     margin 20px
+    @media screen and (max-width:480px)
+      margin 0
   .el-pagination
     text-align right
     margin-right 20px

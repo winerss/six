@@ -28,7 +28,7 @@
             <el-form-item label="匹配时间">
               <span>{{ item.create_time }}</span>
             </el-form-item>
-            <el-form-item label="收款账号(支付宝)">
+            <el-form-item label="收款账号(钱包地址)">
               <span>{{ item.account }}</span>
             </el-form-item>
             <el-form-item>
@@ -202,6 +202,8 @@ export default {
       font-size 14px
   .el-table
     margin 20px
+    @media screen and (max-width:480px)
+      margin 0
   .el-pagination
     text-align right
     margin-right 20px
