@@ -170,6 +170,9 @@ export default {
 
 <style lang="stylus">
 #myrecord
+  .el-table__expand-icon>.el-icon
+    color #f00
+    font-weight bold
   .tips
     position fixed
     top 0

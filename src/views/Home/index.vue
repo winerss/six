@@ -4,7 +4,9 @@
       <el-breadcrumb-item>合约资产</el-breadcrumb-item>
     </el-breadcrumb>
     <div class="content">
-      <div class="nickname">用户：<span>{{data.nickname}}</span></div>
+      <div class="nickname">
+        用户：<span>{{data.nickname}}</span>
+      </div>
       <el-card class="box-card">
         <div slot="header" class="clearfix">
           <img src="../../assets/img/qianbao.png" alt="">
