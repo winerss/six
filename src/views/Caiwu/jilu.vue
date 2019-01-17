@@ -4,9 +4,8 @@
       <el-breadcrumb-item>我的流水</el-breadcrumb-item>
     </el-breadcrumb>
     <div class="toolbar">
-      <el-radio v-model="radio" label="4">激活码转账</el-radio>
-      <el-radio v-model="radio" label="5">排单币转账</el-radio>
-      <el-button size="small" style="float: right;"  @click="search" type="primary">查询</el-button>
+      <el-radio v-model="radio" @change="search" label="4">激活码转账</el-radio>
+      <el-radio v-model="radio" @change="search" label="5">排单币转账</el-radio>
     </div>
     <el-table
       ref="singleTable"
@@ -24,7 +23,7 @@
       </el-table-column>
       <el-table-column
         property="account"
-        label="改变金额">
+        label="资产变化">
       </el-table-column>
       <el-table-column
         property="c_account"
@@ -58,7 +57,7 @@ export default {
     }
   },
   methods: {
-    search () {
+    search (radio) {
       this.getData()
     },
     get_user_info () {

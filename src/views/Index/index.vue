@@ -8,8 +8,8 @@
         text-color="#999"
         active-text-color="#ffd04b">
         <el-menu-item index="0" style="margin-bottom: 40px">
-          <img class="logo" src="../../assets/img/login.png" alt="">
-          <div class="nickname"><span>{{data.nickname}}</span></div>
+          <i style="color: rgb(255, 208, 75)" v-for="(item, index) in grade" :key="index" class="el-icon-star-on"></i>
+          <div class="nickname"><span>{{data.nickname}}</span><img v-if="data.is_vip == '1'" src="../../assets/img/vip.png" alt=""></div>
         </el-menu-item>
         <el-menu-item index="1" @click="goPage('1', '/home')">
           <img src="../../assets/img/zichan.png" alt="">
@@ -66,14 +66,14 @@
             <span slot="title">财务管理</span>
           </template>
           <el-menu-item-group>
+            <el-menu-item index="7-8" @click="goPage('7-8', '/shouyi')">
+              <img src="../../assets/img/jilu.png" alt="">
+              收益明细
+            </el-menu-item>
             <el-menu-item index="7-1" @click="goPage('7-1', '/liushui')">
               <img src="../../assets/img/liushui.png" alt="">
               我的流水
             </el-menu-item>
-            <!-- <el-menu-item index="7-2" @click="goPage('7-2', '/qingdan')">
-              <img src="../../assets/img/qingdan.png" alt="">
-              贡献清单
-            </el-menu-item> -->
             <el-menu-item index="7-3" @click="goPage('7-3', '/tibi')">
               <img src="../../assets/img/tibi.png" alt="">
               提币
@@ -116,35 +116,6 @@
                 </el-menu-item>
               </el-menu-item-group>
             </el-submenu>
-        <!-- <el-submenu index="8">
-          <template slot="title">
-            <img src="../../assets/img/gonggao.png" alt="">
-            <span slot="title">公告中心</span>
-          </template>
-          <el-menu-item-group>
-            <el-menu-item index="8-1" @click="goPage('8-1', '/news')">
-              <img src="../../assets/img/xinwen.png" alt="">
-              新闻公告
-            </el-menu-item>
-            <el-submenu index="8-2">
-              <template slot="title">
-                <img src="../../assets/img/gonggao.png" alt="">
-                <span slot="title">内部邮箱</span>
-              </template>
-              <el-menu-item-group>
-                <el-menu-item index="8-2-1" @click="goPage('8-2-1', '/send')">
-                  发邮件
-                </el-menu-item>
-                <el-menu-item index="8-2-2" @click="goPage('8-2-2', '/sendList')">
-                  发件箱
-                </el-menu-item>
-                <el-menu-item index="8-2-3" @click="goPage('8-2-3' ,'/revice')">
-                  收件箱
-                </el-menu-item>
-              </el-menu-item-group>
-            </el-submenu>
-          </el-menu-item-group>
-        </el-submenu> -->
         <el-menu-item index="5" @click="layout">
           <img src="../../assets/img/zhuxiao.png" alt="">
           <span slot="title">注销登录</span>
@@ -183,6 +154,7 @@ export default {
       activeNav: '',
       num1: 0,
       data: {},
+      grade: 0,
       num2: 0,
       num3: 0
     }
@@ -242,6 +214,7 @@ export default {
         if (data.code === 1) {
           console.log(data.data)
           this.data = data.data
+          this.grade = Number(data.data.grade)
         }
       })
     },
@@ -275,7 +248,10 @@ img
     font-size 16px
     color #ccc
     line-height 30px
-    text-align center
+    img
+      height 30px
+      width 30px
+      vertical-align middle
     span
       font-size 18px
     @media screen and (max-width:480px)

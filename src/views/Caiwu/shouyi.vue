@@ -1,14 +1,8 @@
 <template>
-  <div id="caiwu">
+  <div id="shouyi">
     <el-breadcrumb class="title" separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item>我的流水</el-breadcrumb-item>
+      <el-breadcrumb-item>收益明细</el-breadcrumb-item>
     </el-breadcrumb>
-    <div class="toolbar">
-      <el-radio v-model="radio" @change="search" label="0">全部流水</el-radio>
-      <el-radio v-model="radio" @change="search" label="1">激活码流水</el-radio>
-      <el-radio v-model="radio" @change="search" label="2">大盘币流水</el-radio>
-      <el-radio v-model="radio" @change="search" label="3">排单币流水</el-radio>
-    </div>
     <el-table
       ref="singleTable"
       :data="tableData"
@@ -18,10 +12,6 @@
         <template slot-scope="sope">
           {{name}}
         </template>
-      </el-table-column>
-      <el-table-column
-        property="create_time"
-        label="日期">
       </el-table-column>
       <el-table-column
         property="account"
@@ -34,6 +24,10 @@
       <el-table-column
         property="note"
         label="备注">
+      </el-table-column>
+      <el-table-column
+        property="create_time"
+        label="日期">
       </el-table-column>
     </el-table>
     <el-pagination
@@ -52,16 +46,12 @@ export default {
     return {
       total: 1000,
       currentPage: 1,
-      radio: '0',
       name: '',
       pages: 0,
       tableData: []
     }
   },
   methods: {
-    search () {
-      this.getData()
-    },
     get_user_info () {
       var params = new FormData()
       params.append('sid', localStorage.getItem('sid'))
@@ -78,7 +68,7 @@ export default {
       var params = new FormData()
       params.append('sid', localStorage.getItem('sid'))
       params.append('page', val)
-      params.append('type', this.radio)
+      params.append('type', 6)
       this.axios.post(process.env.API_ROOT + '/api/user/get_money_detail', params).then((res) => {
         console.log(res.data)
         let data = res.data
@@ -93,7 +83,7 @@ export default {
       var params = new FormData()
       params.append('sid', localStorage.getItem('sid'))
       params.append('page', val)
-      params.append('type', this.radio)
+      params.append('type', 6)
       this.axios.post(process.env.API_ROOT + '/api/user/get_money_detail', params).then((res) => {
         console.log(res.data)
         let data = res.data
@@ -108,7 +98,7 @@ export default {
       var params = new FormData()
       params.append('sid', localStorage.getItem('sid'))
       params.append('page', 1)
-      params.append('type', this.radio)
+      params.append('type', 6)
       this.axios.post(process.env.API_ROOT + '/api/user/get_money_detail', params).then((res) => {
         console.log(res.data)
         let data = res.data
@@ -131,7 +121,7 @@ export default {
 </script>
 
 <style lang="stylus">
-#caiwu
+#shouyi
   .title
     padding 12px 20px
     color #ccc

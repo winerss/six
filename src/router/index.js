@@ -11,6 +11,7 @@ import myinvite from '@/views/Myinvite'
 import net from '@/views/Myinvite/net'
 
 // 财务
+import shouyi from '@/views/caiwu/shouyi'
 import liushui from '@/views/caiwu/liushui'
 import qingdan from '@/views/caiwu/qingdan'
 import tibi from '@/views/caiwu/tibi'
@@ -99,6 +100,14 @@ export default new Router({
           title: '社群网络'
         }
       }, {
+        path: '/shouyi',
+        name: 'shouyi',
+        component: shouyi,
+        meta: {
+          title: '收益明细'
+        }
+      },
+      {
         path: '/liushui',
         name: 'liushui',
         component: liushui,
