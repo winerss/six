@@ -40,7 +40,7 @@
         <div class="text item">
           <div class="shoubi" v-for="(item, index) in items[3]" :key="item.id" @click="goDetail('/mypipei')">
             <span style="display:inline-block;width: 50px">匹配{{index + 1}}</span>
-            <span style="display:inline-block;width: 200px">倒计时：{{mytimer(item.rest_time)}}</span>
+            <span style="display:inline-block;width: 200px">倒计时：<span class="date1">{{item.rest_time}}</span></span>
           </div>
         </div>
       </el-card>
@@ -51,7 +51,7 @@
         <div class="text item">
           <div class="pipei" v-for="(item, index) in items[4]" :key="item.id" @click="goDetail('/myrecord')">
             <span style="display:inline-block;width: 50px">匹配{{index + 1}}</span>
-            <span style="display:inline-block;width: 200px">倒计时：{{item.rest_time}}</span>
+            <span style="display:inline-block;width: 200px">倒计时：<span class="date2">{{item.rest_time}}</span></span>
           </div>
         </div>
       </el-card>
@@ -64,23 +64,12 @@ export default {
   data () {
     return {
       data: {},
-      items: []
-    }
-  },
-  computed: {
-    mytimer: {
-      get: function (value) {
-        return value
-      }
+      items: [],
+      timers1: null,
+      timers2: null
     }
   },
   methods: {
-    // timer (value) {
-    //   setInterval(() => {
-    //       console.log(value - 1)
-    //     return (value - 1)
-    //   }, 1000)
-    // },
     get_user_info () {
       var params = new FormData()
       params.append('sid', localStorage.getItem('sid'))
@@ -98,16 +87,37 @@ export default {
       params.append('sid', localStorage.getItem('sid'))
       this.axios.post(process.env.API_ROOT + '/api/user/shouye', params).then((res) => {
         this.items = res.data.data
-        console.log(this.items)
+        this.timers1 = setInterval(() => {
+          this.items[3].forEach((element, index) => {
+            if (element.rest_time < 1) {
+              return false
+            }
+            this.items[3][index].rest_time = element.rest_time - 1
+          })
+        }, 1000)
+        this.timers2 = setInterval(() => {
+          this.items[4].forEach((element, index) => {
+            if (element.rest_time < 1) {
+              return false
+            }
+            this.items[4][index].rest_time = element.rest_time - 1
+          })
+        }, 1000)
       })
     },
     goDetail (path) {
       this.$router.push(path)
     }
   },
-  mounted () {
+  created () {
     this.get_user_info()
     this.shouye()
+  },
+  beforeDestroy () {
+    clearInterval(this.timers)
+    clearInterval(this.timers2)
+  },
+  mounted () {
   },
   components: {
   }
