@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/views/Index'
 import home from '@/views/Home'
+import myhome from '@/views/Home/myhome'
 import ziliao from '@/views/Ziliao'
 import lianjie from '@/views/lianjie'
 import denglu from '@/views/Password/denglu'
@@ -41,14 +42,21 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/home',
+      redirect: '/myhome',
       component: index,
       children: [{
+        path: '/myhome',
+        name: 'myhome',
+        component: myhome,
+        meta: {
+          title: ''
+        }
+      }, {
         path: '/home',
         name: 'home',
         component: home,
         meta: {
-          title: '仙草坊'
+          title: ''
         }
       }, {
         path: '/ziliao',

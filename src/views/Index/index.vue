@@ -11,6 +11,10 @@
           <i style="color: rgb(255, 208, 75)" v-for="(item, index) in grade" :key="index" class="el-icon-star-on"></i>
           <div class="nickname"><span>{{data.nickname}}</span><img v-if="data.is_vip == '1'" src="../../assets/img/vip.png" alt=""></div>
         </el-menu-item>
+        <el-menu-item index="0" @click="goPage('0', '/myhome')">
+          <img src="../../assets/img/home.png" alt="">
+          <span slot="title">首页</span>
+        </el-menu-item>
         <el-menu-item index="1" @click="goPage('1', '/home')">
           <img src="../../assets/img/zichan.png" alt="">
           <span slot="title">合约资产</span>
@@ -291,6 +295,7 @@ img
     position absolute
     right 0
     top 0
+    overflow auto
     bottom 0
     .collapse
       background rgba(0, 0, 0, 0.8)

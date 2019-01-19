@@ -42,7 +42,7 @@ export default {
             type: 'success'
           })
           localStorage.setItem('sid', data.data.sid)
-          this.$router.push('/home')
+          this.$router.push('/myhome')
         } else {
           this.$message.error(data.msg)
         }
