@@ -5,11 +5,8 @@
     </el-breadcrumb>
     <div class="content">
       <el-card class="box-card">
-        <div slot="header" class="clearfix">
+        <div class="clearfix" style="cursor:pointer;" @click="goDetail('/paidan', '8-1')">
           <span>播撒种子</span>
-        </div>
-        <div class="text item">
-          <h2>{{data.zhu_point}}</h2>
         </div>
       </el-card>
       <el-card class="box-card">
@@ -17,7 +14,10 @@
           <span>种子成长倒计时显示</span>
         </div>
         <div class="text item">
-          <h2>{{data.all_point}}</h2>
+         <div class="shoubi" v-for="(item, index) in items[1]" :key="item.id" @click="goDetail('/pipei', '8-2')">
+            <span style="display:inline-block;width: 50px">匹配{{index + 1}}</span>
+            <span style="display:inline-block;width: 200px">倒计时：<span class="date1">{{item.rest_time | date}}</span></span>
+          </div>
         </div>
       </el-card>
       <el-card class="box-card">
@@ -29,7 +29,7 @@
             <span style="display:inline-block;width: 50px">播撒种子{{index + 1}}</span>
             <span style="display:inline-block;width: 80px">第{{item.day}}天</span>
             <span style="display:inline-block;width: 120px">利息：{{item.account}}</span>
-            <el-button style="margin-top:6px;" v-if="item.can_shou== 1" size="small" plain>确认收取</el-button>
+            <el-button style="margin-top:6px;" v-if="item.can_shou== 1" size="small" @click="con(item.id)" plain>确认收取</el-button>
           </div>
         </div>
       </el-card>
@@ -38,9 +38,9 @@
           <span>收币确认倒计时显示</span>
         </div>
         <div class="text item">
-          <div class="shoubi" v-for="(item, index) in items[3]" :key="item.id" @click="goDetail('/mypipei')">
+          <div class="shoubi" v-for="(item, index) in items[3]" :key="item.id" @click="goDetail('/mypipei', '8-4')">
             <span style="display:inline-block;width: 50px">匹配{{index + 1}}</span>
-            <span style="display:inline-block;width: 200px">倒计时：<span class="date1">{{item.rest_time}}</span></span>
+            <span style="display:inline-block;width: 200px">倒计时：<span class="date1">{{item.rest_time | date}}</span></span>
           </div>
         </div>
       </el-card>
@@ -49,9 +49,9 @@
           <span>匹配成功后打币倒计时</span>
         </div>
         <div class="text item">
-          <div class="pipei" v-for="(item, index) in items[4]" :key="item.id" @click="goDetail('/myrecord')">
+          <div class="pipei" v-for="(item, index) in items[4]" :key="item.id" @click="goDetail('/myrecord', '/myrecord')">
             <span style="display:inline-block;width: 50px">匹配{{index + 1}}</span>
-            <span style="display:inline-block;width: 200px">倒计时：<span class="date2">{{item.rest_time}}</span></span>
+            <span style="display:inline-block;width: 200px">倒计时：<span class="date2">{{item.rest_time | date}}</span></span>
           </div>
         </div>
       </el-card>
@@ -65,8 +65,17 @@ export default {
     return {
       data: {},
       items: [],
+      timers: null,
       timers1: null,
       timers2: null
+    }
+  },
+  filters: {
+    date: function (val) {
+      var h = parseInt(val / (60 * 60) % 24, 10)
+      var m = parseInt(val / 60 % 60, 10)
+      var s = parseInt(val % 60, 10)
+      return h + '小时' + m + '分钟' + s + '秒'
     }
   },
   methods: {
@@ -82,11 +91,36 @@ export default {
         }
       })
     },
+    con (id) {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      params.append('id', id)
+      this.axios.post(process.env.API_ROOT + '/api/transfer/shouqu', params).then((res) => {
+        console.log(res)
+        let data = res.data
+        if (data.code === 1) {
+          this.$message({
+            type: 'success',
+            message: data.msg
+          })
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
+    },
     shouye () {
       var params = new FormData()
       params.append('sid', localStorage.getItem('sid'))
       this.axios.post(process.env.API_ROOT + '/api/user/shouye', params).then((res) => {
         this.items = res.data.data
+        this.timers = setInterval(() => {
+          this.items[1].forEach((element, index) => {
+            if (element.rest_time < 1) {
+              return false
+            }
+            this.items[1][index].rest_time = element.rest_time - 1
+          })
+        }, 1000)
         this.timers1 = setInterval(() => {
           this.items[3].forEach((element, index) => {
             if (element.rest_time < 1) {
@@ -105,7 +139,8 @@ export default {
         }, 1000)
       })
     },
-    goDetail (path) {
+    goDetail (path, type) {
+      localStorage.setItem('active', type)
       this.$router.push(path)
     }
   },
@@ -115,6 +150,7 @@ export default {
   },
   beforeDestroy () {
     clearInterval(this.timers)
+    clearInterval(this.timers1)
     clearInterval(this.timers2)
   },
   mounted () {
