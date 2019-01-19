@@ -6,7 +6,7 @@
     <div class="content">
       <el-card class="box-card">
         <div slot="header" class="clearfix">
-          <span>发起排单</span>
+          <span>播撒种子</span>
         </div>
         <div class="text item">
           <h2>{{data.zhu_point}}</h2>
@@ -14,7 +14,7 @@
       </el-card>
       <el-card class="box-card">
         <div slot="header" class="clearfix">
-          <span>排单匹配倒计时显示</span>
+          <span>种子成长倒计时显示</span>
         </div>
         <div class="text item">
           <h2>{{data.all_point}}</h2>
@@ -26,7 +26,7 @@
         </div>
         <div class="text item">
           <div class="color-change" v-for="(item, index) in items[2]" :key="item.id" :class="'color'+item.day">
-            <span style="display:inline-block;width: 50px">排单{{index + 1}}</span>
+            <span style="display:inline-block;width: 50px">播撒种子{{index + 1}}</span>
             <span style="display:inline-block;width: 80px">第{{item.day}}天</span>
             <span style="display:inline-block;width: 120px">利息：{{item.account}}</span>
             <el-button style="margin-top:6px;" v-if="item.can_shou== 1" size="small" plain>确认收取</el-button>

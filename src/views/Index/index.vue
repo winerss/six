@@ -107,10 +107,10 @@
               </template>
               <el-menu-item-group>
                 <el-menu-item index="8-1" @click="goPage('8-1', '/paidan')">
-                  发起排单
+                  播撒种子
                 </el-menu-item>
                 <el-menu-item index="8-2" @click="goPage('8-2', '/pipei')">
-                  排单匹配
+                  种子成长
                 </el-menu-item>
                 <el-menu-item index="8-3" @click="goPage('8-3' ,'/myrecord')">
                   我的排单记录

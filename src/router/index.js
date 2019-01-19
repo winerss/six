@@ -162,14 +162,14 @@ export default new Router({
         name: 'paidan',
         component: paidan,
         meta: {
-          title: '排单'
+          title: '播撒种子'
         }
       }, {
         path: '/pipei',
         name: 'pipei',
         component: pipei,
         meta: {
-          title: '排单匹配'
+          title: '种子成长'
         }
       }, {
         path: '/myrecord',

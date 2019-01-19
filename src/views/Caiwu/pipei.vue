@@ -1,7 +1,7 @@
 <template>
   <div id="pipei">
     <el-breadcrumb class="title" separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item>排单匹配</el-breadcrumb-item>
+      <el-breadcrumb-item>种子成长</el-breadcrumb-item>
     </el-breadcrumb>
     <div class="tips" v-show="dialogVisible">
       <el-form label-width="84px">

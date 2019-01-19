@@ -1,7 +1,7 @@
 <template>
   <div id="paidan">
     <el-breadcrumb class="title" separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item>发起排单</el-breadcrumb-item>
+      <el-breadcrumb-item>播撒种子</el-breadcrumb-item>
     </el-breadcrumb>
     <div class="content">
       <p class="tips">利息: {{data.lxn_scale * 100}}% 排单周期: {{data.zq_scale}}(天) 排单手续费{{data.sx_scale * 100}}%</p>
