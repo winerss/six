@@ -52,6 +52,15 @@
           <h2>{{data.team_sum}}</h2>
         </div>
       </el-card>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <img src="../../assets/img/qianbao.png" alt="">
+          <span>动态奖金</span>
+        </div>
+        <div class="text item">
+          <h2>{{data.dongtai_point}}</h2>
+        </div>
+      </el-card>
       <el-card class="box-card news msg">
         <div slot="header" class="clearfix">
           <span>我的信息</span>
@@ -173,8 +182,8 @@ export default {
       width 27%
       margin-left 2%
       margin-top 30px
-      background rgba(0, 0, 0, 0.8)
-      color #ccc
+      background #006400
+      color #fff
       @media screen and (max-width:480px)
         width 46%
         margin-top 10px

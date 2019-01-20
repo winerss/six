@@ -248,6 +248,7 @@ img
   left 0
   right 0
   background-size cover
+  background url('../../assets/img/bg.jpg')
   .nickname
     margin-top 4px
     font-size 16px
@@ -276,7 +277,7 @@ img
     position relative
     height 100%
     float left
-    background rgba(0,0,0,0.8)
+    // background #006400
     .el-menu
       height 100%
       overflow-x hidden
@@ -287,7 +288,7 @@ img
     transition: left .4s
     @media screen and (max-width:480px)
       left 0
-      background #fff
+      // background #fff
       z-index 999
   .max-conatiner
     left 200px
@@ -299,7 +300,7 @@ img
     overflow auto
     bottom 0
     .collapse
-      background rgba(0, 0, 0, 0.8)
+      // background #006400
       width 100%
       .el-icon-menu
         font-size 30px
@@ -326,8 +327,8 @@ img
         float left
       .el-button
         padding 0
-        background #333
-        border-color #333
+        background rgba(0, 0, 0, 0)
+        border-color rgba(0, 0, 0, 0)
       @media screen and (max-width:480px)
         right 2px
         top 6px

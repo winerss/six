@@ -68,6 +68,7 @@ export default {
   height 100%
   width 100%
   background-size cover
+  background url('../../assets/img/bg.jpg')
   .login
     width 80%
     max-width 600px
