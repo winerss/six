@@ -112,7 +112,7 @@ export default {
             message: data.msg,
             type: 'success'
           })
-          window.location.reload()
+          this.$router.push('/myinvite')
         } else {
           this.$message.error(data.msg)
         }

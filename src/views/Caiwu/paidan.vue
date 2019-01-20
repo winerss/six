@@ -53,6 +53,7 @@ export default {
       params.append('sid', localStorage.getItem('sid'))
       this.axios.post(process.env.API_ROOT + '/api/transfer/sale', params).then((res) => {
         let data = res.data
+        console.log(res)
         if (data.code === 1) {
           this.$message({
             message: data.msg,
