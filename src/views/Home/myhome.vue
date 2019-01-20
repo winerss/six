@@ -31,7 +31,7 @@
             <span style="display:inline-block;width: 120px">利息：{{item.account}}</span>
             <!-- <el-button style="margin-top:6px;" v-if="item.can_shou== 1" size="small" @click="con(item.id)" plain>确认收取</el-button> -->
           </div>
-          <p v-show="items[1].length==0" style="text-align: center; font-size: 14px; color: #999">暂无数据</p>
+          <p v-show="items[2].length == 0" style="text-align: center; font-size: 14px; color: #999">暂无数据</p>
         </div>
       </el-card>
       <el-card class="box-card">
@@ -43,7 +43,7 @@
             <span style="display:inline-block;width: 50px">匹配{{index + 1}}</span>
             <span style="display:inline-block;width: 200px">倒计时：<span class="date1">{{item.rest_time | date}}</span></span>
           </div>
-          <p v-show="items[3].length==0" style="text-align: center; font-size: 14px; color: #999">暂无数据</p>
+          <p v-show="items[3].length == 0" style="text-align: center; font-size: 14px; color: #999">暂无数据</p>
         </div>
       </el-card>
       <el-card class="box-card">
@@ -228,7 +228,7 @@ export default {
         .color-change
           margin-bottom 4px
           font-size 14px
-          color #fff
+          color #555
           line-height 30px
           padding 0 4px
           .el-button

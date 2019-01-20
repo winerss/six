@@ -113,6 +113,7 @@ export default {
             type: 'success'
           })
           this.$router.push('/myinvite')
+          localStorage.setItem('active', '6-2')
         } else {
           this.$message.error(data.msg)
         }

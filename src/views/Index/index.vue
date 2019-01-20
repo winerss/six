@@ -172,6 +172,7 @@ export default {
       this.$message.error('请重新登录')
       setTimeout(() => {
         this.$router.push('/login')
+        localStorage.removeItem('active')
       }, 1000)
     }
     if (document.body.clientWidth < 480) {
