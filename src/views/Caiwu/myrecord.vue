@@ -17,7 +17,7 @@
       :data="tableData"
       highlight-current-row
       :row-class-name="tableRowClassName">
-      <el-table-column property="child" type="expand">
+      <el-table-column width="20px" property="child" type="expand">
         <template slot-scope="props">
           <el-form v-for="(item, index) in props.row.child" :key="index" label-position="left" inline class="demo-table-expand">
             <el-form-item label="匹配人名称">
@@ -37,16 +37,22 @@
             </el-form-item>
             <el-form-item>
               <el-button class="upload" v-show="item.status == '3'" size="small" type="primary">
-                上传付款凭证
+                上传凭证
                 <input class="selectImg" @change="upload($event, item.id)" type="file" name="files" accept="image/*"/>
               </el-button>
-              <el-button @click="look(item.pic)" v-show="item.status == '2'" size="small" type="primary">查看付款凭证</el-button>
+              <el-button @click="look(item.pic)" v-show="item.status == '2'" size="small" type="primary">查看凭证</el-button>
               <el-button class="upload" v-show="item.status == '2'" size="small" type="primary">
-                重新上传付款凭证
+                重新上传凭证
                 <input class="selectImg" @change="upload($event, item.id)" type="file" name="files" accept="image/*"/>
               </el-button>
             </el-form-item>
           </el-form>
+        </template>
+      </el-table-column>
+      <el-table-column
+        width="110">
+        <template slot-scope="scope">
+          <span style="font-size: 8px">查看凭证</span>
         </template>
       </el-table-column>
       <el-table-column

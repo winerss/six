@@ -4,7 +4,7 @@
       <el-breadcrumb-item>播撒种子</el-breadcrumb-item>
     </el-breadcrumb>
     <div class="content">
-      <p class="tips">利息: {{data.lxn_scale * 100}}% 排单周期: {{data.zq_scale}}(天) 排单手续费{{data.sx_scale * 100}}%</p>
+      <p class="tips">利息: {{data.lxn_scale * 100}}% 种子周期: {{data.zq_scale}}(天) 排单手续费{{data.sx_scale * 100}}%</p>
       <el-form label-width="80px" class="demo-ruleForm">
         <el-form-item label="发起数量" required>
           <el-input v-model="num" placeholder="请输入发起数量"></el-input>
@@ -59,11 +59,12 @@ export default {
             message: data.msg,
             type: 'success'
           })
-          window.location.reload()
+          setTimeout(() => {
+            this.$router.push('/myrecord')
+            localStorage.setItem('active', '8-3')
+          }, 1000)
         } else {
           this.$message.error(data.msg)
-          this.$router.push('/myrecord')
-          localStorage.setItem('active', '8-3')
         }
       })
     }
