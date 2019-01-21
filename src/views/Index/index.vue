@@ -241,6 +241,10 @@ export default {
 <style lang="stylus" scope>
 img
   width 20px
+.el-pagination__jump
+  margin-left: 24px;
+  font-weight: 400;
+  color: #fff;
 #index
   position absolute
   top 0

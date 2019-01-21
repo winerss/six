@@ -15,7 +15,8 @@
     <el-table
       ref="singleTable"
       :data="tableData"
-      highlight-current-row>
+      highlight-current-row
+      :row-class-name="tableRowClassName">
       <el-table-column property="child" type="expand">
         <template slot-scope="props">
           <el-form v-for="(item, index) in props.row.child" :key="index" label-position="left" inline class="demo-table-expand">
@@ -53,7 +54,7 @@
         label="排单数量">
       </el-table-column>
       <el-table-column
-        property="手机号"
+        property="self_tel"
         label="手机号">
       </el-table-column>
       <el-table-column
@@ -88,6 +89,13 @@ export default {
     }
   },
   methods: {
+    tableRowClassName ({row, rowIndex}) {
+      console.log(row)
+      if (row.status !== '1') {
+        return 'warning-row'
+      }
+      return ''
+    },
     handleSizeChange (val) {
       var params = new FormData()
       params.append('sid', localStorage.getItem('sid'))
@@ -170,6 +178,8 @@ export default {
 
 <style lang="stylus">
 #myrecord
+  .el-table .warning-row
+    color: #f00
   .el-table__expand-icon>.el-icon
     color #f00
     font-weight bold

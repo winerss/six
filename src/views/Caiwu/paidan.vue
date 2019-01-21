@@ -62,6 +62,8 @@ export default {
           window.location.reload()
         } else {
           this.$message.error(data.msg)
+          this.$router.push('/myrecord')
+          localStorage.setItem('active', '8-3')
         }
       })
     }

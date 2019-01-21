@@ -35,7 +35,7 @@
         property="create_time"
         label="创建时间">
       </el-table-column>
-      <el-table-column
+      <!-- <el-table-column
         property="is_use"
         label="操作">
         <template slot-scope="scope">
@@ -44,7 +44,7 @@
             type="primary"
             @click="handleEdit(scope.$index, scope.row)">匹配</el-button>
         </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
     <el-pagination
       @size-change="handleSizeChange"
