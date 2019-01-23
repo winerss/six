@@ -32,6 +32,10 @@
         label="已匹配数量">
       </el-table-column>
       <el-table-column
+        property="matchmoney"
+        label="未匹配数量">
+      </el-table-column>
+      <el-table-column
         property="create_time"
         label="创建时间">
       </el-table-column>
