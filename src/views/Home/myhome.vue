@@ -26,24 +26,13 @@
         </div>
         <div class="text item">
           <div class="color-change" v-for="(item, index) in items[2]" :key="item.id" :class="'color'+item.day">
-            <span style="display:inline-block;width: 80px">播撒种子{{index + 1}}</span>
+            <span style="display:inline-block;width: 80px">种子成长{{index + 1}}</span>
             <span style="display:inline-block;width: 80px">第{{item.day}}天</span>
-            <span style="display:inline-block;width: 120px">利息：{{item.account}}</span>
+            <span style="display:inline-block;width: 180px">利息：{{item.account}}</span>
+            <span style="display:inline-block;width: 200px">原种子：{{item.base_amount}}</span>
             <!-- <el-button style="margin-top:6px;" v-if="item.can_shou== 1" size="small" @click="con(item.id)" plain>确认收取</el-button> -->
           </div>
           <p v-show="items[2].length == 0" style="text-align: center; font-size: 14px; color: #999">暂无数据</p>
-        </div>
-      </el-card>
-      <el-card class="box-card">
-        <div slot="header" class="clearfix">
-          <span>收币确认倒计时显示</span>
-        </div>
-        <div class="text item">
-          <div class="shoubi" v-for="(item, index) in items[3]" :key="item.id" @click="goDetail('/mypipei', '8-4')">
-            <span style="display:inline-block;width: 50px">匹配{{index + 1}}</span>
-            <span style="display:inline-block;width: 200px">倒计时：<span class="date1">{{item.rest_time | date}}</span></span>
-          </div>
-          <p v-show="items[3].length == 0" style="text-align: center; font-size: 14px; color: #999">暂无数据</p>
         </div>
       </el-card>
       <el-card class="box-card">
@@ -53,10 +42,30 @@
         <div class="text item">
           <div class="pipei" v-for="(item, index) in items[4]" :key="item.id" @click="goDetail('/myrecord', '/myrecord')">
             <span style="display:inline-block;width: 50px">匹配{{index + 1}}</span>
-            <span style="display:inline-block;width: 200px">倒计时：<span class="date2">{{item.rest_time | date}}</span></span>
+            <span style="display:inline-block;width: 200px">倒计时：<span class="date2" style="color:#f00;">{{item.rest_time | date}}</span></span>
           </div>
         </div>
         <p v-show="items[4].length==0" style="text-align: center; font-size: 14px; color: #999">暂无数据</p>
+      </el-card>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <span>收币确认倒计时显示</span>
+        </div>
+        <div class="text item">
+          <div class="shoubi" v-for="(item, index) in items[3]" :key="item.id" @click="goDetail('/mypipei', '8-4')">
+            <span style="display:inline-block;width: 50px">匹配{{index + 1}}</span>
+            <span style="display:inline-block;width: 200px">倒计时：<span class="date1" style="color:#f00;">{{item.rest_time | date}}</span></span>
+          </div>
+          <p v-show="items[3].length == 0" style="text-align: center; font-size: 14px; color: #999">暂无数据</p>
+        </div>
+      </el-card>
+      <el-card class="box-card">
+        <div class="text item">
+          <p class="name" style="font-size:18px;color:#666;line-height:24px" @click="goUrl(1)">我的排单未完成匹配数<el-badge v-show="num1 > 0" :value="num1" class="item"></el-badge></p>
+        </div>
+        <div class="text item">
+          <p class="name" style="font-size:18px;color:#666;line-height:24px" @click="goUrl(2)">我匹配的排单未完成数<el-badge v-show="num2 > 0" :value="num2" class="item"></el-badge></p>
+        </div>
       </el-card>
     </div>
   </div>
@@ -69,6 +78,8 @@ export default {
       data: {},
       items: [],
       timers: null,
+      num1: 0,
+      num2: 0,
       timers1: null,
       timers2: null
     }
@@ -93,6 +104,23 @@ export default {
           this.$message.error(data.msg)
         }
       })
+    },
+    painotice () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/user/painotice', params).then((res) => {
+        this.num1 = res.data.data[1].count
+        this.num2 = res.data.data[2].count
+      })
+    },
+    goUrl (type) {
+      if (type === 1) {
+        this.$router.push('/myrecord')
+        localStorage.setItem('active', '8-3')
+      } else {
+        this.$router.push('/mypipei')
+        localStorage.setItem('active', '8-4')
+      }
     },
     con (id) {
       var params = new FormData()
@@ -156,6 +184,7 @@ export default {
   created () {
     this.get_user_info()
     this.shouye()
+    this.painotice()
   },
   beforeDestroy () {
     clearInterval(this.timers)
@@ -203,6 +232,7 @@ export default {
     .box-card
       display block
       width 46%
+      min-width: 800px;
       margin-left 2%
       margin-top 30px
       background #f5f5f5
@@ -210,6 +240,7 @@ export default {
       @media screen and (max-width:480px)
         margin-top 10px
         width 96%
+        min-width 96%
       .clearfix
         font-size 18px
         color #666

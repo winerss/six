@@ -134,7 +134,7 @@ export default {
             message: data.msg,
             type: 'success'
           })
-          // window.location.reload()
+          window.location.reload()
         } else {
           this.$message.error(data.msg)
         }

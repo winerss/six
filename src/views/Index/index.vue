@@ -15,6 +15,12 @@
           <img src="../../assets/img/home.png" alt="">
           <span slot="title">首页</span>
         </el-menu-item>
+        <a style="cursor:pointer" target="_black" href="https://www.xbtc.cx">
+        <el-menu-item>
+          <img src="../../assets/img/login.png" alt="">
+          <span slot="title">RBC/USDT</span>
+        </el-menu-item>
+        </a>
         <el-menu-item index="1" @click="goPage('1', '/home')">
           <img src="../../assets/img/zichan.png" alt="">
           <span slot="title">合约资产</span>

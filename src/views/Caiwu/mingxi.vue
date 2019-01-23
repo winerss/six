@@ -15,7 +15,7 @@
         property="time"
         label="提币时间">
       </el-table-column>
-      <el-table-column
+      <!-- <el-table-column
         property="deal_time"
         label="处理时间">
       </el-table-column>
@@ -30,7 +30,7 @@
             >未处理</el-button>
           <el-tag v-if="scope.row.status == 1" type="success">已处理</el-tag>
         </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
     <el-pagination
       @size-change="handleSizeChange"

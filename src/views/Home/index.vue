@@ -16,7 +16,7 @@
           <h2>{{data.zhu_point}}</h2>
         </div>
       </el-card>
-      <el-card class="box-card">
+      <!-- <el-card class="box-card">
         <div slot="header" class="clearfix">
           <img src="../../assets/img/star.png" alt="">
           <span>大盘币</span>
@@ -24,7 +24,7 @@
         <div class="text item">
           <h2>{{data.all_point}}</h2>
         </div>
-      </el-card>
+      </el-card> -->
       <el-card class="box-card">
         <div slot="header" class="clearfix">
           <img src="../../assets/img/qianbao.png" alt="">
@@ -32,6 +32,15 @@
         </div>
         <div class="text item">
           <h2>{{data.enroll_point}}</h2>
+        </div>
+      </el-card>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <img src="../../assets/img/qianbao.png" alt="">
+          <span>RBC/USDT</span>
+        </div>
+        <div class="text item">
+          <h2>{{data.dongtai_point}}</h2>
         </div>
       </el-card>
       <el-card class="box-card">
@@ -50,15 +59,6 @@
         </div>
         <div class="text item">
           <h2>{{data.team_sum}}</h2>
-        </div>
-      </el-card>
-      <el-card class="box-card">
-        <div slot="header" class="clearfix">
-          <img src="../../assets/img/qianbao.png" alt="">
-          <span>动态奖金</span>
-        </div>
-        <div class="text item">
-          <h2>{{data.dongtai_point}}</h2>
         </div>
       </el-card>
       <el-card class="box-card news msg">
@@ -82,6 +82,9 @@
         </div>
       </el-card>
     </div>
+    <!-- <div style="padding-left:20px;margin-top: 30px;font-size:20px;">
+      <a style="color:#fff; cursor:pointer;text-decoration:underline;" target="_black" href="www.xbtc.cx">RBC/USDT：www.xbtc.cx</a>
+    </div> -->
   </div>
 </template>
 
@@ -178,6 +181,7 @@ export default {
       margin-top 0
       margin-bottom -8px
   .content
+    overflow hidden
     .box-card
       width 27%
       margin-left 2%
