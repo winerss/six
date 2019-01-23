@@ -137,14 +137,14 @@
         <i class="el-icon-menu" @click="collapse"></i>
       </div>
       <div class="message">
-        <el-dropdown>
+        <el-dropdown trigger="click">
           <el-button type="primary" size="small">
             <el-badge v-show="num3 > 0" :value="num3" class="item"></el-badge>
             <img src="../../assets/img/bell.png" alt="">
           </el-button>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click.native="goUrl(1)">我的排单未完成匹配数<el-badge :value="num1" class="item"></el-badge></el-dropdown-item>
-            <el-dropdown-item @click.native="goUrl(2)">我匹配的排单未完成数<el-badge :value="num2" class="item"></el-badge></el-dropdown-item>
+            <el-dropdown-item @click.native="goUrl(1)">我的排单未完成匹配数<el-badge :value="num1" v-show="num1>0" class="item"></el-badge></el-dropdown-item>
+            <el-dropdown-item @click.native="goUrl(2)">我匹配的排单未完成数<el-badge :value="num2"  v-show="num2>0"  class="item"></el-badge></el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
         <p class="reload">
