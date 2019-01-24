@@ -7,7 +7,7 @@
         :collapse="isCollapse"
         text-color="#999"
         active-text-color="#ffd04b">
-        <el-menu-item index="0" style="margin-bottom: 40px">
+        <el-menu-item index="12" style="margin-bottom: 40px">
           <i style="color: rgb(255, 208, 75)" v-for="(item, index) in grade" :key="index" class="el-icon-star-on"></i>
           <div class="nickname"><span>{{data.nickname}}</span><img v-if="data.is_vip == '1'" src="../../assets/img/vip.png" alt=""></div>
         </el-menu-item>
@@ -15,16 +15,26 @@
           <img src="../../assets/img/home.png" alt="">
           <span slot="title">首页</span>
         </el-menu-item>
-        <a style="cursor:pointer" target="_black" href="https://www.xbtc.cx">
-        <el-menu-item>
-          <img src="../../assets/img/login.png" alt="">
-          <span slot="title">RBC/USDT</span>
-        </el-menu-item>
-        </a>
-        <el-menu-item index="1" @click="goPage('1', '/home')">
-          <img src="../../assets/img/zichan.png" alt="">
-          <span slot="title">合约资产</span>
-        </el-menu-item>
+        <el-submenu index="6">
+          <template slot="title">
+            <img src="../../assets/img/huiyuan.png" alt="">
+            <span slot="title">会员管理</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="6-1" @click="goPage('6-1', '/register')">
+              <img src="../../assets/img/zhuce.png" alt="">
+              立即注册
+            </el-menu-item>
+            <el-menu-item index="6-2" @click="goPage('6-2', '/myinvite')">
+              <img src="../../assets/img/yaoqing.png" alt="">
+              我的邀请
+            </el-menu-item>
+            <el-menu-item index="6-3" @click="goPage('6-3', '/net')">
+              <img src="../../assets/img/wangluo.png" alt="">
+              社群网络
+            </el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
         <el-submenu index="4">
           <template slot="title">
             <img src="../../assets/img/ziliao.png" alt="">
@@ -49,27 +59,10 @@
             </el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-        <el-submenu index="6">
-          <template slot="title">
-            <img src="../../assets/img/huiyuan.png" alt="">
-            <span slot="title">会员管理</span>
-          </template>
-          <el-menu-item-group>
-            <el-menu-item index="6-1" @click="goPage('6-1', '/register')">
-              <img src="../../assets/img/zhuce.png" alt="">
-              立即注册
-            </el-menu-item>
-            <el-menu-item index="6-2" @click="goPage('6-2', '/myinvite')">
-              <img src="../../assets/img/yaoqing.png" alt="">
-              我的邀请
-            </el-menu-item>
-            <el-menu-item index="6-3" @click="goPage('6-3', '/net')">
-              <img src="../../assets/img/wangluo.png" alt="">
-              社群网络
-            </el-menu-item>
-          </el-menu-item-group>
-        </el-submenu>
-
+        <el-menu-item index="1" @click="goPage('1', '/home')">
+          <img src="../../assets/img/zichan.png" alt="">
+          <span slot="title">合约资产</span>
+        </el-menu-item>
         <el-submenu index="7">
           <template slot="title">
             <img src="../../assets/img/caiwu.png" alt="">
@@ -109,27 +102,33 @@
               转账记录
             </el-menu-item>
           </el-menu-item-group>
-          </el-submenu>
-            <el-submenu index="8">
-              <template slot="title">
-                <img src="../../assets/img/tibi.png" alt="">
-                <span slot="title">播种收割</span>
-              </template>
-              <el-menu-item-group>
-                <el-menu-item index="8-1" @click="goPage('8-1', '/paidan')">
-                  播撒种子
-                </el-menu-item>
-                <el-menu-item index="8-2" @click="goPage('8-2', '/pipei')">
-                  种子成长
-                </el-menu-item>
-                <el-menu-item index="8-3" @click="goPage('8-3' ,'/myrecord')">
-                  我的排单记录
-                </el-menu-item>
-                <el-menu-item index="8-4" @click="goPage('8-4' ,'/mypipei')">
-                  匹配收割记录
-                </el-menu-item>
-              </el-menu-item-group>
-            </el-submenu>
+        </el-submenu>
+        <el-submenu index="8">
+          <template slot="title">
+            <img src="../../assets/img/tibi.png" alt="">
+            <span slot="title">播种收割</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="8-1" @click="goPage('8-1', '/paidan')">
+              播撒种子
+            </el-menu-item>
+            <el-menu-item index="8-2" @click="goPage('8-2', '/pipei')">
+              种子成长
+            </el-menu-item>
+            <el-menu-item index="8-3" @click="goPage('8-3' ,'/myrecord')">
+              我的排单记录
+            </el-menu-item>
+            <el-menu-item index="8-4" @click="goPage('8-4' ,'/mypipei')">
+              匹配收割记录
+            </el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+        <a style="cursor:pointer" target="_black" href="https://www.xbtc.cx">
+          <el-menu-item index="15">
+            <img src="../../assets/img/login.png" alt="">
+            <span slot="title">RBC/USDT</span>
+          </el-menu-item>
+        </a>
         <el-menu-item index="5" @click="layout">
           <img src="../../assets/img/zhuxiao.png" alt="">
           <span slot="title">注销登录</span>

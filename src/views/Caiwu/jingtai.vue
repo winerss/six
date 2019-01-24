@@ -83,7 +83,7 @@ export default {
       var params = new FormData()
       params.append('sid', localStorage.getItem('sid'))
       params.append('page', val)
-      params.append('type', 6)
+      params.append('type', 7)
       this.axios.post(process.env.API_ROOT + '/api/user/get_money_detail', params).then((res) => {
         console.log(res.data)
         let data = res.data
@@ -98,7 +98,7 @@ export default {
       var params = new FormData()
       params.append('sid', localStorage.getItem('sid'))
       params.append('page', 1)
-      params.append('type', 6)
+      params.append('type', 7)
       this.axios.post(process.env.API_ROOT + '/api/user/get_money_detail', params).then((res) => {
         console.log(res.data)
         let data = res.data

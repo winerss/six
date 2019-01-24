@@ -25,14 +25,15 @@
           <span>种子成长</span>
         </div>
         <div class="text item">
-          <div class="color-change" v-for="(item, index) in items[2]" :key="item.id" :class="'color'+item.day">
+          <div class="color-change" v-for="(item, index) in items2" :key="item.id" :class="'color'+item.day">
             <span style="display:inline-block;width: 80px">种子成长{{index + 1}}</span>
             <span style="display:inline-block;width: 80px">第{{item.day}}天</span>
             <span style="display:inline-block;width: 180px">利息：{{item.account}}</span>
             <span style="display:inline-block;width: 200px">原种子：{{item.base_amount}}</span>
             <!-- <el-button style="margin-top:6px;" v-if="item.can_shou== 1" size="small" @click="con(item.id)" plain>确认收取</el-button> -->
           </div>
-          <p v-show="items[2].length == 0" style="text-align: center; font-size: 14px; color: #999">暂无数据</p>
+          <p v-show="itemsS2 !== ''" style="text-align: center; font-size: 14px; color: #999">{{itemsS2}}</p>
+          <p v-show="items2.length == 0" style="text-align: center; font-size: 14px; color: #999">暂无数据</p>
         </div>
       </el-card>
       <el-card class="box-card">
@@ -40,23 +41,25 @@
           <span>匹配成功后打币倒计时</span>
         </div>
         <div class="text item">
-          <div class="pipei" v-for="(item, index) in items[4]" :key="item.id" @click="goDetail('/myrecord', '/myrecord')">
+          <div class="pipei" v-for="(item, index) in items4" :key="item.id" @click="goDetail('/myrecord', '/myrecord')">
             <span style="display:inline-block;width: 50px">匹配{{index + 1}}</span>
             <span style="display:inline-block;width: 200px">倒计时：<span class="date2" style="color:#f00;">{{item.rest_time | date}}</span></span>
           </div>
         </div>
-        <p v-show="items[4].length==0" style="text-align: center; font-size: 14px; color: #999">暂无数据</p>
+        <p v-show="itemsS4 !== ''" style="text-align: center; font-size: 14px; color: #999">{{itemsS4}}</p>
+        <p v-show="items4.length==0" style="text-align: center; font-size: 14px; color: #999">暂无数据</p>
       </el-card>
       <el-card class="box-card">
         <div slot="header" class="clearfix">
           <span>收币确认倒计时显示</span>
         </div>
         <div class="text item">
-          <div class="shoubi" v-for="(item, index) in items[3]" :key="item.id" @click="goDetail('/mypipei', '8-4')">
+          <div class="shoubi" v-for="(item, index) in items3" :key="item.id" @click="goDetail('/mypipei', '8-4')">
             <span style="display:inline-block;width: 50px">匹配{{index + 1}}</span>
             <span style="display:inline-block;width: 200px">倒计时：<span class="date1" style="color:#f00;">{{item.rest_time | date}}</span></span>
           </div>
-          <p v-show="items[3].length == 0" style="text-align: center; font-size: 14px; color: #999">暂无数据</p>
+          <p v-show="itemsS3 !== ''" style="text-align: center; font-size: 14px; color: #999">{{itemsS3}}</p>
+          <p v-show="items3.length == 0" style="text-align: center; font-size: 14px; color: #999">暂无数据</p>
         </div>
       </el-card>
       <el-card class="box-card">
@@ -65,6 +68,17 @@
         </div>
         <div class="text item">
           <p class="name" style="font-size:18px;color:#666;line-height:24px" @click="goUrl(2)">我匹配的排单未完成数<el-badge v-show="num2 > 0" :value="num2" class="item"></el-badge></p>
+        </div>
+      </el-card>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <span>监管信息</span>
+        </div>
+        <div class="text item">
+          <div class="shoubi" style="overflow:hidden;" v-for="item in notice" :key="item.id" >
+            <span style="display:inline-block;float:left;width: 65%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{item.content}}</span>
+            <span style="display:inline-block;float:left;width: 30%">{{item.create_time}}</span>
+          </div>
         </div>
       </el-card>
     </div>
@@ -76,10 +90,16 @@ export default {
   data () {
     return {
       data: {},
-      items: [],
+      itemsS2: '',
+      itemsS3: '',
+      itemsS4: '',
+      items2: [],
+      items3: [],
+      items4: [],
       timers: null,
       num1: 0,
       num2: 0,
+      notice: [],
       timers1: null,
       timers2: null
     }
@@ -105,6 +125,13 @@ export default {
         }
       })
     },
+    get_notice () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/user/get_notice', params).then((res) => {
+        this.notice = res.data.data
+      })
+    },
     painotice () {
       var params = new FormData()
       params.append('sid', localStorage.getItem('sid'))
@@ -127,7 +154,6 @@ export default {
       params.append('sid', localStorage.getItem('sid'))
       params.append('id', id)
       this.axios.post(process.env.API_ROOT + '/api/transfer/shouqu', params).then((res) => {
-        console.log(res)
         let data = res.data
         if (data.code === 1) {
           this.$message({
@@ -143,37 +169,52 @@ export default {
       var params = new FormData()
       params.append('sid', localStorage.getItem('sid'))
       this.axios.post(process.env.API_ROOT + '/api/user/shouye', params).then((res) => {
-        this.items = res.data.data
-        if (this.items[1]) {
+        // this.items = res.data.data
+        // this.items3 = res.data.data[3]
+        // this.items4 = res.data.data[4]
+        if (Object.prototype.toString.call(res.data.data[2]) === '[object Array]') {
+          this.items2 = res.data.data[2]
           this.timers = setInterval(() => {
-            this.items[1].forEach((element, index) => {
+            this.items2.forEach((element, index) => {
               if (element.rest_time < 1) {
                 return false
               }
-              this.items[1][index].rest_time = element.rest_time - 1
+              this.items2[index].rest_time = element.rest_time - 1
             })
           }, 1000)
+        } else {
+          this.items2 = []
+          this.itemsS2 = res.data.data[2]
         }
-        if (this.items[3]) {
-          this.timers1 = setInterval(() => {
-            this.items[3].forEach((element, index) => {
+        if (Object.prototype.toString.call(res.data.data[3]) === '[object Array]') {
+          this.items3 = res.data.data[3]
+          this.timers = setInterval(() => {
+            this.items3.forEach((element, index) => {
               if (element.rest_time < 1) {
                 return false
               }
-              this.items[3][index].rest_time = element.rest_time - 1
+              this.items3[index].rest_time = element.rest_time - 1
             })
           }, 1000)
+        } else {
+          this.items3 = []
+          this.itemsS3 = res.data.data[3]
         }
-        if (this.items[4]) {
-          this.timers2 = setInterval(() => {
-            this.items[4].forEach((element, index) => {
+        if (Object.prototype.toString.call(res.data.data[4]) === '[object Array]') {
+          this.items4 = res.data.data[4]
+          this.timers = setInterval(() => {
+            this.items4.forEach((element, index) => {
               if (element.rest_time < 1) {
                 return false
               }
-              this.items[4][index].rest_time = element.rest_time - 1
+              this.items4[index].rest_time = element.rest_time - 1
             })
           }, 1000)
+        } else {
+          this.items4 = []
+          this.itemsS4 = res.data.data[4]
         }
+        console.log(this.items3)
       })
     },
     goDetail (path, type) {
@@ -185,6 +226,7 @@ export default {
     this.get_user_info()
     this.shouye()
     this.painotice()
+    this.get_notice()
   },
   beforeDestroy () {
     clearInterval(this.timers)

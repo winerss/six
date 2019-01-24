@@ -46,8 +46,7 @@
       </el-table-column>
       <el-table-column
         property="status"
-        label="操作"
-        width="300px">
+        label="操作">
         <template slot-scope="scope">
           <el-button
             v-show="scope.row.status == '2'"
