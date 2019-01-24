@@ -80,6 +80,10 @@
               <img src="../../assets/img/jilu.png" alt="">
               收益明细
             </el-menu-item>
+            <el-menu-item index="7-1" @click="goPage('7-0', '/jingtai')">
+              <img src="../../assets/img/liushui.png" alt="">
+              静态收益
+            </el-menu-item>
             <el-menu-item index="7-1" @click="goPage('7-1', '/liushui')">
               <img src="../../assets/img/liushui.png" alt="">
               我的流水
@@ -109,7 +113,7 @@
             <el-submenu index="8">
               <template slot="title">
                 <img src="../../assets/img/tibi.png" alt="">
-                <span slot="title">排单平台</span>
+                <span slot="title">播种收割</span>
               </template>
               <el-menu-item-group>
                 <el-menu-item index="8-1" @click="goPage('8-1', '/paidan')">
@@ -122,7 +126,7 @@
                   我的排单记录
                 </el-menu-item>
                 <el-menu-item index="8-4" @click="goPage('8-4' ,'/mypipei')">
-                  我匹配的排单记录
+                  匹配收割记录
                 </el-menu-item>
               </el-menu-item-group>
             </el-submenu>

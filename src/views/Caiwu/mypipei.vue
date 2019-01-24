@@ -1,7 +1,7 @@
 <template>
   <div id="mypipei">
     <el-breadcrumb class="title" separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item>我匹配的排单记录</el-breadcrumb-item>
+      <el-breadcrumb-item>匹配收割记录</el-breadcrumb-item>
     </el-breadcrumb>
     <div class="tips" v-show="popupVisible">
       <div class="wrapper">

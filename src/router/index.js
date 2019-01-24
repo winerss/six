@@ -14,6 +14,7 @@ import net from '@/views/Myinvite/net'
 // 财务
 import shouyi from '@/views/caiwu/shouyi'
 import liushui from '@/views/caiwu/liushui'
+import jingtai from '@/views/caiwu/jingtai'
 import qingdan from '@/views/caiwu/qingdan'
 import tibi from '@/views/caiwu/tibi'
 import mingxi from '@/views/caiwu/mingxi'
@@ -121,6 +122,13 @@ export default new Router({
         component: liushui,
         meta: {
           title: '我的流水'
+        }
+      }, {
+        path: '/jingtai',
+        name: 'jingtai',
+        component: jingtai,
+        meta: {
+          title: '静态收益'
         }
       }, {
         path: '/qingdan',

@@ -46,6 +46,15 @@
       <el-card class="box-card">
         <div slot="header" class="clearfix">
           <img src="../../assets/img/heart.png" alt="">
+          <span>等待播种收割</span>
+        </div>
+        <div class="text item">
+          <h2>{{jintai}}</h2>
+        </div>
+      </el-card>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <img src="../../assets/img/heart.png" alt="">
           <span>推荐人数</span>
         </div>
         <div class="text item">
@@ -94,6 +103,7 @@ export default {
     return {
       data: {},
       num1: 0,
+      jintai: '',
       num2: 0,
       news: []
     }
@@ -117,6 +127,13 @@ export default {
     get_record () {
       this.axios.post(process.env.API_ROOT + '/api/block/get_record').then((res) => {
         this.news = res.data.data.slice(0, 5)
+      })
+    },
+    get_jintai () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/user/get_jintai', params).then((res) => {
+        this.jintai = res.data.data
       })
     },
     goUrl (type) {
@@ -144,6 +161,7 @@ export default {
     this.get_user_info()
     this.get_record()
     this.painotice()
+    this.get_jintai()
   },
   components: {
   }
