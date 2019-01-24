@@ -265,17 +265,17 @@ export default {
           .el-button
             padding: 2px 8px !important;
         .color1
-          background rgba(0, 255, 0, .3)
+          background rgba(0,100,0, .8)
         .color2
-          background rgba(0, 255, 0, .5)
+          background rgba(0,100,0, .5)
         .color3
-          background rgba(0, 255, 0, .8)
+          background rgba(0,100,0, .3)
         .color4
-          background rgba(255, 128, 0, .3)
+          background rgba(255,215,0, .3)
         .color5
-          background rgba(255, 128, 0, .5)
+          background rgba(255,215,0, .5)
         .color6
-          background rgba(255, 255, 0, .8)
+          background rgba(255,215,0, .8)
         .color7
           background rgba(255, 0, 0, .3)
         .color8
