@@ -22,15 +22,15 @@
           </template>
           <el-menu-item-group>
             <el-menu-item index="6-1" @click="goPage('6-1', '/register')">
-              <img src="../../assets/img/zhuce.png" alt="">
+              <!-- <img src="../../assets/img/zhuce.png" alt=""> -->
               立即注册
             </el-menu-item>
             <el-menu-item index="6-2" @click="goPage('6-2', '/myinvite')">
-              <img src="../../assets/img/yaoqing.png" alt="">
+              <!-- <img src="../../assets/img/yaoqing.png" alt=""> -->
               我的邀请
             </el-menu-item>
             <el-menu-item index="6-3" @click="goPage('6-3', '/net')">
-              <img src="../../assets/img/wangluo.png" alt="">
+              <!-- <img src="../../assets/img/wangluo.png" alt=""> -->
               社群网络
             </el-menu-item>
           </el-menu-item-group>
@@ -42,19 +42,19 @@
           </template>
           <el-menu-item-group>
             <el-menu-item index="4-1" @click="goPage('4-1', '/lianjie')">
-              <img src="../../assets/img/lianjie.png" alt="">
+              <!-- <img src="../../assets/img/lianjie.png" alt=""> -->
               <span slot="title">我的链接</span>
             </el-menu-item>
             <el-menu-item index="4-2" @click="goPage('4-2', '/ziliao')">
-              <img src="../../assets/img/ziliao.png" alt="">
+              <!-- <img src="../../assets/img/ziliao.png" alt=""> -->
               <span slot="title">资料修改</span>
             </el-menu-item>
             <el-menu-item index="4-3" @click="goPage('4-3', 'denglu')">
-              <img src="../../assets/img/mima.png" alt="">
+              <!-- <img src="../../assets/img/mima.png" alt=""> -->
               修改登录密码
             </el-menu-item>
             <el-menu-item index="4-4" @click="goPage('4-4', 'anquan')">
-              <img src="../../assets/img/mima.png" alt="">
+              <!-- <img src="../../assets/img/mima.png" alt=""> -->
               修改安全密码
             </el-menu-item>
           </el-menu-item-group>
@@ -70,35 +70,35 @@
           </template>
           <el-menu-item-group>
             <el-menu-item index="7-8" @click="goPage('7-8', '/shouyi')">
-              <img src="../../assets/img/jilu.png" alt="">
+              <!-- <img src="../../assets/img/jilu.png" alt=""> -->
               收益明细
             </el-menu-item>
-            <el-menu-item index="7-1" @click="goPage('7-0', '/jingtai')">
-              <img src="../../assets/img/liushui.png" alt="">
+            <el-menu-item index="7-10" @click="goPage('7-10', '/jingtai')">
+              <!-- <img src="../../assets/img/liushui.png" alt=""> -->
               静态收益
             </el-menu-item>
             <el-menu-item index="7-1" @click="goPage('7-1', '/liushui')">
-              <img src="../../assets/img/liushui.png" alt="">
+              <!-- <img src="../../assets/img/liushui.png" alt=""> -->
               我的流水
             </el-menu-item>
             <el-menu-item index="7-3" @click="goPage('7-3', '/tibi')">
-              <img src="../../assets/img/tibi.png" alt="">
+              <!-- <img src="../../assets/img/tibi.png" alt=""> -->
               提币
             </el-menu-item>
             <el-menu-item index="7-4" @click="goPage('7-4', '/mingxi')">
-              <img src="../../assets/img/shuoming.png" alt="">
+              <!-- <img src="../../assets/img/shuoming.png" alt=""> -->
               提币明细
             </el-menu-item>
             <el-menu-item index="7-5" @click="goPage('7-5', '/neibu')">
-              <img src="../../assets/img/neibu.png" alt="">
+              <!-- <img src="../../assets/img/neibu.png" alt=""> -->
               激活码转账
             </el-menu-item>
             <el-menu-item index="7-6" @click="goPage('7-6', '/jiedian')">
-              <img src="../../assets/img/jiedian.png" alt="">
+              <!-- <img src="../../assets/img/jiedian.png" alt=""> -->
               排单币转账
             </el-menu-item>
             <el-menu-item index="7-7" @click="goPage('7-7', '/jilu')">
-              <img src="../../assets/img/jilu.png" alt="">
+              <!-- <img src="../../assets/img/jilu.png" alt=""> -->
               转账记录
             </el-menu-item>
           </el-menu-item-group>
@@ -116,7 +116,7 @@
               种子成长
             </el-menu-item>
             <el-menu-item index="8-3" @click="goPage('8-3' ,'/myrecord')">
-              我的排单记录
+              播种记录
             </el-menu-item>
             <el-menu-item index="8-4" @click="goPage('8-4' ,'/mypipei')">
               匹配收割记录
@@ -146,8 +146,8 @@
             <img src="../../assets/img/bell.png" alt="">
           </el-button>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click.native="goUrl(1)">我的排单未完成匹配数<el-badge :value="num1" v-show="num1>0" class="item"></el-badge></el-dropdown-item>
-            <el-dropdown-item @click.native="goUrl(2)">我匹配的排单未完成数<el-badge :value="num2"  v-show="num2>0"  class="item"></el-badge></el-dropdown-item>
+            <el-dropdown-item @click.native="goUrl(1)">播种匹配未完成<el-badge :value="num1" v-show="num1>0" class="item"></el-badge></el-dropdown-item>
+            <el-dropdown-item @click.native="goUrl(2)">匹配收割未完成<el-badge :value="num2"  v-show="num2>0"  class="item"></el-badge></el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
         <p class="reload">

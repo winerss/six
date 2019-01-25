@@ -8,14 +8,15 @@
         <img :src="photo" alt="">
         <div class="btn">
           <el-button style="float: left;" @click="cancel">取消</el-button>
-          <el-button style="float: right" @click="cancel" type="primary">确定</el-button>
+          <el-button style="float: right" @click="confirm" type="primary">确认收款</el-button>
         </div>
       </div>
     </div>
     <el-table
       ref="singleTable"
       :data="tableData"
-      highlight-current-row>
+      highlight-current-row
+      :row-class-name="tableRowClassName">
       <el-table-column
         property="father.self_nickname"
         label="主单发起人">
@@ -24,17 +25,17 @@
         property="father.self_tel"
         label="电话">
       </el-table-column>
-      <el-table-column
+      <!-- <el-table-column
         property="father.amount"
         label="主单数量">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column
         property="father.create_time"
         label="主单发起时间">
       </el-table-column>
       <el-table-column
         property="amount"
-        label="我匹配的数量">
+        label="匹配收割数量">
       </el-table-column>
       <el-table-column
         property="create_time"
@@ -46,20 +47,21 @@
       </el-table-column>
       <el-table-column
         property="status"
-        label="操作">
+        label="操作"
+        width="200px">
         <template slot-scope="scope">
           <el-button
             v-show="scope.row.status == '2'"
             style="float:left;"
             size="mini"
             type="primary"
-            @click="look(scope.row.pic)">查看付款凭证</el-button>
-          <el-button
+            @click="look(scope.row.pic, scope.row.id)">查看付款凭证并确定收款</el-button>
+          <!-- <el-button
             v-show="scope.row.status == '2'"
             size="mini"
             style="float:left;"
             type="primary"
-            @click="confirm(scope.row.id)">确认收款</el-button>
+            @click="confirm(scope.row.id)">确认收款</el-button> -->
         </template>
       </el-table-column>
     </el-table>
@@ -82,10 +84,18 @@ export default {
       popupVisible: false,
       tableData: [],
       photo: '',
+      id: '',
       pages: 0
     }
   },
   methods: {
+    tableRowClassName ({row, rowIndex}) {
+      console.log(row.status)
+      if (row.status !== '1') {
+        return 'warning-row'
+      }
+      return ''
+    },
     handleSizeChange (val) {
       var params = new FormData()
       params.append('sid', localStorage.getItem('sid'))
@@ -103,10 +113,10 @@ export default {
     cancel () {
       this.popupVisible = false
     },
-    look (url) {
-      console.log(url)
+    look (url, id) {
+      this.id = id
       this.popupVisible = true
-      this.photo = 'https://www.dadan299.com/' + url
+      this.photo = 'http://www.hjd688.com/' + url
     },
     handleCurrentChange (val) {
       var params = new FormData()
@@ -122,10 +132,10 @@ export default {
         }
       })
     },
-    confirm (id) {
+    confirm () {
       var params = new FormData()
       params.append('sid', localStorage.getItem('sid'))
-      params.append('id', id)
+      params.append('id', this.id)
       this.axios.post(process.env.API_ROOT + '/api/transfer/ok_order', params).then((res) => {
         let data = res.data
         if (data.code === 1) {
@@ -133,7 +143,9 @@ export default {
             message: data.msg,
             type: 'success'
           })
-          window.location.reload()
+          setTimeout(() => {
+            window.location.reload()
+          }, 500)
         } else {
           this.$message.error(data.msg)
         }
@@ -165,6 +177,8 @@ export default {
 
 <style lang="stylus">
 #mypipei
+  .el-table .warning-row
+    color: #f00
   .tips
     position fixed
     top 0

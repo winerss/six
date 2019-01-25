@@ -184,14 +184,14 @@ export default new Router({
         name: 'myrecord',
         component: myrecord,
         meta: {
-          title: '我的排单记录'
+          title: '播种记录'
         }
       }, {
         path: '/mypipei',
         name: 'mypipei',
         component: mypipei,
         meta: {
-          title: '我的排单记录'
+          title: '播种记录'
         }
       }, {
         path: '/jilu',

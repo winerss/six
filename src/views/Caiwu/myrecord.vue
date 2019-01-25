@@ -1,7 +1,7 @@
 <template>
   <div id="myrecord">
     <el-breadcrumb class="title" separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item>我的排单记录</el-breadcrumb-item>
+      <el-breadcrumb-item>播种记录</el-breadcrumb-item>
     </el-breadcrumb>
     <div class="tips" v-show="popupVisible">
       <div class="wrapper">
@@ -45,6 +45,7 @@
                 重新上传凭证
                 <input class="selectImg" @change="upload($event, item.id)" type="file" name="files" accept="image/*"/>
               </el-button>
+              <el-button size="small" type="success"  v-clipboard:copy="item.account" v-clipboard:success="onCopy" class="copy">复制钱包地址</el-button>
             </el-form-item>
           </el-form>
         </template>
@@ -66,6 +67,10 @@
       <el-table-column
         property="matchmoney"
         label="已匹配数量">
+      </el-table-column>
+      <el-table-column
+        property="restmoney"
+        label="剩余数量">
       </el-table-column>
       <el-table-column
         property="create_time"
@@ -95,6 +100,15 @@ export default {
     }
   },
   methods: {
+    onCopy: function (e) {
+      this.$message({
+        message: '复制成功',
+        type: 'success'
+      })
+    },
+    onError: function (e) {
+      this.$message.error('复制失败')
+    },
     tableRowClassName ({row, rowIndex}) {
       console.log(row)
       if (row.status !== '1') {
@@ -145,7 +159,7 @@ export default {
     look (url) {
       console.log(url)
       this.popupVisible = true
-      this.photo = 'https://www.dadan299.com/' + url
+      this.photo = 'http://www.hjd688.com/' + url
     },
     cancel () {
       this.popupVisible = false
@@ -249,6 +263,7 @@ export default {
     @media screen and (max-width:480px)
       padding 0
     .el-form-item
+      margin-bottom 0
       @media screen and (max-width:480px)
         margin 0
     .el-form-item__label, .el-form-item__content

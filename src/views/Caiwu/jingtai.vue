@@ -6,7 +6,8 @@
     <el-table
       ref="singleTable"
       :data="tableData"
-      highlight-current-row>
+      highlight-current-row
+      :row-class-name="tableRowClassName">
       <el-table-column
         label="昵称">
         <template slot-scope="sope">
@@ -52,6 +53,13 @@ export default {
     }
   },
   methods: {
+    tableRowClassName ({row, rowIndex}) {
+      console.log(row.type)
+      if (row.type === '33') {
+        return 'warning-row'
+      }
+      return ''
+    },
     get_user_info () {
       var params = new FormData()
       params.append('sid', localStorage.getItem('sid'))
@@ -122,6 +130,8 @@ export default {
 
 <style lang="stylus">
 #jingtai
+  .el-table .warning-row
+    color: #f00
   .title
     padding 12px 20px
     color #ccc

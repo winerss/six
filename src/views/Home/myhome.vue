@@ -64,10 +64,10 @@
       </el-card>
       <el-card class="box-card">
         <div class="text item">
-          <p class="name" style="font-size:18px;color:#666;line-height:24px" @click="goUrl(1)">我的排单未完成匹配数<el-badge v-show="num1 > 0" :value="num1" class="item"></el-badge></p>
+          <p class="name" style="font-size:18px;color:#666;line-height:24px" @click="goUrl(1)">播种匹配未完成<el-badge v-show="num1 > 0" :value="num1" class="item"></el-badge></p>
         </div>
         <div class="text item">
-          <p class="name" style="font-size:18px;color:#666;line-height:24px" @click="goUrl(2)">我匹配的排单未完成数<el-badge v-show="num2 > 0" :value="num2" class="item"></el-badge></p>
+          <p class="name" style="font-size:18px;color:#666;line-height:24px" @click="goUrl(2)">匹配收割未完成<el-badge v-show="num2 > 0" :value="num2" class="item"></el-badge></p>
         </div>
       </el-card>
       <el-card class="box-card">
