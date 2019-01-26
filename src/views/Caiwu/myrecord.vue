@@ -3,9 +3,12 @@
     <el-breadcrumb class="title" separator-class="el-icon-arrow-right">
       <el-breadcrumb-item>播种记录</el-breadcrumb-item>
     </el-breadcrumb>
+    <div class="scale-img" @click="scale" v-show="scaleShow">
+      <img :src="photo" alt="">
+    </div>
     <div class="tips" v-show="popupVisible">
       <div class="wrapper">
-        <img :src="photo" alt="">
+        <img @click="scale" :src="photo" alt="">
         <div class="btn">
           <el-button style="float: left;" @click="cancel">取消</el-button>
           <el-button style="float: right" @click="cancel" type="primary">确定</el-button>
@@ -36,6 +39,7 @@
               <span>{{ item.account }}</span>
             </el-form-item>
             <el-form-item>
+              <el-button size="small" type="success"  v-clipboard:copy="item.account" v-clipboard:success="onCopy" class="copy">复制钱包地址</el-button>
               <el-button class="upload" v-show="item.status == '3'" size="small" type="primary">
                 上传凭证
                 <input class="selectImg" @change="upload($event, item.id)" type="file" name="files" accept="image/*"/>
@@ -45,7 +49,6 @@
                 重新上传凭证
                 <input class="selectImg" @change="upload($event, item.id)" type="file" name="files" accept="image/*"/>
               </el-button>
-              <el-button size="small" type="success"  v-clipboard:copy="item.account" v-clipboard:success="onCopy" class="copy">复制钱包地址</el-button>
             </el-form-item>
           </el-form>
         </template>
@@ -96,10 +99,14 @@ export default {
       tableData: [],
       popupVisible: false,
       pages: 0,
+      scaleShow: false,
       photo: ''
     }
   },
   methods: {
+    scale () {
+      this.scaleShow = !this.scaleShow
+    },
     onCopy: function (e) {
       this.$message({
         message: '复制成功',
@@ -203,11 +210,26 @@ export default {
   .el-table__expand-icon>.el-icon
     color #f00
     font-weight bold
+  .scale-img
+    position fixed
+    z-index 10
+    top 10%
+    left 10%
+    right 10%
+    bottom 10%
+    text-align center
+    img
+      width 500px
+    @media screen and (max-width:480px)
+      left 4%
+      right 4%
+      img
+        width 100%
   .tips
     position fixed
     top 0
     left 0
-    z-index 9999
+    z-index 9
     width 100%
     height 100%
     background rgba(0,0,0,.4)
@@ -223,9 +245,9 @@ export default {
       img
         display block
         margin 0 auto
-        min-width 30%
-        max-width 80%
-        padding-top 20px
+      .scale
+        width 100%
+        max-height 100%
       .btn
         position absolute
         bottom 20px

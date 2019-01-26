@@ -80,7 +80,8 @@ export default {
 <style lang="stylus">
 #paidan
   .el-form-item__label
-    color #333
+    color #ccc
+    text-align left
   .el-button
     display block
     margin 0 auto
@@ -107,7 +108,7 @@ export default {
       right 20px
       padding-bottom 10px
       border-bottom 1px solid #333
-      color #333
+      color #f5f5f5
       font-size 16px
       @media screen and (max-width:480px)
         top 0px

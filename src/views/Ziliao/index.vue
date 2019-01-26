@@ -100,7 +100,8 @@ export default {
       padding 8px 10px
       font-size 14px
   .el-form-item__label
-    color #333
+    color #ccc
+    text-align center
   .el-button
     display block
     margin 0 auto

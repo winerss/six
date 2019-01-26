@@ -131,7 +131,8 @@ export default {
 <style lang="stylus">
 #register
   .el-form-item__label
-    color #333
+    color #ccc
+    text-align left
   .el-button
     display block
     margin 0 auto

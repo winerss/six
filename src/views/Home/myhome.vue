@@ -301,29 +301,38 @@ export default {
         .color-change
           margin-bottom 4px
           font-size 14px
-          color #555
+          color #333
           line-height 30px
           padding 0 4px
           .el-button
             padding: 2px 8px !important;
         .color1
           background rgba(0,100,0, .8)
+          color #f5f5f5
         .color2
           background rgba(0,100,0, .5)
+          color #f5f5f5
         .color3
           background rgba(0,100,0, .3)
+          color #fff
         .color4
           background rgba(255,215,0, .3)
+          color #333
         .color5
           background rgba(255,215,0, .5)
+          color #333
         .color6
           background rgba(255,215,0, .8)
+          color #333
         .color7
           background rgba(255, 0, 0, .3)
+          color #fff
         .color8
           background rgba(255, 0, 0, .5)
+          color #fff
         .color9
           background rgba(255, 0, 0, .8)
+          color #fff
         .shoubi,.pipei
           cursor pointer
           margin-bottom 4px

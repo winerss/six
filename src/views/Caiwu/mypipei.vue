@@ -3,9 +3,12 @@
     <el-breadcrumb class="title" separator-class="el-icon-arrow-right">
       <el-breadcrumb-item>匹配收割记录</el-breadcrumb-item>
     </el-breadcrumb>
+    <div class="scale-img" @click="scale" v-show="scaleShow">
+      <img :src="photo" alt="">
+    </div>
     <div class="tips" v-show="popupVisible">
       <div class="wrapper">
-        <img :src="photo" alt="">
+        <img @click="scale" :src="photo" alt="">
         <div class="btn">
           <el-button style="float: left;" @click="cancel">取消</el-button>
           <el-button style="float: right" @click="confirm" type="primary">确认收款</el-button>
@@ -85,10 +88,14 @@ export default {
       tableData: [],
       photo: '',
       id: '',
+      scaleShow: false,
       pages: 0
     }
   },
   methods: {
+    scale () {
+      this.scaleShow = !this.scaleShow
+    },
     tableRowClassName ({row, rowIndex}) {
       console.log(row.status)
       if (row.status !== '1') {
@@ -179,11 +186,26 @@ export default {
 #mypipei
   .el-table .warning-row
     color: #f00
+  .scale-img
+    position fixed
+    z-index 10
+    top 10%
+    left 10%
+    right 10%
+    bottom 10%
+    text-align center
+    img
+      width 500px
+    @media screen and (max-width:480px)
+      left 4%
+      right 4%
+      img
+        width 100%
   .tips
     position fixed
     top 0
     left 0
-    z-index 9999
+    z-index 9
     width 100%
     height 100%
     background rgba(0,0,0,.4)
@@ -199,9 +221,6 @@ export default {
       img
         display block
         margin 0 auto
-        min-width 30%
-        max-width 80%
-        padding-top 20px
       .btn
         position absolute
         bottom 20px

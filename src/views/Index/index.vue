@@ -254,6 +254,8 @@ img
   margin-left: 24px;
   font-weight: 400;
   color: #fff;
+.el-breadcrumb__item:last-child .el-breadcrumb__inner
+  color #f5f5f5
 #index
   position absolute
   top 0
@@ -291,6 +293,9 @@ img
     height 100%
     float left
     // background #006400
+    @media screen and (max-width:480px)
+      .el-menu--collapse
+        margin-left -80px
     .el-menu
       height 100%
       overflow-x hidden

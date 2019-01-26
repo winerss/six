@@ -187,7 +187,7 @@ export default {
     margin-top 10px
     margin-bottom -20px
     font-size 16px
-    color #333
+    color #f5f5f5
     line-height 40px
     margin-left 30px
     text-align left

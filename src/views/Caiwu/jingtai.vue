@@ -1,7 +1,7 @@
 <template>
   <div id="jingtai">
     <el-breadcrumb class="title" separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item>收益明细</el-breadcrumb-item>
+      <el-breadcrumb-item>静态收益</el-breadcrumb-item>
     </el-breadcrumb>
     <el-table
       ref="singleTable"
