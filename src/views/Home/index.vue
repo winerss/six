@@ -55,6 +55,15 @@
       <el-card class="box-card">
         <div slot="header" class="clearfix">
           <img src="../../assets/img/heart.png" alt="">
+          <span>监管失察惩罚</span>
+        </div>
+        <div class="text item">
+          <h2>{{weigui}} RBC</h2>
+        </div>
+      </el-card>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <img src="../../assets/img/heart.png" alt="">
           <span>推荐人数</span>
         </div>
         <div class="text item">
@@ -105,6 +114,7 @@ export default {
       num1: 0,
       jintai: '',
       num2: 0,
+      weigui: '',
       news: []
     }
   },
@@ -136,6 +146,13 @@ export default {
         this.jintai = res.data.data
       })
     },
+    get_weigui () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/user/get_weigui', params).then((res) => {
+        this.weigui = res.data.data
+      })
+    },
     goUrl (type) {
       if (type === 1) {
         this.$router.push('/myrecord')
@@ -160,6 +177,7 @@ export default {
   mounted () {
     this.get_user_info()
     this.get_record()
+    this.get_weigui()
     this.painotice()
     this.get_jintai()
   },

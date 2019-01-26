@@ -4,10 +4,14 @@
       <el-breadcrumb-item>播种记录</el-breadcrumb-item>
     </el-breadcrumb>
     <div class="scale-img" @click="scale" v-show="scaleShow">
-      <img :src="photo" alt="">
+      <div class="scale-wrapper">
+        <span>X</span>
+        <img :src="photo" alt="">
+      </div>
     </div>
     <div class="tips" v-show="popupVisible">
       <div class="wrapper">
+        <p style="text-align:center;padding-top: 20px;font-size: 16px;">点击图片放大</p>
         <img @click="scale" :src="photo" alt="">
         <div class="btn">
           <el-button style="float: left;" @click="cancel">取消</el-button>
@@ -213,18 +217,43 @@ export default {
   .scale-img
     position fixed
     z-index 10
-    top 10%
-    left 10%
-    right 10%
-    bottom 10%
+    top 0
+    left 0
+    right 0
+    bottom 0
+    background rgba(0,0,0,.6)
     text-align center
-    img
+    .scale-wrapper
+      position absolute
+      height 500px
       width 500px
-    @media screen and (max-width:480px)
-      left 4%
-      right 4%
+      background #fff
+      border-radius 10px
+      left 50%
+      top 50%
+      margin-top -250px
+      margin-left -250px
+      @media screen and (max-width:480px)
+        width 90%
+        left 5%
+        margin-left 0
+        height 500px
+      span
+        position absolute
+        height 20px
+        width 20px
+        background #ccc
+        border-radius 50%
+        right -10px
+        top -10px
+        font-size 14px
+        line-height 20px
+        color #fff
       img
-        width 100%
+        max-height 100%
+        height auto
+        max-width 100%
+        min-width 80%
   .tips
     position fixed
     top 0
@@ -245,6 +274,8 @@ export default {
       img
         display block
         margin 0 auto
+        max-width 400px
+        min-width 200px
       .scale
         width 100%
         max-height 100%

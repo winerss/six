@@ -60,7 +60,7 @@ export default {
             type: 'success'
           })
           setTimeout(() => {
-            this.$router.push('/myrecord')
+            this.$router.push('/myhome')
             localStorage.setItem('active', '8-3')
           }, 1000)
         } else {

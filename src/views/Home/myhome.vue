@@ -76,8 +76,8 @@
         </div>
         <div class="text item">
           <div class="shoubi" style="overflow:hidden;" v-for="item in notice" :key="item.id" >
-            <span style="display:inline-block;float:left;width: 65%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{item.content}}</span>
-            <span style="display:inline-block;float:left;width: 30%">{{item.create_time}}</span>
+            <span>{{item.content}}</span>&nbsp;&nbsp;
+            <span>{{item.create_time}}</span>
           </div>
         </div>
       </el-card>
