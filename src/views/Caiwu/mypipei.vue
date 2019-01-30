@@ -126,7 +126,7 @@ export default {
     look (url, id) {
       this.id = id
       this.popupVisible = true
-      this.photo = 'http://www.hjd688.com/' + url
+      this.photo = 'https://www.dadan299.com/' + url
     },
     handleCurrentChange (val) {
       var params = new FormData()

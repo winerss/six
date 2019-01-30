@@ -170,7 +170,7 @@ export default {
     look (url) {
       console.log(url)
       this.popupVisible = true
-      this.photo = 'http://www.hjd688.com/' + url
+      this.photo = 'https://www.dadan299.com/' + url
     },
     cancel () {
       this.popupVisible = false
