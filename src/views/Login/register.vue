@@ -80,7 +80,7 @@ export default {
         this.$message.error('请输入手机号')
         return false
       }
-      var myreg = /^[1][3,4,5,7,8][0-9]{9}$/
+      var myreg = /^[1][0-9]{10}$/
       if (!myreg.test(this.phone)) {
         this.$message.error('请输入正确的手机号')
         return false

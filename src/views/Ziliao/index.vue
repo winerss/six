@@ -49,7 +49,7 @@ export default {
         this.$message.error('请输入手机号码')
         return false
       }
-      let reg = /^(13[0-9]|15[012356789]|17[3678]|18[0-9]|14[57])[0-9]{8}$/
+      let reg = /^[1][0-9]{10}$/
       if (!reg.test(this.phone)) {
         this.$message.error('请检查您的手机格式')
         return false

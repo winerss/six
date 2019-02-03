@@ -14,6 +14,16 @@ Vue.use(VueClipboard)
 Vue.use(ElementUI)
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
+axios.interceptors.response.use(
+  response => {
+    if (response.data.code === 404) {
+      setTimeout(function () {
+        router.push('/login')
+        localStorage.removeItem('active')
+      }, 1000)
+    }
+    return response
+  })
 // 过滤器
 Vue.filter('money', function (value) {
   if (!value) return '0.00'

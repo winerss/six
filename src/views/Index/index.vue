@@ -172,18 +172,20 @@ export default {
       num3: 0
     }
   },
+  created () {
+    // if (!localStorage.getItem('sid')) {
+    //   this.$message.error('请重新登录')
+    //   setTimeout(() => {
+    //     this.$router.push('/login')
+    //     localStorage.removeItem('active')
+    //   }, 1000)
+    // }
+  },
   mounted () {
     this.websitename()
     this.get_user_info()
     this.painotice()
     this.activeNav = localStorage.getItem('active') || '1'
-    if (!localStorage.getItem('sid')) {
-      this.$message.error('请重新登录')
-      setTimeout(() => {
-        this.$router.push('/login')
-        localStorage.removeItem('active')
-      }, 1000)
-    }
     if (document.body.clientWidth < 480) {
       this.isCollapse = true
     }
