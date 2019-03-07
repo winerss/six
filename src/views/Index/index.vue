@@ -123,7 +123,7 @@
             </el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-        <a style="cursor:pointer" target="_black" href="https://www.xbtc.cx">
+        <a style="cursor:pointer" target="_black" href="https://xbtc.cx">
           <el-menu-item index="15">
             <img src="../../assets/img/login.png" alt="">
             <span slot="title">RBC/USDT</span>
