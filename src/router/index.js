@@ -1,41 +1,38 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/views/Index'
-import home from '@/views/Home'
-import myhome from '@/views/Home/myhome'
-import ziliao from '@/views/Ziliao'
-import lianjie from '@/views/lianjie'
-import denglu from '@/views/Password/denglu'
-import anquan from '@/views/Password/anquan'
-import register from '@/views/Login/register'
-import myinvite from '@/views/Myinvite'
-import net from '@/views/Myinvite/net'
-
+const index = () => import('@/views/Index')
+const home = () => import('@/views/Home')
+const myhome = () => import('@/views/Home/myhome')
+const ziliao = () => import('@/views/Ziliao')
+const lianjie = () => import('@/views/lianjie')
+const denglu = () => import('@/views/Password/denglu')
+const anquan = () => import('@/views/Password/anquan')
+const register = () => import('@/views/Login/register')
+const myinvite = () => import('@/views/Myinvite')
+const net = () => import('@/views/Myinvite/net')
 // 财务
-import shouyi from '@/views/caiwu/shouyi'
-import liushui from '@/views/caiwu/liushui'
-import jingtai from '@/views/caiwu/jingtai'
-import qingdan from '@/views/caiwu/qingdan'
-import tibi from '@/views/caiwu/tibi'
-import mingxi from '@/views/caiwu/mingxi'
-import neibu from '@/views/caiwu/neibu'
-import jiedian from '@/views/caiwu/jiedian'
-import jilu from '@/views/caiwu/jilu'
-import paidan from '@/views/caiwu/paidan'
-import pipei from '@/views/caiwu/pipei'
-import myrecord from '@/views/caiwu/myrecord'
-import mypipei from '@/views/caiwu/mypipei'
-import noticeDetail from '@/views/Home/noticeDetail'
-
+const shouyi = () => import('@/views/caiwu/shouyi')
+const liushui = () => import('@/views/caiwu/liushui')
+const jingtai = () => import('@/views/caiwu/jingtai')
+const qingdan = () => import('@/views/caiwu/qingdan')
+const tibi = () => import('@/views/caiwu/tibi')
+const mingxi = () => import('@/views/caiwu/mingxi')
+const neibu = () => import('@/views/caiwu/neibu')
+const jiedian = () => import('@/views/caiwu/jiedian')
+const jilu = () => import('@/views/caiwu/jilu')
+const paidan = () => import('@/views/caiwu/paidan')
+const pipei = () => import('@/views/caiwu/pipei')
+const myrecord = () => import('@/views/caiwu/myrecord')
+const mypipei = () => import('@/views/caiwu/mypipei')
+const noticeDetail = () => import('@/views/Home/noticeDetail')
 // 邮箱
-import news from '@/views/news'
-import send from '@/views/news/send'
-import sendList from '@/views/news/sendList'
-import revice from '@/views/news/revice'
-
+const news = () => import('@/views/news')
+const send = () => import('@/views/news/send')
+const sendList = () => import('@/views/news/sendList')
+const revice = () => import('@/views/news/revice')
 // 登陆注册
-import login from '@/views/Login/login'
-import unknow from '@/views/unknow'
+const login = () => import('@/views/Login/login')
+const unknow = () => import('@/views/unknow')
 
 Vue.use(Router)
 
