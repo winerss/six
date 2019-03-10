@@ -123,6 +123,7 @@ export default {
       this.id = id
       this.popupVisible = true
       this.photo = 'http://www.hbxjw.com/' + url
+      // this.photo = 'https://www.dadan299.com/' + url
     },
     handleCurrentChange (val) {
       var params = new FormData()
