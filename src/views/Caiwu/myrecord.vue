@@ -254,15 +254,17 @@ export default {
 #myrecord
 .el-popover
   line-height 24px
-  .my-label
-    display inline-block
-    width 100px
-    color #333
-  img
-    margin-left 100px
-    margin-top -20px
-    height 100px
-    width 100px
+  .item
+    word-break break-all
+    .my-label
+      display inline-block
+      width 100px
+      color #333
+    img
+      margin-left 100px
+      margin-top -20px
+      height 100px
+      width 100px
   .el-table .warning-row
     color: #f00
   .el-table__expand-icon>.el-icon

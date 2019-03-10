@@ -27,7 +27,7 @@
           </el-button>
           <div class="img-wrapper" v-show="zhi">
             <span class="close" @click="delImg(1)">X</span>
-            <img :src="zhi" alt="">
+            <img :src=" 'htts://www.hbxjw.com' + zhi" alt="">
           </div>
         </el-form-item>
         <el-form-item label="微信收款码">
@@ -37,7 +37,7 @@
           </el-button>
           <div class="img-wrapper" v-show="wei">
             <span class="close" @click="delImg(2)">X</span>
-            <img :src="wei" alt="">
+            <img :src="'htts://www.hbxjw.com' + wei" alt="">
           </div>
         </el-form-item>
         <el-button type="primary" @click="submitForm">确认修改</el-button>
@@ -108,10 +108,10 @@ export default {
           this.address = data.data.money_address
           this.bank_address = data.data.bank_address
           this.bank = data.data.bank
-          let url = 'htts://www.hbxjw.com'
+          // let url = 'htts://www.hbxjw.com'
           // let url = 'https://www.dadan299.com'
-          this.zhi = url + data.data.alipay
-          this.wei = url + data.data.weixin
+          this.zhi = data.data.alipay
+          this.wei = data.data.weixin
         } else {
           this.$message.error(data.msg)
         }
@@ -154,7 +154,7 @@ export default {
             message: data.msg,
             type: 'success'
           })
-          window.location.reload()
+          // window.location.reload()
         } else {
           this.$message.error(data.msg)
         }
