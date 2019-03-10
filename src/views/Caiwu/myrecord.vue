@@ -56,10 +56,10 @@
                   <span class="my-label">卡号：</span>{{types[1].bank_address}}
                 </div>
                 <div class="text item" v-if="types[2].alipay">
-                  <span class="my-label">支付宝收款码：</span><br><img :src="'htts://www.hbxjw.com' + types[2].alipay" alt="">
+                  <span class="my-label">支付宝收款码：</span><br><img :src="'http://www.hbxjw.com' + types[2].alipay" alt="">
                 </div>
                 <div class="text item" v-if="types[3].weixin">
-                  <span class="my-label">微信收款码：</span><br><img :src="'htts://www.hbxjw.com' + types[3].weixin" alt="">
+                  <span class="my-label">微信收款码：</span><br><img :src="'http://www.hbxjw.com' + types[3].weixin" alt="">
                 </div>
                 <el-button slot="reference" @click="getType(item.id)" size="small" type="primary" plain>收款账号</el-button>
               </el-popover>
@@ -138,7 +138,7 @@ export default {
       this.axios.post(process.env.API_ROOT + '/api/user/paytype', params).then((res) => {
         let data = res.data
         if (data.code === 1) {
-          // let url = 'htts://www.hbxjw.com'
+          // let url = 'http://www.hbxjw.com'
           // let url = 'https://www.dadan299.com'
           this.types[0].money_address = data.data[0].money_address
           this.types[1].bank = data.data[1].bank
