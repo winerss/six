@@ -56,10 +56,10 @@
                   <span class="my-label">卡号：</span>{{types[1].bank_address}}
                 </div>
                 <div class="text item" v-if="types[2].alipay">
-                  <span class="my-label">支付宝收款码：</span><br><img :src="'https://www.dadan299.com' + types[2].alipay" alt="">
+                  <span class="my-label">支付宝收款码：</span><br><img :src="'htts://www.hbxjw.com' + types[2].alipay" alt="">
                 </div>
                 <div class="text item" v-if="types[3].weixin">
-                  <span class="my-label">微信收款码：</span><br><img :src="'https://www.dadan299.com' + types[3].weixin" alt="">
+                  <span class="my-label">微信收款码：</span><br><img :src="'htts://www.hbxjw.com' + types[3].weixin" alt="">
                 </div>
                 <el-button slot="reference" @click="getType(item.id)" size="small" type="primary" plain>收款账号</el-button>
               </el-popover>
