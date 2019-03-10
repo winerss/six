@@ -48,10 +48,6 @@
         label="匹配日期">
       </el-table-column>
       <el-table-column
-        property="account"
-        label="收款账号">
-      </el-table-column>
-      <el-table-column
         property="status"
         label="操作"
         width="200px">

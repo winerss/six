@@ -132,6 +132,10 @@ export default {
 
 <style lang="stylus">
 #caiwu
+  .el-radio+.el-radio
+  .el-radio
+    margin-left 0
+    margin-right 0px
   .title
     padding 12px 20px
     color #ccc
@@ -144,7 +148,10 @@ export default {
     font-size 24px
     background #fff
     padding 20px
+    margin 20px
     color #333
+    @media screen and (max-width:480px)
+      margin 0
   .el-table
     margin 20px
     @media screen and (max-width:480px)
