@@ -106,6 +106,12 @@ export default {
           console.log(data.data)
           this.phone = data.data.tel
           this.address = data.data.money_address
+          this.bank_address = data.data.bank_address
+          this.bank = data.data.bank
+          // let url = 'htts://www.hbxjw.com'
+          let url = 'https://www.dadan299.com'
+          this.zhi = url + data.data.alipay
+          this.wei = url + data.data.weixin
         } else {
           this.$message.error(data.msg)
         }

@@ -46,20 +46,20 @@
                 title="收款方式"
                 width="300"
                 trigger="click">
-                <div class="text item">
+                <div class="text item" v-if="types[0].money_address">
                   <span class="my-label">钱包地址：</span>{{types[0].money_address}}
                 </div>
-                <div class="text item">
+                <div class="text item" v-if="types[1].bank">
                   <span class="my-label">开户行：</span>{{types[1].bank}}
                 </div>
-                <div class="text item">
+                <div class="text item" v-if="types[1].bank_address">
                   <span class="my-label">卡号：</span>{{types[1].bank_address}}
                 </div>
-                <div class="text item">
-                  <span class="my-label">支付宝收款码：</span><br><img :src="types[2].alipay" alt="">
+                <div class="text item" v-if="types[2].alipay">
+                  <span class="my-label">支付宝收款码：</span><br><img :src="'https://www.dadan299.com' + types[2].alipay" alt="">
                 </div>
-                <div class="text item">
-                  <span class="my-label">微信收款码：</span><br><img :src="types[3].weixin" alt="">
+                <div class="text item" v-if="types[3].weixin">
+                  <span class="my-label">微信收款码：</span><br><img :src="'https://www.dadan299.com' + types[3].weixin" alt="">
                 </div>
                 <el-button slot="reference" @click="getType(item.id)" size="small" type="primary" plain>收款账号</el-button>
               </el-popover>
@@ -138,13 +138,13 @@ export default {
       this.axios.post(process.env.API_ROOT + '/api/user/paytype', params).then((res) => {
         let data = res.data
         if (data.code === 1) {
-          let url = 'htts://www.hbxjw.com'
+          // let url = 'htts://www.hbxjw.com'
           // let url = 'https://www.dadan299.com'
           this.types[0].money_address = data.data[0].money_address
           this.types[1].bank = data.data[1].bank
           this.types[1].bank_address = data.data[1].bank_address
-          this.types[2].alipay = url + data.data[2].alipay
-          this.types[3].weixin = url + data.data[3].weixin
+          this.types[2].alipay = data.data[2].alipay
+          this.types[3].weixin = data.data[3].weixin
         } else {
           this.$message.error(data.msg)
         }
@@ -210,7 +210,7 @@ export default {
       })
     },
     look (url) {
-      console.log(url)
+      // console.log(url)
       this.popupVisible = true
       this.photo = 'http://www.hbxjw.com/' + url
       // this.photo = 'https://www.dadan299.com/' + url
