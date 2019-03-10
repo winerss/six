@@ -11,34 +11,36 @@
         <el-form-item label="钱包地址">
           <el-input v-model="address" placeholder="请输入钱包地址"></el-input>
         </el-form-item>
-        <el-form-item label="安全密钥" required>
-          <el-input type="password" v-model="pass" placeholder="请输入安全密钥"></el-input>
-        </el-form-item>
         <el-form-item label="开户行">
           <el-input type="text" v-model="bank" placeholder="请输入开户行名称"></el-input>
         </el-form-item>
         <el-form-item label="卡号">
           <el-input type="text" v-model="bank_address" placeholder="请输入银行卡号"></el-input>
         </el-form-item>
-        <el-form-item label="支付宝收款码">
-          <el-button class="upload" size="small" type="primary">
-            点击上传
-            <input class="selectImg" @change="upload($event, 1)" type="file" name="files" accept="image/*"/>
-          </el-button>
-          <div class="img-wrapper" v-show="zhi">
-            <span class="close" @click="delImg(1)">X</span>
-            <img :src=" 'http://www.hbxjw.com' + zhi" alt="">
-          </div>
-        </el-form-item>
-        <el-form-item label="微信收款码">
-          <el-button class="upload" size="small" type="primary">
-            点击上传
-            <input class="selectImg" @change="upload($event, 2)" type="file" name="files" accept="image/*"/>
-          </el-button>
-          <div class="img-wrapper" v-show="wei">
-            <span class="close" @click="delImg(2)">X</span>
-            <img :src="'http://www.hbxjw.com' + wei" alt="">
-          </div>
+        <div style="overflow:hidden;">
+          <el-form-item label="支付宝收款码" class="img-one">
+            <el-button class="upload" size="small" type="primary">
+              点击上传
+              <input class="selectImg" @change="upload($event, 1)" type="file" name="files" accept="image/*"/>
+            </el-button>
+            <div class="img-wrapper" v-show="zhi">
+              <!-- <span class="close" @click="delImg(1)">X</span> -->
+              <img :src=" 'http://www.hbxjw.com' + zhi" alt="">
+            </div>
+          </el-form-item>
+          <el-form-item label="微信收款码" class="img-two">
+            <el-button class="upload" size="small" type="primary">
+              点击上传
+              <input class="selectImg" @change="upload($event, 2)" type="file" name="files" accept="image/*"/>
+            </el-button>
+            <div class="img-wrapper" v-show="wei">
+              <!-- <span class="close" @click="delImg(2)">X</span> -->
+              <img :src="'http://www.hbxjw.com' + wei" alt="">
+            </div>
+          </el-form-item>
+        </div>
+        <el-form-item label="安全密钥" required>
+          <el-input type="password" v-model="pass" placeholder="请输入安全密钥"></el-input>
         </el-form-item>
         <el-button type="primary" @click="submitForm">确认修改</el-button>
       </el-form>
@@ -154,7 +156,7 @@ export default {
             message: data.msg,
             type: 'success'
           })
-          // window.location.reload()
+          window.location.reload()
         } else {
           this.$message.error(data.msg)
         }
@@ -192,6 +194,9 @@ export default {
     @media screen and (max-width:480px)
       padding 0
       background none
+  .img-one,.img-two
+    float left
+    margin-right 30px
   .img-wrapper
     position relative
     width 100px

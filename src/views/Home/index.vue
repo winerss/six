@@ -45,7 +45,7 @@
       </el-card>
       <el-card class="box-card">
         <div slot="header" class="clearfix">
-          <img src="../../assets/img/heart.png" alt="">
+          <img src="../../assets/img/qianbao.png" alt="">
           <span>等待播种收割</span>
         </div>
         <div class="text item">
@@ -54,7 +54,7 @@
       </el-card>
       <el-card class="box-card">
         <div slot="header" class="clearfix">
-          <img src="../../assets/img/heart.png" alt="">
+          <img src="../../assets/img/qianbao.png" alt="">
           <span>监管失察惩罚</span>
         </div>
         <div class="text item">
@@ -72,11 +72,20 @@
       </el-card>
       <el-card class="box-card">
         <div slot="header" class="clearfix">
-          <img src="../../assets/img/qianbao.png" alt="">
+          <img src="../../assets/img/heart.png" alt="">
           <span>团队人数</span>
         </div>
         <div class="text item">
           <h2>{{data.team_sum}}</h2>
+        </div>
+      </el-card>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <img src="../../assets/img/heart.png" alt="">
+          <span>剩余未匹配</span>
+        </div>
+        <div class="text item">
+          <h2>{{rest_zhong}}</h2>
         </div>
       </el-card>
       <el-card class="box-card news msg">
@@ -115,6 +124,7 @@ export default {
       jintai: '',
       num2: 0,
       weigui: '',
+      rest_zhong: '',
       news: []
     }
   },
@@ -137,6 +147,13 @@ export default {
     get_record () {
       this.axios.post(process.env.API_ROOT + '/api/block/get_record').then((res) => {
         this.news = res.data.data.slice(0, 5)
+      })
+    },
+    restZhong () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/user/rest_zhong', params).then((res) => {
+        this.rest_zhong = res.data.data
       })
     },
     get_jintai () {
@@ -178,6 +195,7 @@ export default {
     this.get_user_info()
     this.get_record()
     this.get_weigui()
+    this.restZhong()
     this.painotice()
     this.get_jintai()
   },

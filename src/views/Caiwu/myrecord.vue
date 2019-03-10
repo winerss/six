@@ -41,7 +41,8 @@
             </el-form-item>
             <br>
             <el-form-item>
-              <el-popover
+              <el-button @click="getType(item.id)" size="small" type="primary" plain>收款账号</el-button>
+              <!-- <el-popover
                 placement="right"
                 title="收款方式"
                 width="300"
@@ -62,7 +63,7 @@
                   <span class="my-label">微信收款码：</span><br><img :src="'http://www.hbxjw.com' + types[3].weixin" alt="">
                 </div>
                 <el-button slot="reference" @click="getType(item.id)" size="small" type="primary" plain>收款账号</el-button>
-              </el-popover>
+              </el-popover> -->
             </el-form-item>
             <el-form-item>
               <!-- <el-button size="small" type="success"  v-clipboard:copy="item.account" v-clipboard:success="onCopy" class="copy">复制钱包地址</el-button> -->
@@ -113,6 +114,26 @@
       layout="prev, pager, next, jumper"
       :total="pages">
     </el-pagination>
+    <div class="types" v-show="show">
+      <div class="wrapper">
+        <span class="close" @click="show = false">X</span>
+        <el-tabs v-model="activeName" @tab-click="handleClick">
+          <el-tab-pane label="钱包地址" name="first" v-if="types[0].can_use == 1">
+            <span class="my-label">钱包地址：</span>{{types[0].money_address}}
+          </el-tab-pane>
+          <el-tab-pane label="银行" name="second" v-if="types[1].can_use == 1">
+            <span class="my-label">银行：</span>{{types[1].bank}}<br><br>
+            <span class="my-label">卡号：</span>{{types[1].bank_address}}
+          </el-tab-pane>
+          <el-tab-pane label="支付宝" name="third"  v-if="types[2].can_use == 1">
+            <span class="my-label">支付宝收款码：</span><br><img :src="'http://www.hbxjw.com' + types[2].alipay" alt="">
+          </el-tab-pane>
+          <el-tab-pane label="微信" name="fourth"  v-if="types[3].can_use == 1">
+            <span class="my-label">微信收款码：</span><br><img :src="'http://www.hbxjw.com' + types[3].weixin" alt="">
+          </el-tab-pane>
+        </el-tabs>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -124,13 +145,17 @@ export default {
       currentPage: 1,
       tableData: [],
       popupVisible: false,
+      show: false,
       pages: 0,
       scaleShow: false,
+      activeName: 'first',
       types: [{'money_address': ''}, {'bank': '', 'bank_address': ''}, {'alipay': ''}, {'wexin': ''}],
       photo: ''
     }
   },
   methods: {
+    handleClick (tab, event) {
+    },
     getType (id) {
       var params = new FormData()
       params.append('id', id)
@@ -138,13 +163,14 @@ export default {
       this.axios.post(process.env.API_ROOT + '/api/user/paytype', params).then((res) => {
         let data = res.data
         if (data.code === 1) {
+          this.show = true
           // let url = 'http://www.hbxjw.com'
           // let url = 'https://www.dadan299.com'
-          this.types[0].money_address = data.data[0].money_address
-          this.types[1].bank = data.data[1].bank
-          this.types[1].bank_address = data.data[1].bank_address
-          this.types[2].alipay = data.data[2].alipay
-          this.types[3].weixin = data.data[3].weixin
+          this.types = data.data
+          // this.types[1].bank = data.data[1].bank
+          // this.types[1].bank_address = data.data[1].bank_address
+          // this.types[2].alipay = data.data[2].alipay
+          // this.types[3].weixin = data.data[3].weixin
         } else {
           this.$message.error(data.msg)
         }
@@ -252,19 +278,55 @@ export default {
 
 <style lang="stylus">
 #myrecord
-.el-popover
-  line-height 24px
-  .item
-    word-break break-all
-    .my-label
-      display inline-block
-      width 100px
-      color #333
-    img
-      margin-left 100px
-      margin-top -20px
-      height 100px
-      width 100px
+// .el-popover
+//   line-height 24px
+//   .item
+//     word-break break-all
+//     .my-label
+//       display inline-block
+//       width 100px
+//       color #333
+//     img
+//       margin-left 100px
+//       margin-top -20px
+//       width 100px
+  .types
+    position fixed
+    z-index 9998
+    top 0
+    left 0
+    right 0
+    bottom 0
+    background rgba(0,0,0,.4)
+    .wrapper
+      position relative
+      width 50%
+      height 400px
+      margin 20% auto
+      padding 20px
+      background #fff
+      @media screen and (max-width:480px)
+        width 80%
+      .close
+        position absolute
+        display inline-block
+        z-index 9999
+        right -10px
+        top -10px
+        width 20px
+        height 20px
+        border-radius 50%
+        line-height 20px
+        text-align center
+        font-size 12px
+        color #333
+        background rgba(255,255,255,.8)
+        cursor pointer
+    .el-tabs
+      img
+        display block
+        width 200px
+        margin 20px auto
   .el-table .warning-row
     color: #f00
   .el-table__expand-icon>.el-icon
