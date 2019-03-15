@@ -123,7 +123,7 @@
             </el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-        <a style="cursor:pointer" target="_black" href="https://xbtc.cx">
+        <a style="cursor:pointer" target="_black" :href="url">
           <el-menu-item index="15">
             <img src="../../assets/img/login.png" alt="">
             <span slot="title">RBC/USDT</span>
@@ -166,6 +166,7 @@ export default {
       isCollapse: false,
       activeNav: '',
       num1: 0,
+      url: '',
       data: {},
       grade: 0,
       num2: 0,
@@ -185,6 +186,7 @@ export default {
     this.websitename()
     this.get_user_info()
     this.painotice()
+    this.getUrl()
     this.activeNav = localStorage.getItem('active') || '1'
     if (document.body.clientWidth < 480) {
       this.isCollapse = true
@@ -221,6 +223,16 @@ export default {
         this.$router.push('/mypipei')
         localStorage.setItem('active', '8-4')
       }
+    },
+    getUrl () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/user/tradeweb', params).then((res) => {
+        let data = res.data
+        if (data.code === 1) {
+          this.url = data.data
+        }
+      })
     },
     get_user_info () {
       var params = new FormData()
