@@ -26,10 +26,10 @@
         </div>
         <div class="text item">
           <div class="color-change" v-for="(item, index) in items2" :key="item.id" :class="'color'+item.day">
-            <span style="display:inline-block;width: 80px">种子成长{{index + 1}}</span>
-            <span style="display:inline-block;width: 80px">第{{item.day}}天</span>
-            <span style="display:inline-block;width: 180px">利息：{{item.account}}</span>
-            <span style="display:inline-block;width: 200px">原种子：{{item.base_amount}}</span>
+            <span style="display:inline-block;">种子成长{{index + 1}} </span>
+            <span style="display:inline-block;">第{{item.day}}天 </span>
+            <span style="display:inline-block;">利息：{{item.account}} </span>
+            <span style="display:inline-block;">原种子：{{item.base_amount}}</span>
             <!-- <el-button style="margin-top:6px;" v-if="item.can_shou== 1" size="small" @click="con(item.id)" plain>确认收取</el-button> -->
           </div>
           <p v-show="itemsS2 !== ''" style="text-align: center; font-size: 14px; color: #999">{{itemsS2}}</p>
