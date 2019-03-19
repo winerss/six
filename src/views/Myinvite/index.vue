@@ -152,6 +152,8 @@ export default {
 
 <style lang="stylus">
 #myinvite
+  .el-message-box
+    max-width 420px
   .title
     padding 12px 20px
     color #ccc
