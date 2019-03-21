@@ -105,7 +105,7 @@ export default {
     handleSizeChange (val) {
       var params = new FormData()
       params.append('sid', localStorage.getItem('sid'))
-      params.append('page', 1)
+      params.append('page', val)
       this.axios.post(process.env.API_ROOT + '/api/transfer/self_pipei', params).then((res) => {
         console.log(res)
         let data = res.data
@@ -128,7 +128,7 @@ export default {
     handleCurrentChange (val) {
       var params = new FormData()
       params.append('sid', localStorage.getItem('sid'))
-      params.append('page', 1)
+      params.append('page', val)
       this.axios.post(process.env.API_ROOT + '/api/transfer/self_pipei', params).then((res) => {
         console.log(res)
         let data = res.data
