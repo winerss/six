@@ -139,6 +139,7 @@
       <div class="collapse">
         <i class="el-icon-menu" @click="collapse"></i>
       </div>
+      <el-tag class="jiejia" v-if="jiejiaSta"><i class="el-icon-date"></i> 节假日</el-tag>
       <div class="message">
         <el-dropdown trigger="click">
           <el-button type="primary" size="small">
@@ -166,6 +167,7 @@ export default {
       isCollapse: false,
       activeNav: '',
       num1: 0,
+      jiejiaSta: false,
       url: '',
       data: {},
       grade: 0,
@@ -187,6 +189,7 @@ export default {
     this.get_user_info()
     this.painotice()
     this.getUrl()
+    this.jiejia()
     this.activeNav = localStorage.getItem('active') || '1'
     if (document.body.clientWidth < 480) {
       this.isCollapse = true
@@ -206,6 +209,18 @@ export default {
     layout () {
       localStorage.clear()
       this.$router.push('/login')
+    },
+    jiejia () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/user/jiejia', params).then((res) => {
+        let isJiejia = res.data.data[0]
+        if (isJiejia === '2') {
+          this.jiejiaSta = true
+        } else {
+          this.jiejiaSta = false
+        }
+      })
     },
     websitename () {
       var params = new FormData()
@@ -240,7 +255,6 @@ export default {
       this.axios.post(process.env.API_ROOT + '/api/user/get_user_info', params).then((res) => {
         let data = res.data
         if (data.code === 1) {
-          console.log(data.data)
           this.data = data.data
           this.grade = Number(data.data.grade)
         }
@@ -339,6 +353,14 @@ img
         padding 10px 20px
         cursor pointer
         color #ccc
+    .jiejia
+      position absolute
+      right 150px
+      top 10px
+      @media screen and (max-width:480px)
+        right: 50%
+        margin-right -29px
+        top: 10px
     .message
       position absolute
       right 20px
