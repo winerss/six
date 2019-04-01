@@ -118,8 +118,9 @@
       <div class="wrapper">
         <span class="close" @click="show = false">X</span>
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="钱包地址" name="first" v-if="types[0].can_use == 1">
-            <span class="my-label">钱包地址：</span>{{types[0].money_address}}
+          <el-tab-pane label="XRP提现地址" name="first" v-if="types[0].can_use == 1">
+            <span class="my-label">XRP提现地址：</span>{{types[0].money_address}}<el-button size="small" type="success"  v-clipboard:copy="types[0].money_address" v-clipboard:success="onCopy" class="copy">复制</el-button><br><br>
+            <span class="my-label">XRP提现Tag：</span>{{types[0].money_tag}}
           </el-tab-pane>
           <el-tab-pane label="银行" name="second" v-if="types[1].can_use == 1">
             <span class="my-label">银行：</span>{{types[1].bank}}<br><br>
@@ -149,7 +150,7 @@ export default {
       pages: 0,
       scaleShow: false,
       activeName: 'first',
-      types: [{'money_address': ''}, {'bank': '', 'bank_address': ''}, {'alipay': ''}, {'wexin': ''}],
+      types: [{'money_address': '', 'money_tag': ''}, {'bank': '', 'bank_address': ''}, {'alipay': ''}, {'wexin': ''}],
       photo: ''
     }
   },
