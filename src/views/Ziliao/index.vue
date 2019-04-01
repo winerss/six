@@ -8,8 +8,11 @@
         <el-form-item label="手机号码">
           <el-input v-model="phone" placeholder="请输入手机号码"></el-input>
         </el-form-item>
-        <el-form-item label="钱包地址">
-          <el-input v-model="address" placeholder="请输入钱包地址"></el-input>
+        <el-form-item label="XRP提现地址">
+          <el-input v-model="address" placeholder="请输入XRP提现地址"></el-input>
+        </el-form-item>
+        <el-form-item label="XRP提现Tag">
+          <el-input v-model="money_tag" placeholder="请输入XRP提现Tag"></el-input>
         </el-form-item>
         <el-form-item label="开户行">
           <el-input type="text" v-model="bank" placeholder="请输入开户行名称"></el-input>
@@ -54,6 +57,7 @@ export default {
     return {
       phone: '',
       address: '',
+      money_tag: '',
       pass: '',
       zhi: '',
       zhifile: '',
@@ -130,7 +134,11 @@ export default {
         return false
       }
       if (!this.address) {
-        this.$message.error('请输入钱包地址')
+        this.$message.error('请输入XRP提现地址')
+        return false
+      }
+      if (!this.money_tag) {
+        this.$message.error('请输入XRP提现Tag')
         return false
       }
       if (!this.pass) {
@@ -143,6 +151,7 @@ export default {
       var params = new FormData()
       params.append('tel', this.phone)
       params.append('money_address', this.address)
+      params.append('money_tag', this.money_tag)
       params.append('erji', this.pass)
       params.append('bank', this.bank)
       params.append('bank_address', this.bank_address)
