@@ -6,8 +6,11 @@
         <el-form-item label="昵称" required>
           <el-input v-model="name" placeholder="请输入请输入6到12位数字+字母昵称"></el-input>
         </el-form-item>
-        <el-form-item label="钱包地址" required>
-          <el-input v-model="money_address" placeholder="请输入钱包地址"></el-input>
+        <el-form-item label="XRP提现地址" required>
+          <el-input v-model="money_address" placeholder="请输入XRP提现地址"></el-input>
+        </el-form-item>
+        <el-form-item label="XRP提现Tag" required>
+          <el-input v-model="money_tag" placeholder="请输入XRP提现Tag"></el-input>
         </el-form-item>
         <el-form-item label="邀请人昵称" required>
           <el-input v-model="user" disabled="" placeholder="请输入邀请人昵称"></el-input>
@@ -39,6 +42,7 @@ export default {
       name: '',
       user: '',
       phone: '',
+      money_tag: '',
       money_address: '',
       code: '',
       password: '',
@@ -69,7 +73,11 @@ export default {
         return false
       }
       if (!this.money_address) {
-        this.$message.error('请输入钱包地址')
+        this.$message.error('请输入XRP提现地址')
+        return false
+      }
+      if (!this.money_address) {
+        this.$message.error('请输入XRP提现Tag')
         return false
       }
       if (!this.user) {
@@ -101,6 +109,7 @@ export default {
       params.append('username', this.name)
       params.append('leader_user', this.user)
       params.append('tel', this.phone)
+      params.append('money_tag', this.money_tag)
       params.append('money_address', this.money_address)
       params.append('password', this.password)
       params.append('erji', this.pass)
