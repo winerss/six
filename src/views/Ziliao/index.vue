@@ -14,13 +14,13 @@
         <el-form-item label="XRP提现Tag">
           <el-input v-model="money_tag" placeholder="请输入XRP提现Tag"></el-input>
         </el-form-item>
-        <el-form-item label="开户行">
+        <el-form-item label="开户行" v-if="other_pay_type == 1">
           <el-input type="text" v-model="bank" placeholder="请输入开户行名称"></el-input>
         </el-form-item>
-        <el-form-item label="卡号">
+        <el-form-item label="卡号" v-if="other_pay_type == 1">
           <el-input type="text" v-model="bank_address" placeholder="请输入银行卡号"></el-input>
         </el-form-item>
-        <div style="overflow:hidden;">
+        <div style="overflow:hidden;" v-if="other_pay_type == 1">
           <el-form-item label="支付宝收款码" class="img-one">
             <el-button class="upload" size="small" type="primary">
               点击上传
@@ -63,6 +63,7 @@ export default {
       zhifile: '',
       zhiname: '',
       wei: '',
+      other_pay_type: 1,
       weifile: '',
       weiname: '',
       bank: '',
@@ -112,12 +113,25 @@ export default {
           console.log(data.data)
           this.phone = data.data.tel
           this.address = data.data.money_address
+          this.money_tag = data.data.money_tag
           this.bank_address = data.data.bank_address
           this.bank = data.data.bank
           // let url = 'http://www.hbxjw.com'
           // let url = 'https://www.dadan299.com'
           this.zhi = data.data.alipay
           this.wei = data.data.weixin
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
+    },
+    getmoney_tag () {
+      var params = new FormData()
+      params.append('sid', localStorage.getItem('sid'))
+      this.axios.post(process.env.API_ROOT + '/api/user/other_pay_type', params).then((res) => {
+        let data = res.data
+        if (data.code === 1) {
+          this.other_pay_type = data.data
         } else {
           this.$message.error(data.msg)
         }
@@ -173,6 +187,7 @@ export default {
     }
   },
   mounted () {
+    this.getmoney_tag()
     this.get_user_info()
   },
   components: {
