@@ -8,11 +8,13 @@
         <el-form-item label="手机号码">
           <el-input v-model="phone" placeholder="请输入手机号码"></el-input>
         </el-form-item>
-        <el-form-item label="XRP提现地址">
-          <el-input v-model="address" placeholder="请输入XRP提现地址"></el-input>
+        <el-form-item class="copy-btn" style="position:relative;" label="XRP提现地址">
+          <el-input  v-model="address" placeholder="请输入XRP提现地址"></el-input>
+          <el-button style="position:absolute;right:0;top:0;bottom: 0;" size="small" type="success"  v-clipboard:copy="address" v-clipboard:success="onCopy" class="copy">复制</el-button>
         </el-form-item>
-        <el-form-item label="XRP提现Tag">
+        <el-form-item class="copy-btn" style="position:relative;" label="XRP提现Tag">
           <el-input v-model="money_tag" placeholder="请输入XRP提现Tag"></el-input>
+          <el-button style="position:absolute;right:0;top:0;bottom: 0;" size="small" type="success"  v-clipboard:copy="money_tag" v-clipboard:success="onCopy" class="copy">复制</el-button>
         </el-form-item>
         <el-form-item label="开户行" v-if="other_pay_type == 1">
           <el-input type="text" v-model="bank" placeholder="请输入开户行名称"></el-input>
@@ -71,6 +73,15 @@ export default {
     }
   },
   methods: {
+    onCopy: function (e) {
+      this.$message({
+        message: '复制成功',
+        type: 'success'
+      })
+    },
+    onError: function (e) {
+      this.$message.error('复制失败')
+    },
     delImg (id) {
       if (id === 1) {
         this.zhi = ''
@@ -197,6 +208,9 @@ export default {
 
 <style lang="stylus">
 #ziliao
+  .copy-btn
+    .el-form-item__content
+      padding-right: 50px
   .title
     padding 12px 20px
     color #ccc
