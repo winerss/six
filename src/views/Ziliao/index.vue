@@ -210,7 +210,7 @@ export default {
 #ziliao
   .copy-btn
     .el-form-item__content
-      padding-right: 50px
+      padding-right 50px
   .title
     padding 12px 20px
     color #ccc
