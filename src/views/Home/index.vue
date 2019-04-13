@@ -189,9 +189,17 @@ export default {
     },
     goDetail (id) {
       this.$router.push('/noticeDetail/' + id)
+    },
+    getToken () {
+      let url = window.location.href
+      if (url.indexOf('sid')) {
+        let sid = url.split('sid=')[1]
+        localStorage.setItem('sid', sid)
+      }
     }
   },
   mounted () {
+    this.getToken()
     this.get_user_info()
     this.get_record()
     this.get_weigui()
