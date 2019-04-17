@@ -192,7 +192,7 @@ export default {
     },
     getToken () {
       let url = window.location.href
-      if (url.indexOf('sid')) {
+      if (url.indexOf('sid') > 0) {
         let sid = url.split('sid=')[1]
         localStorage.setItem('sid', sid)
       }
