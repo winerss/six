@@ -30,7 +30,7 @@
             </el-button>
             <div class="img-wrapper" v-show="zhi">
               <!-- <span class="close" @click="delImg(1)">X</span> -->
-              <img :src=" 'http://www.hbxjw.com' + zhi" alt="">
+              <img @click="prev(zhi)" :src=" 'http://www.hbxjw.com' + zhi" alt="">
             </div>
           </el-form-item>
           <el-form-item label="微信收款码" class="img-two">
@@ -40,7 +40,7 @@
             </el-button>
             <div class="img-wrapper" v-show="wei">
               <!-- <span class="close" @click="delImg(2)">X</span> -->
-              <img :src="'http://www.hbxjw.com' + wei" alt="">
+              <img @click="prev(wei)" :src="'http://www.hbxjw.com' + wei" alt="">
             </div>
           </el-form-item>
         </div>
@@ -50,6 +50,12 @@
         <el-button type="primary" @click="submitForm">确认修改</el-button>
       </el-form>
     </div>
+    <div v-show="show" class="prevImg">
+      <div class="wrapper">
+        <span class="close" @click="show = false">X</span>
+        <img :src="prevImg" alt="">
+      </div>
+    </div>
   </div>
 </template>
 
@@ -58,9 +64,11 @@ export default {
   data () {
     return {
       phone: '',
+      show: false,
       address: '',
       money_tag: '',
       pass: '',
+      prevImg: '',
       zhi: '',
       zhifile: '',
       zhiname: '',
@@ -73,6 +81,10 @@ export default {
     }
   },
   methods: {
+    prev: function (img) {
+      this.show = true
+      this.prevImg = 'http://www.hbxjw.com' + img
+    },
     onCopy: function (e) {
       this.$message({
         message: '复制成功',
@@ -275,4 +287,40 @@ export default {
       background: rgba(0, 0, 0, 0);
       opacity: 0;
       filter: opacity(0)
+  .prevImg
+    position fixed
+    z-index 9998
+    top 0
+    left 0
+    right 0
+    bottom 0
+    background rgba(0,0,0,.4)
+    .wrapper
+      position relative
+      width 50%
+      margin 20% auto
+      padding 20px
+      background #fff
+      text-align center
+      @media screen and (max-width:480px)
+        width 80%
+      .close
+        position absolute
+        display inline-block
+        z-index 9999
+        right -10px
+        top -10px
+        width 20px
+        height 20px
+        border-radius 50%
+        line-height 20px
+        text-align center
+        font-size 12px
+        color #333
+        background rgba(255,255,255,.8)
+        cursor pointer
+      img
+        width 300px
+        @media screen and (max-width:480px)
+          width 200px
 </style>
